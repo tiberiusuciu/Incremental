@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Incrementale</string>
     <string name="cliker_button">Travail</string>
+    <string name="clicker_page">Travail</string>
+    <string name="worker_page">Équipe</string>
+    <string name="shop_page">Magasin</string>
 </resources>

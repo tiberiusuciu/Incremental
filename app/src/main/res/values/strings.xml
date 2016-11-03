@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Incremental</string>
     <string name="cliker_button">Work</string>
+    <string name="clicker_page">Work</string>
+    <string name="worker_page">Squad</string>
+    <string name="shop_page">Shop</string>
 </resources>
