@@ -18,6 +18,8 @@
         android:layout_height="wrap_content"
         class="android.support.design.widget.TabLayout"
         android:id="@+id/tabLayout"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -7,16 +7,17 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.example.ergo.incremental.ClickerFragment"
-        android:id="@+id/fragment"
-        tools:layout="@layout/clicker_fragment"
+        android:name="com.example.ergo.incremental.StatsFragment"
+        android:id="@+id/fragment2"
+        tools:layout="@layout/stats_fragment"
         android:layout_weight="1" />
 
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.example.ergo.incremental.StatsFragment"
-        android:id="@+id/fragment2"
-        tools:layout="@layout/stats_fragment"
+        android:name="com.example.ergo.incremental.ClickerFragment"
+        android:id="@+id/fragment"
+        tools:layout="@layout/clicker_fragment"
         android:layout_weight="1" />
+
 </LinearLayout>
