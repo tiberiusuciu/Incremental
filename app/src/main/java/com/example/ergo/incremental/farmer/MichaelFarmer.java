@@ -2,11 +2,11 @@ package com.example.ergo.incremental.farmer;
 
 import com.example.ergo.incremental.utils.FarmersStats;
 
-public class MichealFarmer implements Farmer, FarmersStats {
+public class MichaelFarmer implements Farmer, FarmersStats {
     private int codesPerSeconds;
     private String name;
 
-    public MichealFarmer() {
+    public MichaelFarmer() {
         codesPerSeconds = MICHEAL_CPS;
         name = MICHEAL_NAME;
     }
