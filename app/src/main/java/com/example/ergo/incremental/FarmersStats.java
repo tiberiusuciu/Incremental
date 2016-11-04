@@ -80,7 +80,7 @@ public interface FarmersStats {
     final int ADAM_CPS = 12;
     final int ADAM_COST = 2;
 
-    //Currency = Principes
+    //Currency = Principe
     final int KEVIN_CPS = 12;
     final int KEVIN_COST = 2;
 

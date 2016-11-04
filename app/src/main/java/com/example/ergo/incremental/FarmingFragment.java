@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by ergo on 03/11/16.
+ * Ceci est le fragment qui gère la page principale, elle affiche le bouton ainsi que les statistiques du jeu
  */
 
 public class FarmingFragment extends Fragment {

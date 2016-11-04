@@ -1,7 +1,7 @@
 package com.example.ergo.incremental;
 
 /**
- * Created by ergo on 03/11/16.
+ * Interface générique pour regrouper tout mes travailleurs
  */
 
 public interface Farmer {

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by ergo on 03/11/16.
+ * Ceci est le fragment du bouton pour créer du code
  */
 
 public class ClickerFragment extends Fragment {
