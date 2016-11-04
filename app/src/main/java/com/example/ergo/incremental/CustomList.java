@@ -43,7 +43,7 @@ public class CustomList extends ArrayAdapter<String> {
         mainText.setText(farmerNames[position]);
         priceText.setText(farmerCost[position]);
         subText.setText(farmerPerformance[position]);
-        //to implement
+        //Todo: to implement
         //imageView.setImageResource(imageId[position]);
         return rowView;
     }
