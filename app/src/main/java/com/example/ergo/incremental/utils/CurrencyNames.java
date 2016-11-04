@@ -10,7 +10,6 @@ public interface CurrencyNames {
     final String ANIME_NOM = "ANIME";
     final String BACKFLIP_NOM = "BACKFLIP";
     final String BLINK_NOM = "BLINK";
-    final String CABARET_NOM = "CABARET";
     final String CAFFEINN_NOM = "CAFFEINN";
     final String COIFFURE_NOM = "COIFFURE";
     final String COUSIN_NOM = "COUSIN";
@@ -23,6 +22,7 @@ public interface CurrencyNames {
     final String MOTIVATION_NOM = "MOTIVATION";
     final String NOURRITURE_NOM = "NOURRITURE";
     final String PARTY_NOM = "PARTY";
+    final String PIANO_NOM = "PIANO";
     final String PRINCIPE_NOM = "PRINCIPE";
     final String SILENCE_NOM = "SILENCE";
     final String SOMMEIL_NOM = "SOMMEIL";

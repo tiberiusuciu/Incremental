@@ -2,11 +2,11 @@ package com.example.ergo.incremental.currency;
 
 import com.example.ergo.incremental.utils.CurrencyNames;
 
-public class Cabaret implements Currency, CurrencyNames {
+public class Piano implements Currency, CurrencyNames {
     protected String name;
 
-    public Cabaret(){
-        name = CABARET_NOM;
+    public Piano(){
+        name = PIANO_NOM;
     }
 
     public String getName() {

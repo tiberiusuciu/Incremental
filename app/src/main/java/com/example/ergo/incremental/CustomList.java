@@ -16,12 +16,16 @@ import android.widget.TextView;
 public class CustomList extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final String[] web;
+    private final String[] farmerNames;
+    private final String[] farmerCost;
+    private final String[] farmerPerformance;
     private final Integer[] imageId;
-    public CustomList(Activity context, String[] web, Integer[] imageId) {
-        super(context, R.layout.shop_list_single, web);
+    public CustomList(Activity context, String[] farmerNames, String[] farmerCost, String[] farmerPerformance, Integer[] imageId) {
+        super(context, R.layout.shop_list_single, farmerNames);
         this.context = context;
-        this.web = web;
+        this.farmerNames = farmerNames;
+        this.farmerCost = farmerCost;
+        this.farmerPerformance = farmerPerformance;
         this.imageId = imageId;
     }
 
@@ -33,11 +37,13 @@ public class CustomList extends ArrayAdapter<String> {
 
         TextView mainText = (TextView) rowView.findViewById(R.id.textView);
         TextView subText = (TextView) rowView.findViewById(R.id.subTextView);
+        TextView priceText = (TextView) rowView.findViewById(R.id.price);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
 
-        mainText.setText(web[position]);
+        mainText.setText(farmerNames[position]);
+        priceText.setText(farmerCost[position]);
+        subText.setText(farmerPerformance[position]);
         //to implement
-        //subText.setText(anotherWeb[position]);
         //imageView.setImageResource(imageId[position]);
         return rowView;
     }

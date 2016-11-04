@@ -47,7 +47,56 @@ public class ShopFragment extends Fragment {
                 FarmersStats.VINCENT_NAME,
                 FarmersStats.XAVIER_NAME
         };
-
+        //TODO: Remove these string calls here and add them in the string.xml of values
+        //TODO: Place this array somewhere else in the utils?
+        String[] farmerPrice = {
+                FarmersStats.ADAM_COST + " " + FarmersStats.ADAM_CURRENCY,
+                FarmersStats.DAVIDE_COST + " " + FarmersStats.DAVIDE_CURRENCY,
+                FarmersStats.GREG_COST + " " + FarmersStats.GREG_CURRENCY,
+                FarmersStats.GUILLAUME_COST + " " + FarmersStats.GUILLAUME_CURRENCY,
+                FarmersStats.HERVE_COST + " " + FarmersStats.HERVE_CURRENCY,
+                FarmersStats.JEAN_DANIEL_COST + " " + FarmersStats.JEAN_DANIEL_CURRENCY,
+                FarmersStats.JEB_COST + " " + FarmersStats.JEB_CURRENCY,
+                FarmersStats.JESS_COST + " " + FarmersStats.JESS_CURRENCY,
+                FarmersStats.JIMMY_COST + " " + FarmersStats.JIMMY_CURRENCY,
+                FarmersStats.JONATHAN_COST + " " + FarmersStats.JONATHAN_CURRENCY,
+                FarmersStats.KEVIN_COST + " " + FarmersStats.KEVIN_CURRENCY,
+                FarmersStats.MICHEAL_COST + " " + FarmersStats.MICHEAL_CURRENCY,
+                FarmersStats.MIECHKO_COST + " " + FarmersStats.MIECHKO_CURRENCY,
+                FarmersStats.NICOLAS_COST + " " + FarmersStats.NICOLAS_CURRENCY,
+                FarmersStats.SAMUEL_COST + " " + FarmersStats.SAMUEL_CURRENCY,
+                FarmersStats.SEB_COST + " " + FarmersStats.SEB_CURRENCY,
+                FarmersStats.SOARES_COST + " " + FarmersStats.SOARES_CURRENCY,
+                FarmersStats.TIBERIU_COST + " " + FarmersStats.TIBERIU_CURRENCY,
+                FarmersStats.VINCENT_COST + " " + FarmersStats.VINCENT_CURRENCY,
+                FarmersStats.XAVIER_COST + " " + FarmersStats.XAVIER_CURRENCY
+        };
+        //TODO: Remove these string calls here and add them in the string.xml of values
+        //TODO: Place this array somewhere else in the utils?
+        String[] farmerPerformance = {
+                FarmersStats.ADAM_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.DAVIDE_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.GREG_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.GUILLAUME_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.HERVE_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.JEAN_DANIEL_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.JEB_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.JESS_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.JIMMY_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.JONATHAN_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.KEVIN_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.MICHEAL_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.MIECHKO_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.NICOLAS_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.SAMUEL_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.SEB_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.SOARES_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.TIBERIU_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.VINCENT_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+                FarmersStats.XAVIER_CPS + " " + FarmersStats.PERFORMANCE_UNIT
+        };
+        //TODO: Find images?
+        //TODO: Place this array somewhere else in the utils?
         Integer[] images = {
                 1,
                 2,
@@ -71,7 +120,7 @@ public class ShopFragment extends Fragment {
                 20
         };
 
-        CustomList adapter = new CustomList(getActivity(), farmers, images);
+        CustomList adapter = new CustomList(getActivity(), farmers, farmerPrice, farmerPerformance, images);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(
