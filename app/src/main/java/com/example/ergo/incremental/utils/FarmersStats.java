@@ -28,7 +28,7 @@ public interface FarmersStats {
     final int JONATHAN_CPS = 3;
     final int JONATHAN_COST = 2;
 
-    //Currency = Magic
+    //Currency = Blink
     final int JIMMY_CPS = 3;
     final int JIMMY_COST = 2;
 
