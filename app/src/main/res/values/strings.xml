@@ -4,4 +4,25 @@
     <string name="clicker_page">Work</string>
     <string name="worker_page">Squad</string>
     <string name="shop_page">Shop</string>
+    <string name="tiberiu_currency">HAIRCUT</string>
+    <string name="david_currency">ANIME</string>
+    <string name="michael_currency">SLEEP</string>
+    <string name="jonathan_currency">MOTIVATION</string>
+    <string name="jimmy_currency">BLINK</string>
+    <string name="miechko_currency">MAGIC</string>
+    <string name="jean_daniel_currency">DND</string>
+    <string name="jess_currency">PIANO</string>
+    <string name="xavier_currency">ABSENCE</string>
+    <string name="seb_currency">DARK SOUL</string>
+    <string name="samuel_currency">BACKFLIP</string>
+    <string name="jeb_currency">PARTY</string>
+    <string name="nicolas_currency">COUSIN</string>
+    <string name="soares_currency">TWIN BROTHER</string>
+    <string name="vincent_currency">CAFFEINN</string>
+    <string name="guillaume_currency">FOOD</string>
+    <string name="adam_currency">LINUX</string>
+    <string name="kevin_currency">PRINCIPLE</string>
+    <string name="greg_currency">SILENCE</string>
+    <string name="herve_currency">KIRIKOU</string>
+    <string name="plural_currency">(S)</string>
 </resources>

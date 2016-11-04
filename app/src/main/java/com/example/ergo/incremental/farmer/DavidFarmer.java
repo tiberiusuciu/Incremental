@@ -8,8 +8,8 @@ public class DavidFarmer implements Farmer, FarmersStats {
     private String name;
 
     public DavidFarmer() {
-        codesPerSeconds = DAVIDE_CPS;
-        name = DAVIDE_NAME;
+        codesPerSeconds = DAVID_CPS;
+        name = DAVID_NAME;
     }
 
     @Override

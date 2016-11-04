@@ -20,15 +20,15 @@ public interface FarmersStats {
     final int TIBERIU_CPS = 1;
     final int TIBERIU_COST = 2;
 
-    final String DAVIDE_CURRENCY = "ANIME(S)";
-    final String DAVIDE_NAME = "DAVIDE";
-    final int DAVIDE_CPS = 2;
-    final int DAVIDE_COST = 2;
+    final String DAVID_CURRENCY = "ANIME(S)";
+    final String DAVID_NAME = "DAVID";
+    final int DAVID_CPS = 2;
+    final int DAVID_COST = 2;
 
-    final String MICHEAL_CURRENCY = "SOMMEIL(S)";
-    final String MICHEAL_NAME = "MICHEAL";
-    final int MICHEAL_CPS = 2;
-    final int MICHEAL_COST = 2;
+    final String MICHAEL_CURRENCY = "SOMMEIL(S)";
+    final String MICHAEL_NAME = "MICHEAL";
+    final int MICHAEL_CPS = 2;
+    final int MICHAEL_COST = 2;
 
     final String JONATHAN_CURRENCY = "MOTIVATION(S)";
     final String JONATHAN_NAME = "JONATHAN";

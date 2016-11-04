@@ -7,8 +7,8 @@ public class MichaelFarmer implements Farmer, FarmersStats {
     private String name;
 
     public MichaelFarmer() {
-        codesPerSeconds = MICHEAL_CPS;
-        name = MICHEAL_NAME;
+        codesPerSeconds = MICHAEL_CPS;
+        name = MICHAEL_NAME;
     }
 
     @Override

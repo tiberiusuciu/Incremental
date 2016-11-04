@@ -5,9 +5,10 @@ package com.example.ergo.incremental.utils;
  */
 
 public interface ShopFragmentInterface {
+    //TODO: Remove these string calls here and add them in the string.xml of values
     String[] farmers = {
             FarmersStats.ADAM_NAME,
-            FarmersStats.DAVIDE_NAME,
+            FarmersStats.DAVID_NAME,
             FarmersStats.GREG_NAME,
             FarmersStats.GUILLAUME_NAME,
             FarmersStats.HERVE_NAME,
@@ -17,7 +18,7 @@ public interface ShopFragmentInterface {
             FarmersStats.JIMMY_NAME,
             FarmersStats.JONATHAN_NAME,
             FarmersStats.KEVIN_NAME,
-            FarmersStats.MICHEAL_NAME,
+            FarmersStats.MICHAEL_NAME,
             FarmersStats.MIECHKO_NAME,
             FarmersStats.NICOLAS_NAME,
             FarmersStats.SAMUEL_NAME,
@@ -31,7 +32,7 @@ public interface ShopFragmentInterface {
     //TODO: Remove these string calls here and add them in the string.xml of values
     String[] farmerPrice = {
             FarmersStats.ADAM_COST + " " + FarmersStats.ADAM_CURRENCY,
-            FarmersStats.DAVIDE_COST + " " + FarmersStats.DAVIDE_CURRENCY,
+            FarmersStats.DAVID_COST + " " + FarmersStats.DAVID_CURRENCY,
             FarmersStats.GREG_COST + " " + FarmersStats.GREG_CURRENCY,
             FarmersStats.GUILLAUME_COST + " " + FarmersStats.GUILLAUME_CURRENCY,
             FarmersStats.HERVE_COST + " " + FarmersStats.HERVE_CURRENCY,
@@ -41,7 +42,7 @@ public interface ShopFragmentInterface {
             FarmersStats.JIMMY_COST + " " + FarmersStats.JIMMY_CURRENCY,
             FarmersStats.JONATHAN_COST + " " + FarmersStats.JONATHAN_CURRENCY,
             FarmersStats.KEVIN_COST + " " + FarmersStats.KEVIN_CURRENCY,
-            FarmersStats.MICHEAL_COST + " " + FarmersStats.MICHEAL_CURRENCY,
+            FarmersStats.MICHAEL_COST + " " + FarmersStats.MICHAEL_CURRENCY,
             FarmersStats.MIECHKO_COST + " " + FarmersStats.MIECHKO_CURRENCY,
             FarmersStats.NICOLAS_COST + " " + FarmersStats.NICOLAS_CURRENCY,
             FarmersStats.SAMUEL_COST + " " + FarmersStats.SAMUEL_CURRENCY,
@@ -55,7 +56,7 @@ public interface ShopFragmentInterface {
     //TODO: Remove these string calls here and add them in the string.xml of values
     String[] farmerPerformance = {
             FarmersStats.ADAM_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
-            FarmersStats.DAVIDE_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+            FarmersStats.DAVID_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.GREG_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.GUILLAUME_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.HERVE_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
@@ -65,7 +66,7 @@ public interface ShopFragmentInterface {
             FarmersStats.JIMMY_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.JONATHAN_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.KEVIN_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
-            FarmersStats.MICHEAL_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
+            FarmersStats.MICHAEL_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.MIECHKO_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.NICOLAS_CPS + " " + FarmersStats.PERFORMANCE_UNIT,
             FarmersStats.SAMUEL_CPS + " " + FarmersStats.PERFORMANCE_UNIT,

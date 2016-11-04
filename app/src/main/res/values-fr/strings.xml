@@ -5,4 +5,10 @@
     <string name="clicker_page">Travail</string>
     <string name="worker_page">Équipe</string>
     <string name="shop_page">Magasin</string>
+    <string name="tiberiu_currency">COIFFURE</string>
+    <string name="michael_currency">SOMMEIL</string>
+    <string name="jeb_currency">FÊTE</string>
+    <string name="soares_currency">FRÈRE JUMEAU</string>
+    <string name="guillaume_currency">NOURRITURE</string>
+    <string name="kevin_currency">PRINCIPE</string>
 </resources>
