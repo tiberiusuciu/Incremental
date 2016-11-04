@@ -2,7 +2,7 @@ package com.example.ergo.incremental.utils;
 
 /**
  * This class contains the stats for each Farmer
- * CPS means Codes Per Seconds
+ * CPS means Codes Per Second
  *
  * Les Farmers peuvent être acheté avec des objets provenant
  * de la classe mère nommé Currency
