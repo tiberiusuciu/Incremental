@@ -1,5 +1,16 @@
 package com.example.ergo.incremental.currency;
 
 
-public class Principe implements Currency {
+import com.example.ergo.incremental.utils.CurrencyNames;
+
+public class Principe implements Currency, CurrencyNames {
+    protected String name;
+
+    public Principe(){
+        name = PRINCIPE_NOM;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

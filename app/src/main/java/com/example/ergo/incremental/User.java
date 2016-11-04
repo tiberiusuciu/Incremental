@@ -28,9 +28,63 @@ public class User implements UserStats {
         this.monnaie.add(c);
     }
 
+    public int countAllInstancesOfSpecificMonnaie(String currencyName) {
+        int amountFound = 0;
+        for(Currency iterator: monnaie) {
+            if(iterator.getName().equals(currencyName)){
+                amountFound++;
+            }
+        }
+        return amountFound;
+    }
+
+    public boolean findSpecificAmountMonnaie(String currencyName, int amountNeeded) {
+        int amountFound = 0;
+        for(Currency iterator: monnaie) {
+            if(iterator.getName().equals(currencyName)){
+                amountFound++;
+                if(amountFound >= amountNeeded) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    // FindSpecificAmountMonnaie must always be called before this method
+    public void removeSpecificAmountMonnaie(String currencyName, int requestedAmount) {
+        int amountDeleted = 0;
+        for(Currency iterator: monnaie) {
+            if(iterator.getName().equals(currencyName)){
+                monnaie.remove(iterator);
+                amountDeleted++;
+                if(amountDeleted >= requestedAmount) {
+                    break;
+                }
+            }
+        }
+    }
+
     public void addFarmer(Farmer f) {
         this.travaileurs.add(f);
         calculateCodesPerSecond();
+    }
+
+    public int countAllInstancesOfSpecificFarmer(String farmerName) {
+        int amountFound = 0;
+        for(Farmer farmer: travaileurs) {
+            if(farmer.getName().equals(farmerName)) {
+                amountFound++;
+            }
+        }
+        return amountFound;
+    }
+
+    public void applyNewCPSToSpecificFarmer(String farmerName, int newCPS) {
+        for(Farmer farmer: travaileurs) {
+            if(farmer.getName().equals(farmerName)) {
+                farmer.setCodesPerSeconds(newCPS);
+            }
+        }
     }
 
     public void calculateCodesPerSecond() {

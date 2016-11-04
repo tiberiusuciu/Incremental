@@ -5,4 +5,5 @@ package com.example.ergo.incremental.currency;
  */
 
 public interface Currency {
+    public String getName();
 }

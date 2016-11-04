@@ -1,4 +1,15 @@
 package com.example.ergo.incremental.currency;
 
-public class Blink implements Currency {
+import com.example.ergo.incremental.utils.CurrencyNames;
+
+public class Blink implements Currency, CurrencyNames {
+    protected String name;
+
+    public Blink(){
+        name = BLINK_NOM;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

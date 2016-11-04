@@ -9,4 +9,5 @@ import com.example.ergo.incremental.utils.FarmersStats;
 public interface Farmer {
     int getCodesPerSeconds();
     void setCodesPerSeconds(int newCodesPerSecond);
+    public String getName();
 }

@@ -1,4 +1,15 @@
 package com.example.ergo.incremental.currency;
 
-public class FrereJumeau implements Currency {
+import com.example.ergo.incremental.utils.CurrencyNames;
+
+public class FrereJumeau implements Currency, CurrencyNames {
+    protected String name;
+
+    public FrereJumeau(){
+        name = FRERE_JUMEAU_NOM;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

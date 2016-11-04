@@ -3,7 +3,13 @@ package com.example.ergo.incremental.farmer;
 import com.example.ergo.incremental.utils.FarmersStats;
 
 public class JebFarmer implements Farmer, FarmersStats {
-    private int codesPerSeconds = JEB_CPS;
+    private int codesPerSeconds;
+    private String name;
+
+    public JebFarmer() {
+        codesPerSeconds = JEB_CPS;
+        name = JEB_NAME;
+    }
 
     @Override
     public int getCodesPerSeconds() {
@@ -13,5 +19,9 @@ public class JebFarmer implements Farmer, FarmersStats {
     @Override
     public void setCodesPerSeconds(int newCodesPerSecond) {
         this.codesPerSeconds = newCodesPerSecond;
+    }
+
+    public String getName() {
+        return name;
     }
 }
