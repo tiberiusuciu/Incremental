@@ -43,7 +43,7 @@ public interface FarmersStats {
     final int MIECHKO_COST = 2;
 
     //Currency = Dnd
-    final String JEAN_DANIEL_NAME = "JEAN_DANIEL";
+    final String JEAN_DANIEL_NAME = "JEAN DANIEL";
     final int JEAN_DANIEL_CPS = 4;
     final int JEAN_DANIEL_COST = 2;
 
