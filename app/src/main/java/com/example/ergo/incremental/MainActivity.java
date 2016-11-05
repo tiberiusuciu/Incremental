@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.setOffscreenPageLimit(3);
+        (new Thread(new TimerThread())).start();
 
     }
 
