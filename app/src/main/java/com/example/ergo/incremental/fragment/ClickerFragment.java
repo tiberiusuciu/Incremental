@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ergo.incremental.R;
-
+import com.example.ergo.incremental.core_mechanics.Game;
 /**
  * Ceci est le fragment du bouton pour créer du code
  */
@@ -25,6 +25,13 @@ public class ClickerFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + 1);
+                    StatsFragment.codeText.setText(getString(R.string.remaining_code) + " " + (Game.codeToMake - StatsFragment.codeBar.getProgress()));
+                    if(StatsFragment.codeBar.getProgress() == Game.codeToMake){
+                        Game.levelUp();
+                        StatsFragment.codeBar.setProgress(0);
+                        StatsFragment.codeBar.setMax(Game.codeToMake);
+                        StatsFragment.codeText.setText(getString(R.string.beggining_code));
+                    }
                 }
             }
         );

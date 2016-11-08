@@ -35,7 +35,7 @@
         android:indeterminate="false" />
 
     <TextView
-        android:text="@string/remaining_code"
+        android:text="@string/beggining_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/codeText"

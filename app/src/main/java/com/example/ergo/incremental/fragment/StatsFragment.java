@@ -31,11 +31,10 @@ public class StatsFragment extends Fragment {
         timeBar.setProgress(0);
 
         codeBar = (ProgressBar) v.findViewById(R.id.codeBar);
-        codeBar.setMax(180);
+        codeBar.setMax((int)Game.codeToMake);
         codeBar.setProgress(0);
 
         timeText = (TextView) v.findViewById(R.id.timeText);
-        //timeText.setText(R.string.time_indicator);
         codeText = (TextView) v.findViewById(R.id.codeText);
 
         return v;

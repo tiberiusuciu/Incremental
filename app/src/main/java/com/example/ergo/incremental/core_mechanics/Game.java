@@ -13,13 +13,13 @@ public class Game {
     public static int currentLevel = GameValues.STARTING_LEVEL;
 
     // FIXME: Duplicate code execution, is there a cleaner way to do this?
-    public static double codeToMake = Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
+    public static int codeToMake = (int)Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
 
     public static void calculateCodeToMake(){
-        codeToMake = Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
+        codeToMake = (int)Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
     }
 
-    public static  void levelUp() {
+    public static void levelUp() {
         if(currentLevel < GameValues.MAX_NIVEAU){
             currentLevel++;
             calculateCodeToMake();

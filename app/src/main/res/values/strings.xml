@@ -27,4 +27,5 @@
     <string name="plural_currency">(S)</string>
     <string name="time_indicator">Time Remaining: </string>
     <string name="remaining_code">Remaining Code: </string>
+    <string name="beggining_code">Start working to make some code</string>
 </resources>

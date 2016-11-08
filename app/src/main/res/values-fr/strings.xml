@@ -13,4 +13,5 @@
     <string name="kevin_currency">PRINCIPE</string>
     <string name="time_indicator">Temps Restants: </string>
     <string name="remaining_code">Code Restant: </string>
+    <string name="beggining_code">Veuillez travailler pour générer du code</string>
 </resources>

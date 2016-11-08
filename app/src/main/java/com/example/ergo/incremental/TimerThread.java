@@ -21,7 +21,7 @@ public class TimerThread extends Activity implements Runnable {
         this.context = context;
     }
     // TODO This needs to be a singleton
-    // TODO make strings from values reach here
+    // TODO the main loop will be separated from the run method, in order to reuse the code for each level
     @Override
     public void run() {
         try {
