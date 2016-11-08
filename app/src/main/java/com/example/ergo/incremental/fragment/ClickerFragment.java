@@ -10,10 +10,13 @@ import android.widget.Button;
 
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.core_mechanics.Game;
+
 /**
  * Ceci est le fragment du bouton pour créer du code
  */
 
+
+// TODO remove STATSFRAGMENT and put it in a variable, it will be more cleaner
 public class ClickerFragment extends Fragment {
     Button button;
     @Nullable

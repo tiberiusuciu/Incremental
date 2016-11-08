@@ -1,5 +1,7 @@
 package com.example.ergo.incremental.core_mechanics;
 
+import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.fragment.StatsFragment;
 import com.example.ergo.incremental.utils.GameValues;
 
 /**
@@ -23,6 +25,7 @@ public class Game {
         if(currentLevel < GameValues.MAX_NIVEAU){
             currentLevel++;
             calculateCodeToMake();
+            StatsFragment.timeBar.setProgress(0);
         }
         else {
             gameOver();
