@@ -9,17 +9,17 @@ import com.example.ergo.incremental.utils.GameValues;
 // Todo: make this class singleton as well
 public class Game {
 
-    static int availableTime = GameValues.TEMPS_PAR_NIVEAU;
-    static int currentLevel = GameValues.STARTING_LEVEL;
+    public static int availableTime = GameValues.TEMPS_PAR_NIVEAU;
+    public static int currentLevel = GameValues.STARTING_LEVEL;
 
     // FIXME: Duplicate code execution, is there a cleaner way to do this?
-    static double codeToMake = Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
+    public static double codeToMake = Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
 
-    public void calculateCodeToMake(){
+    public static void calculateCodeToMake(){
         codeToMake = Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
     }
 
-    public void levelUp() {
+    public static  void levelUp() {
         if(currentLevel < GameValues.MAX_NIVEAU){
             currentLevel++;
             calculateCodeToMake();
@@ -29,7 +29,14 @@ public class Game {
         }
     }
 
-    public void gameOver(){
+    public static void gameOver(){
 
+    }
+
+    public static String formatTime(int seconds) {
+        int formatSeconds = seconds%60;
+        seconds -= formatSeconds;
+        int formatMinutes = seconds/60;
+        return formatMinutes + "m" + formatSeconds + "s";
     }
 }

@@ -20,7 +20,6 @@ public class TimerThread extends Activity implements Runnable {
     public TimerThread(Context context) {
         this.context = context;
     }
-
     // TODO This needs to be a singleton
     // TODO make strings from values reach here
     @Override
@@ -29,7 +28,7 @@ public class TimerThread extends Activity implements Runnable {
             do{
                 Thread.sleep(1000);
                 StatsFragment.timeBar.setProgress(StatsFragment.timeBar.getProgress() + 1);
-                String textForTime = this.context.getString(R.string.time_indicator) + " " + (GameValues.TEMPS_PAR_NIVEAU - StatsFragment.timeBar.getProgress());
+                String textForTime = this.context.getString(R.string.time_indicator) + " " + Game.formatTime(GameValues.TEMPS_PAR_NIVEAU - StatsFragment.timeBar.getProgress());
                 setText(StatsFragment.timeText, textForTime);
             } while(StatsFragment.timeBar.getProgress() <= GameValues.TEMPS_PAR_NIVEAU);
         } catch (InterruptedException e) {
