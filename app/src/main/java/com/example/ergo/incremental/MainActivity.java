@@ -48,8 +48,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.setOffscreenPageLimit(3);
-        (new Thread(new TimerThread())).start();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        TimerThread timerThread = new TimerThread(getApplicationContext());
+        new Thread(timerThread).start();
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {
@@ -76,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     return null;
             }
+
         }
 
         @Override
