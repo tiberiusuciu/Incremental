@@ -25,6 +25,6 @@
     <string name="greg_currency">SILENCE</string>
     <string name="herve_currency">KIRIKOU</string>
     <string name="plural_currency">(S)</string>
-    <string name="time_indicator">Time Remaining</string>
-    <string name="remaining_code">Remaining Code</string>
+    <string name="time_indicator">Time Remaining: </string>
+    <string name="remaining_code">Remaining Code: </string>
 </resources>

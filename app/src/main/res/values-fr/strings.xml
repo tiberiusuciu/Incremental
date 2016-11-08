@@ -11,6 +11,6 @@
     <string name="soares_currency">FRÈRE JUMEAU</string>
     <string name="guillaume_currency">NOURRITURE</string>
     <string name="kevin_currency">PRINCIPE</string>
-    <string name="time_indicator">Temps Restants</string>
-    <string name="remaining_code">Code Restant</string>
+    <string name="time_indicator">Temps Restants: </string>
+    <string name="remaining_code">Code Restant: </string>
 </resources>

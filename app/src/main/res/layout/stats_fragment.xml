@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/timeBar"
-        android:progressTint="@color/gold"
+        android:progressTint="@color/hot_pink"
         android:minHeight="30dp"
         android:longClickable="false"
         android:backgroundTint="@color/clickerBackground"

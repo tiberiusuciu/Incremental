@@ -10,6 +10,7 @@ import com.example.ergo.incremental.fragment.StatsFragment;
 
 public class TimerThread implements Runnable {
 
+    // TODO This needs to be a singleton
     @Override
     public void run() {
         try {
