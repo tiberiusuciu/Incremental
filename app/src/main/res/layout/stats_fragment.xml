@@ -3,15 +3,45 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ProgressBar
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
+        android:id="@+id/timeBar"
         android:progressTint="@color/gold"
-        android:secondaryProgressTint="@color/clickerButton"
-        android:minHeight="60dip"
+        android:minHeight="30dp"
         android:longClickable="false"
         android:backgroundTint="@color/clickerBackground"
         android:indeterminate="false" />
+
+    <TextView
+        android:text="@string/time_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeText"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textColor="@color/clickerBackground" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/codeBar"
+        android:progressTint="@color/green"
+        android:minHeight="30dp"
+        android:longClickable="false"
+        android:backgroundTint="@color/clickerBackground"
+        android:indeterminate="false" />
+
+    <TextView
+        android:text="@string/remaining_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/codeText"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textColor="@color/clickerBackground" />
+
 </LinearLayout>

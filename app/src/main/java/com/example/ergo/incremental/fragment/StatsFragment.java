@@ -15,15 +15,19 @@ import com.example.ergo.incremental.R;
  */
 
 public class StatsFragment extends Fragment {
-    public static ProgressBar progressBar;
+    public static ProgressBar timeBar;
+    public static ProgressBar codeBar;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.stats_fragment, container, false);
-        progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
-        progressBar.setMax(180);
-        progressBar.setProgress(0);
-        progressBar.setSecondaryProgress(0);
+        timeBar = (ProgressBar) v.findViewById(R.id.timeBar);
+        timeBar.setMax(180);
+        timeBar.setProgress(0);
+
+        codeBar = (ProgressBar) v.findViewById(R.id.codeBar);
+        codeBar.setMax(180);
+        codeBar.setProgress(0);
         return v;
     }
 }

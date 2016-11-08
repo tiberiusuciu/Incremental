@@ -24,7 +24,7 @@ public class ClickerFragment extends Fragment {
 
         button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    StatsFragment.progressBar.setSecondaryProgress(StatsFragment.progressBar.getSecondaryProgress() + 1);
+                    StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + 1);
                 }
             }
         );

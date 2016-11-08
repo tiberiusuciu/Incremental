@@ -16,7 +16,7 @@ public class TimerThread implements Runnable {
             while(true){
                 Log.d("THREAD OF TIME", "THIS IS A TEST!!");
                 Thread.sleep(1000);
-                StatsFragment.progressBar.setProgress(StatsFragment.progressBar.getProgress() + 1);
+                StatsFragment.timeBar.setProgress(StatsFragment.timeBar.getProgress() + 1);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
