@@ -4,43 +4,107 @@
     android:layout_height="match_parent">
 
 
-    <ProgressBar
-        style="@android:style/Widget.ProgressBar.Horizontal"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeBar"
-        android:progressTint="@color/hot_pink"
-        android:minHeight="30dp"
-        android:longClickable="false"
-        android:backgroundTint="@color/clickerBackground"
-        android:indeterminate="false" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeText"
-        android:textAlignment="center"
-        android:textStyle="normal|bold"
-        android:textColor="@color/clickerBackground" />
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeBar"
+            android:progressTint="@color/hot_pink"
+            android:minHeight="30dp"
+            android:longClickable="false"
+            android:backgroundTint="@color/clickerBackground"
+            android:indeterminate="false" />
 
-    <ProgressBar
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/codeBar"
-        android:progressTint="@color/green"
-        android:minHeight="30dp"
-        android:longClickable="false"
-        android:backgroundTint="@color/clickerBackground"
-        android:indeterminate="false" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeText"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:textColor="@color/clickerBackground" />
 
-    <TextView
-        android:text="@string/beggining_code"
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/codeBar"
+            android:progressTint="@color/green"
+            android:minHeight="30dp"
+            android:longClickable="false"
+            android:backgroundTint="@color/clickerBackground"
+            android:indeterminate="false" />
+
+        <TextView
+            android:text="@string/beggining_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/codeText"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:textColor="@color/clickerBackground" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/codeText"
-        android:textAlignment="center"
-        android:textStyle="normal|bold"
-        android:textColor="@color/clickerBackground" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="@string/code_per_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:text="0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cps"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:textSize="96sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="@string/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:text="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lvl"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:textSize="96sp"
+                android:fontFamily="sans-serif"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

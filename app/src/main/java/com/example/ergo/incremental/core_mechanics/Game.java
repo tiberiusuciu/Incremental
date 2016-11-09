@@ -26,6 +26,7 @@ public class Game {
             currentLevel++;
             calculateCodeToMake();
             StatsFragment.timeBar.setProgress(0);
+            StatsFragment.currentLevel.setText(currentLevel + "");
         }
         else {
             gameOver();

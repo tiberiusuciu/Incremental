@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         TimerThread timerThread = new TimerThread(getApplicationContext());
         new Thread(timerThread).start();
+        User user = new User();
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {

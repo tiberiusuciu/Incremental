@@ -22,6 +22,8 @@ public class StatsFragment extends Fragment {
     public static ProgressBar codeBar;
     public static TextView timeText;
     public static TextView codeText;
+    public static TextView codesPerSecond;
+    public static TextView currentLevel;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class StatsFragment extends Fragment {
 
         timeText = (TextView) v.findViewById(R.id.timeText);
         codeText = (TextView) v.findViewById(R.id.codeText);
+
+        codesPerSecond = (TextView) v.findViewById(R.id.cps);
+        currentLevel = (TextView) v.findViewById(R.id.lvl);
 
         return v;
     }
