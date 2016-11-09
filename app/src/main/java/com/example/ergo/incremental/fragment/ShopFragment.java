@@ -20,7 +20,7 @@ import com.example.ergo.incremental.utils.ShopFragmentInterface;
 
 public class ShopFragment extends Fragment {
 
-    ListView listView;
+    public static ListView listView;
 
     @Nullable
     @Override
@@ -36,7 +36,6 @@ public class ShopFragment extends Fragment {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
-
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         itemClicked(view, i);

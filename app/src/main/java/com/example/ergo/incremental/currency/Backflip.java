@@ -2,10 +2,10 @@ package com.example.ergo.incremental.currency;
 
 import com.example.ergo.incremental.utils.CurrencyNames;
 
-public class BackFlip implements Currency, CurrencyNames {
+public class Backflip implements Currency, CurrencyNames {
     protected String name;
 
-    public BackFlip(){
+    public Backflip(){
         name = BACKFLIP_NOM;
     }
 

@@ -3,13 +3,16 @@ package com.example.ergo.incremental;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ergo.incremental.core_mechanics.Game;
 import com.example.ergo.incremental.currency.Currency;
-import com.example.ergo.incremental.currency.Magic;
+import com.example.ergo.incremental.fragment.ShopFragment;
 import com.example.ergo.incremental.fragment.StatsFragment;
 import com.example.ergo.incremental.utils.GameValues;
+import com.example.ergo.incremental.utils.ShopFragmentInterface;
 
 /**
  * Cette classe va offrir une monnaie à l'utilisateur de facon aléatoire à chaque x secondes
@@ -36,6 +39,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
                     if(newCurrency != null){
                         addCurrencyToUser(newCurrency);
                         displayNewCurrency(newCurrency);
+                        updateShop();
                     }
                 }
             } while(!Game.isGameOver);
@@ -74,5 +78,28 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
 
     private void addCurrencyToUser(Currency currency) {
         user.addMonnaie(currency);
+    }
+
+    // TODO update listView items, for now, nothing really updates
+    private void updateShop() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                View v;
+                for (int i = 0; i < ShopFragment.listView.getCount(); i++){
+                    v = ShopFragment.listView.getAdapter().getView(i, null, null);
+                    TextView farmerName = (TextView) v.findViewById(R.id.textView);
+                    if(user.findSpecificAmountMonnaie(ShopFragmentInterface.farmerCurrencyTypes[i], 2)){
+                        Log.d("TAGGY", farmerName.getText() + "");
+                        farmerName.setText("THIS IS A TEST");
+                        Log.d("TAGGYTAGGY", farmerName.getText() + "");
+                        farmerName.setTextColor(context.getResources().getColor(R.color.gold));
+                    }
+                    else {
+                        farmerName.setTextColor(context.getResources().getColor(R.color.clickerBackground));
+                    }
+                }
+            }
+        });
     }
 }

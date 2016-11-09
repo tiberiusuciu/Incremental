@@ -1,5 +1,7 @@
 package com.example.ergo.incremental.utils;
 
+import com.example.ergo.incremental.currency.Currency;
+
 /**
  * Ici repose une classe pour réduire la complexité de la class ShopFragment
  */
@@ -27,6 +29,29 @@ public interface ShopFragmentInterface {
             FarmersStats.TIBERIU_NAME,
             FarmersStats.VINCENT_NAME,
             FarmersStats.XAVIER_NAME
+    };
+
+    String[] farmerCurrencyTypes = {
+            CurrencyNames.LINUX_NOM,
+            CurrencyNames.ANIME_NOM,
+            CurrencyNames.SILENCE_NOM,
+            CurrencyNames.NOURRITURE_NOM,
+            CurrencyNames.KIRIKOU_NOM,
+            CurrencyNames.DND_NOM,
+            CurrencyNames.PARTY_NOM,
+            CurrencyNames.PIANO_NOM,
+            CurrencyNames.BLINK_NOM,
+            CurrencyNames.MOTIVATION_NOM,
+            CurrencyNames.PRINCIPE_NOM,
+            CurrencyNames.SOMMEIL_NOM,
+            CurrencyNames.MAGIC_NOM,
+            CurrencyNames.COUSIN_NOM,
+            CurrencyNames.BACKFLIP_NOM,
+            CurrencyNames.DARKSOULS_NOM,
+            CurrencyNames.FRERE_JUMEAU_NOM,
+            CurrencyNames.COIFFURE_NOM,
+            CurrencyNames.CAFFEINN_NOM,
+            CurrencyNames.ABSENCE_NOM
     };
 
     //TODO: Remove these string calls here and add them in the string.xml of values
