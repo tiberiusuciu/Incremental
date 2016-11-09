@@ -54,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        TimerThread timerThread = new TimerThread(getApplicationContext());
-        new Thread(timerThread).start();
         User user = new User();
+        TimerThread timerThread = new TimerThread(getApplicationContext());
+        RandomCurrencyThread currencyThread = new RandomCurrencyThread(getApplicationContext(), user);
+        new Thread(timerThread).start();
+        new Thread(currencyThread).start();
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {

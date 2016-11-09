@@ -4,6 +4,7 @@ import com.example.ergo.incremental.currency.Currency;
 import com.example.ergo.incremental.farmer.Farmer;
 import com.example.ergo.incremental.utils.UserStats;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +19,8 @@ public class User implements UserStats {
     protected int codesPerSecond;
     protected int codesPerTap;
     public User(){
-        monnaie = null;
-        travaileurs = null;
+        monnaie = new ArrayList<Currency>();
+        travaileurs = new ArrayList<Farmer>();
         codesPerSecond = startingCodesPerSecond;
         codesPerTap = startingCodesPerTap;
     }

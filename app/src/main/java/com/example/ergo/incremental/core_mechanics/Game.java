@@ -11,6 +11,7 @@ import com.example.ergo.incremental.utils.GameValues;
 // Todo: make this class singleton as well
 public class Game {
 
+    public static boolean isGameOver = false;
     public static int availableTime = GameValues.TEMPS_PAR_NIVEAU;
     public static int currentLevel = GameValues.STARTING_LEVEL;
 
@@ -34,7 +35,7 @@ public class Game {
     }
 
     public static void gameOver(){
-
+        isGameOver = true;
     }
 
     public static String formatTime(int seconds) {
