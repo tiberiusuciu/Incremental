@@ -86,8 +86,11 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
             @Override
             public void run() {
                 View v;
-                for (int i = 0; i < ShopFragment.listView.getCount(); i++){
-                    v = ShopFragment.listView.getAdapter().getView(i, null, null);
+                for (int i = ShopFragment.listView.getFirstVisiblePosition(); i < ShopFragment.listView.getLastVisiblePosition(); i++){
+                    //v = ShopFragment.listView.getAdapter().getView(i, null, null);
+                    Log.d("FirstPosition", ShopFragment.listView.getFirstVisiblePosition() + "");
+                    Log.d("LastPosition", ShopFragment.listView.getLastVisiblePosition() + "");
+                    v = ShopFragment.listView.getChildAt(i);
                     TextView farmerName = (TextView) v.findViewById(R.id.textView);
                     if(user.findSpecificAmountMonnaie(ShopFragmentInterface.farmerCurrencyTypes[i], 2)){
                         Log.d("TAGGY", farmerName.getText() + "");
