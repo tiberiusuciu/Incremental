@@ -54,7 +54,7 @@ public class User implements UserStats {
     // FindSpecificAmountMonnaie must always be called before this method
     public void removeSpecificAmountMonnaie(String currencyName, int requestedAmount) {
         int amountDeleted = 0;
-        for(Currency iterator: monnaie) {
+        for(Currency iterator: this.monnaie) {
             if(iterator.getName().equals(currencyName)){
                 monnaie.remove(iterator);
                 amountDeleted++;

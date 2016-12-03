@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,11 +83,12 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
 
     // TODO update listView items, for now, nothing really updates
     private void updateShop() {
+        /*
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 View v;
-                for (int i = ShopFragment.listView.getFirstVisiblePosition(); i < ShopFragment.listView.getLastVisiblePosition(); i++){
+                for (int i = 0; i <= ShopFragment.listView.getLastVisiblePosition() - ShopFragment.listView.getFirstVisiblePosition(); i++){
                     //v = ShopFragment.listView.getAdapter().getView(i, null, null);
                     Log.d("FirstPosition", ShopFragment.listView.getFirstVisiblePosition() + "");
                     Log.d("LastPosition", ShopFragment.listView.getLastVisiblePosition() + "");
@@ -94,7 +96,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
                     TextView farmerName = (TextView) v.findViewById(R.id.textView);
                     if(user.findSpecificAmountMonnaie(ShopFragmentInterface.farmerCurrencyTypes[i], 2)){
                         Log.d("TAGGY", farmerName.getText() + "");
-                        farmerName.setText("THIS IS A TEST");
+                        //farmerName.setText("THIS IS A TEST");
                         Log.d("TAGGYTAGGY", farmerName.getText() + "");
                         farmerName.setTextColor(context.getResources().getColor(R.color.gold));
                     }
@@ -104,5 +106,6 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
                 }
             }
         });
+        */
     }
 }

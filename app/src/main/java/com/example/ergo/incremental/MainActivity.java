@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
         user = new User();
         TimerThread timerThread = new TimerThread(getApplicationContext());
         RandomCurrencyThread currencyThread = new RandomCurrencyThread(getApplicationContext(), user);
+        FarmerThread farmerThread = new FarmerThread(getApplicationContext());
         new Thread(timerThread).start();
         new Thread(currencyThread).start();
+        new Thread(farmerThread).start();
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {
