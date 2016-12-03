@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        User user = new User();
+        user = new User();
         TimerThread timerThread = new TimerThread(getApplicationContext());
         RandomCurrencyThread currencyThread = new RandomCurrencyThread(getApplicationContext(), user);
         new Thread(timerThread).start();

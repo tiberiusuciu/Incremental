@@ -39,7 +39,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
                     if(newCurrency != null){
                         addCurrencyToUser(newCurrency);
                         displayNewCurrency(newCurrency);
-                        updateShop();
+                        //updateShop();
                     }
                 }
             } while(!Game.isGameOver);

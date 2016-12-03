@@ -27,7 +27,7 @@ public class ShopFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shop_fragment, container, false);
         String[] farmers = ShopFragmentInterface.farmers;
-        String[] farmerPrice = ShopFragmentInterface.farmerPrice;
+        String[] farmerPrice = ShopFragmentInterface.farmerCurrencyTypes;
         String[] farmerPerformance = ShopFragmentInterface.farmerPerformance;
         Integer[] images = ShopFragmentInterface.images;
 

@@ -41,8 +41,12 @@ public class CustomList extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
 
         mainText.setText(farmerNames[position]);
-        priceText.setText(farmerCost[position]);
+        priceText.setText("2 " + farmerCost[position]);
         subText.setText(farmerPerformance[position]);
+
+        if(MainActivity.user.findSpecificAmountMonnaie(farmerCost[position], 2)) {
+            mainText.setTextColor(getContext().getResources().getColor(R.color.gold));
+        }
         //Todo: to implement
         //imageView.setImageResource(imageId[position]);
         return rowView;
