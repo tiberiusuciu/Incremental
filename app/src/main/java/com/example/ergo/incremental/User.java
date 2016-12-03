@@ -1,10 +1,13 @@
 package com.example.ergo.incremental;
 
+import android.util.Log;
+
 import com.example.ergo.incremental.currency.Currency;
 import com.example.ergo.incremental.farmer.Farmer;
 import com.example.ergo.incremental.utils.UserStats;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -54,15 +57,14 @@ public class User implements UserStats {
     // FindSpecificAmountMonnaie must always be called before this method
     public void removeSpecificAmountMonnaie(String currencyName, int requestedAmount) {
         int amountDeleted = 0;
-        for(Currency iterator: this.monnaie) {
-            if(iterator.getName().equals(currencyName)){
-                monnaie.remove(iterator);
+        ArrayList toRemove = new ArrayList();
+        for (Currency cur : this.monnaie) {
+            if (cur.getName().equals(currencyName) && amountDeleted < 2) {
+                toRemove.add(cur);
                 amountDeleted++;
-                if(amountDeleted >= requestedAmount) {
-                    break;
-                }
             }
         }
+        this.monnaie.removeAll(toRemove);
     }
 
     public void addFarmer(Farmer f) {

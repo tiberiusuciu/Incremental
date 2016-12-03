@@ -54,9 +54,7 @@ public class ShopFragment extends Fragment {
 
     public void itemClicked(View view, int position) {
         if(MainActivity.user.findSpecificAmountMonnaie(farmerPrice[position], 2)) {
-            Toast.makeText(getContext(), "You have enough to buy a " + farmers[position], Toast.LENGTH_SHORT).show();
-
-            //MainActivity.user.removeSpecificAmountMonnaie(farmerPrice[position], 2);
+            MainActivity.user.removeSpecificAmountMonnaie(farmerPrice[position], 2);
             Class<?> myClass = null;
             Farmer farmer = null;
             try {
