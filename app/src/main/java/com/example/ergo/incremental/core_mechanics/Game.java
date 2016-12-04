@@ -3,6 +3,7 @@ package com.example.ergo.incremental.core_mechanics;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.fragment.StatsFragment;
 import com.example.ergo.incremental.utils.GameValues;
+import com.example.ergo.incremental.utils.ShopFragmentInterface;
 
 /**
  * Ceci est la class qui gère les niveaux ainsi que l'état de la partie (gagné, perdue)

@@ -6,20 +6,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.core_mechanics.Game;
 
 /**
  * Created by ergo on 03/12/16.
  */
 
 public class EventFragment extends Fragment {
+
+    public static TextView eventName;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.event_fragment, container, false);
+        eventName = (TextView) v.findViewById(R.id.eventName);
         return v;
     }
 }

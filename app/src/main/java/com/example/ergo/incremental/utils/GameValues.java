@@ -1,5 +1,7 @@
 package com.example.ergo.incremental.utils;
 
+import com.example.ergo.incremental.farmer.Farmer;
+
 /**
  * Ici repose les valeurs par defauts du jeu
  */
@@ -31,5 +33,17 @@ public interface GameValues {
         "Principe",
         "Silence",
         "Sommeil"
+    };
+    final String[] eventNames = {
+            "La fin de session approche, tous les fermiers travaillent extra, productivité augmentée!",
+            "Les fermiers doivent ré-installer Eclipse, productivité ralenti!",
+            "Les fermiers font le SCRUM, productivité augmentée!"
+    };
+
+    // Ceci est le pourcentage de changement au CPS
+    final double[] eventEffects = {
+            2,
+            0.5,
+            1.5
     };
 }

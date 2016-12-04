@@ -28,7 +28,7 @@ public class FarmerThread extends Activity implements Runnable {
                 Thread.sleep(1000);
                 int codePerSecond = MainActivity.user.codesPerSecond;
                 updateCode(codePerSecond);
-                setText(codePerSecond + "");
+                setText((int)(codePerSecond * RandomEventThread.newCPS) + "");
             } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class FarmerThread extends Activity implements Runnable {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + codePerSecond);
+                StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + (int)(codePerSecond * RandomEventThread.newCPS));
                 if(StatsFragment.codeBar.getProgress() >= StatsFragment.codeBar.getMax()) {
                     Game.levelUp();
                     StatsFragment.codeBar.setProgress(0);
