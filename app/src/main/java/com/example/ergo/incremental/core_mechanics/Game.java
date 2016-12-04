@@ -1,11 +1,13 @@
 package com.example.ergo.incremental.core_mechanics;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.ergo.incremental.GameOver;
 import com.example.ergo.incremental.MainActivity;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.fragment.StatsFragment;
+import com.example.ergo.incremental.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.utils.GameValues;
 import com.example.ergo.incremental.utils.ShopFragmentInterface;
 
@@ -43,9 +45,11 @@ public class Game {
         isGameOver = true;
         Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //EditText editText = (EditText) findViewById(R.id.edit_message);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+        int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
+        int totalFarmers = MainActivity.user.getTravaileurs().size();
+        Log.d("TAGGY TAGGY", ellapsedTime + "");
+        intent.putExtra("ellapsedTime", ellapsedTime + "");
+        intent.putExtra("totalFarmers", totalFarmers + "");
         MainActivity.getAppContext().startActivity(intent);
 
     }

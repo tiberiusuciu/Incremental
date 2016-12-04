@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.example.ergo.incremental.fragment.FarmersFragment;
 import com.example.ergo.incremental.fragment.FarmingFragment;
 import com.example.ergo.incremental.fragment.ShopFragment;
+import com.example.ergo.incremental.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.threads.FarmerThread;
 import com.example.ergo.incremental.threads.RandomCurrencyThread;
 import com.example.ergo.incremental.threads.RandomEventThread;
@@ -65,10 +66,12 @@ public class MainActivity extends AppCompatActivity {
         RandomCurrencyThread currencyThread = new RandomCurrencyThread(getApplicationContext(), user);
         FarmerThread farmerThread = new FarmerThread(getApplicationContext());
         RandomEventThread randomEventThread = new RandomEventThread(getApplicationContext(), user);
+        EllapsedTimeThread ellapsedTimeThread = new EllapsedTimeThread(getApplicationContext());
         new Thread(timerThread).start();
         new Thread(currencyThread).start();
         new Thread(farmerThread).start();
         new Thread(randomEventThread).start();
+        new Thread(ellapsedTimeThread).start();
     }
 
     public static Context getAppContext(){
