@@ -19,7 +19,6 @@ import com.example.ergo.incremental.utils.ShopFragmentInterface;
 public class Game {
 
     public static boolean isGameOver = false;
-    public static int availableTime = GameValues.TEMPS_PAR_NIVEAU;
     public static int currentLevel = GameValues.STARTING_LEVEL;
 
     // FIXME: Duplicate code execution, is there a cleaner way to do this?
@@ -47,7 +46,6 @@ public class Game {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
         int totalFarmers = MainActivity.user.getTravaileurs().size();
-        Log.d("TAGGY TAGGY", ellapsedTime + "");
         intent.putExtra("ellapsedTime", ellapsedTime + "");
         intent.putExtra("totalFarmers", totalFarmers + "");
         MainActivity.getAppContext().startActivity(intent);

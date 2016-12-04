@@ -23,8 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    public static User user;
+    public static User user = null;
     private static Context mContext;
+    private static TimerThread timerThread = null;
+    private static RandomCurrencyThread currencyThread = null;
+    private static FarmerThread farmerThread = null;
+    private static RandomEventThread randomEventThread = null;
+    private static EllapsedTimeThread ellapsedTimeThread = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +66,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        user = new User();
-        TimerThread timerThread = new TimerThread(getApplicationContext());
-        RandomCurrencyThread currencyThread = new RandomCurrencyThread(getApplicationContext(), user);
-        FarmerThread farmerThread = new FarmerThread(getApplicationContext());
-        RandomEventThread randomEventThread = new RandomEventThread(getApplicationContext(), user);
-        EllapsedTimeThread ellapsedTimeThread = new EllapsedTimeThread(getApplicationContext());
-        new Thread(timerThread).start();
-        new Thread(currencyThread).start();
-        new Thread(farmerThread).start();
-        new Thread(randomEventThread).start();
-        new Thread(ellapsedTimeThread).start();
+        if(user == null) {
+            user = new User();
+        }
+        if(timerThread == null) {
+            timerThread = new TimerThread(getApplicationContext());
+            new Thread(timerThread).start();
+        }
+        if(currencyThread == null) {
+            currencyThread = new RandomCurrencyThread(getApplicationContext(), user);
+            new Thread(currencyThread).start();
+        }
+        if(farmerThread == null) {
+            farmerThread = new FarmerThread(getApplicationContext());
+            new Thread(farmerThread).start();
+        }
+        if(randomEventThread == null) {
+            randomEventThread = new RandomEventThread(getApplicationContext(), user);
+            new Thread(randomEventThread).start();
+        }
+        if(ellapsedTimeThread == null) {
+            ellapsedTimeThread = new EllapsedTimeThread(getApplicationContext());
+            new Thread(ellapsedTimeThread).start();
+        }
     }
 
     public static Context getAppContext(){

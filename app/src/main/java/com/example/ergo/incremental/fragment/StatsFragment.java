@@ -3,14 +3,17 @@ package com.example.ergo.incremental.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.ergo.incremental.MainActivity;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.core_mechanics.Game;
+import com.example.ergo.incremental.threads.RandomEventThread;
 import com.example.ergo.incremental.utils.GameValues;
 
 /**
@@ -40,7 +43,9 @@ public class StatsFragment extends Fragment {
         codeText = (TextView) v.findViewById(R.id.codeText);
 
         codesPerSecond = (TextView) v.findViewById(R.id.cps);
+        codesPerSecond.setText((int)(MainActivity.user.getCodesPerSecond() * RandomEventThread.getNewCPS()) + "");
         currentLevel = (TextView) v.findViewById(R.id.lvl);
+        currentLevel.setText(Game.currentLevel + "");
 
         return v;
     }

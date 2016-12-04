@@ -21,6 +21,7 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
     boolean eventIsOn = false;
     int eventTimeRemainder = 0;
     static double newCPS = 1;
+    private static String eventName;
 
     public RandomEventThread(Context context, User user) {
         this.context = context;
@@ -54,11 +55,26 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
             public void run() {
                 int randomEventIndex = (int)(Math.random()*GameValues.eventNames.length);
                 newCPS = GameValues.eventEffects[randomEventIndex];
-                EventFragment.eventName.setText(GameValues.eventNames[randomEventIndex]);
+                eventName = GameValues.eventNames[randomEventIndex];
+                EventFragment.eventName.setText(eventName);
                 eventTimeRemainder = 60;
             }
         });
     }
 
+    public static String getEventName() {
+        return eventName;
+    }
 
+    public static void setEventName(String eventName) {
+        RandomEventThread.eventName = eventName;
+    }
+
+    public static double getNewCPS() {
+        return newCPS;
+    }
+
+    public static void setNewCPS(double newCPS) {
+        RandomEventThread.newCPS = newCPS;
+    }
 }
