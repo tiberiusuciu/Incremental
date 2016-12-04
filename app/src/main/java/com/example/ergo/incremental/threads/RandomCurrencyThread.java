@@ -25,10 +25,12 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
     Context context;
     User user;
     Currency newCurrency = null;
+    private static boolean isThreadStopped;
 
     public RandomCurrencyThread(Context context, User user) {
         this.context = context;
         this.user = user;
+        isThreadStopped = false;
     }
 
     @Override
@@ -36,12 +38,13 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
         try {
             do{
                 Thread.sleep(1000);
-                if(StatsFragment.timeBar.getProgress() % MONNAIE_A_CHAQUE_X_SECONDES == 0 && StatsFragment.timeBar.getProgress() != 0 && StatsFragment.timeBar.getProgress() != GameValues.TEMPS_PAR_NIVEAU){
-                    newCurrency = randomCurrency();
-                    if(newCurrency != null){
-                        addCurrencyToUser(newCurrency);
-                        displayNewCurrency(newCurrency);
-                        //updateShop();
+                if(!isThreadStopped) {
+                    if (StatsFragment.timeBar.getProgress() % MONNAIE_A_CHAQUE_X_SECONDES == 0 && StatsFragment.timeBar.getProgress() != 0 && StatsFragment.timeBar.getProgress() != GameValues.TEMPS_PAR_NIVEAU) {
+                        newCurrency = randomCurrency();
+                        if (newCurrency != null) {
+                            addCurrencyToUser(newCurrency);
+                            displayNewCurrency(newCurrency);
+                        }
                     }
                 }
             } while(!Game.isGameOver);
@@ -82,31 +85,11 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
         user.addMonnaie(currency);
     }
 
-    // TODO update listView items, for now, nothing really updates
-    private void updateShop() {
-        /*
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                View v;
-                for (int i = 0; i <= ShopFragment.listView.getLastVisiblePosition() - ShopFragment.listView.getFirstVisiblePosition(); i++){
-                    //v = ShopFragment.listView.getAdapter().getView(i, null, null);
-                    Log.d("FirstPosition", ShopFragment.listView.getFirstVisiblePosition() + "");
-                    Log.d("LastPosition", ShopFragment.listView.getLastVisiblePosition() + "");
-                    v = ShopFragment.listView.getChildAt(i);
-                    TextView farmerName = (TextView) v.findViewById(R.id.textView);
-                    if(user.findSpecificAmountMonnaie(ShopFragmentInterface.farmerCurrencyTypes[i], 2)){
-                        Log.d("TAGGY", farmerName.getText() + "");
-                        //farmerName.setText("THIS IS A TEST");
-                        Log.d("TAGGYTAGGY", farmerName.getText() + "");
-                        farmerName.setTextColor(context.getResources().getColor(R.color.gold));
-                    }
-                    else {
-                        farmerName.setTextColor(context.getResources().getColor(R.color.clickerBackground));
-                    }
-                }
-            }
-        });
-        */
+    public static boolean isThreadStopped() {
+        return isThreadStopped;
+    }
+
+    public static void setIsThreadStopped(boolean isThreadStopped) {
+        RandomCurrencyThread.isThreadStopped = isThreadStopped;
     }
 }

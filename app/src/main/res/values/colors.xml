@@ -10,4 +10,5 @@
     <color name="white">#FFFFFF</color>
     <color name="gold">#EEBB00</color>
     <color name="green">#66ff66</color>
+    <color name="basicGray">#8a000000</color>
 </resources>

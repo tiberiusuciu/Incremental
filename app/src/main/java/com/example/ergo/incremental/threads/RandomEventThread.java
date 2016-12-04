@@ -22,10 +22,12 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
     int eventTimeRemainder = 0;
     static double newCPS = 1;
     private static String eventName;
+    private static boolean isThreadStopped;
 
     public RandomEventThread(Context context, User user) {
         this.context = context;
         this.user = user;
+        isThreadStopped = false;
     }
 
     @Override
@@ -33,15 +35,17 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
         try {
             do{
                 Thread.sleep(1000);
-                if(eventIsOn) {
-                    eventTimeRemainder--;
-                    if(eventTimeRemainder == 0) {
-                        eventIsOn = false;
-                        newCPS = 1;
+                if(!isThreadStopped) {
+                    if (eventIsOn) {
+                        eventTimeRemainder--;
+                        if (eventTimeRemainder == 0) {
+                            eventIsOn = false;
+                            newCPS = 1;
+                        }
+                    } else {
+                        newRandomEvent();
+                        eventIsOn = true;
                     }
-                } else {
-                    newRandomEvent();
-                    eventIsOn = true;
                 }
             } while(!Game.isGameOver);
         } catch (InterruptedException e) {
@@ -76,5 +80,13 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
 
     public static void setNewCPS(double newCPS) {
         RandomEventThread.newCPS = newCPS;
+    }
+
+    public static boolean isThreadStopped() {
+        return isThreadStopped;
+    }
+
+    public static void setIsThreadStopped(boolean isThreadStopped) {
+        RandomEventThread.isThreadStopped = isThreadStopped;
     }
 }

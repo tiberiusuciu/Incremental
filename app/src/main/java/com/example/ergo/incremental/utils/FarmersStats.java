@@ -26,7 +26,7 @@ public interface FarmersStats {
     final int DAVID_COST = 2;
 
     final String MICHAEL_CURRENCY = "SOMMEIL(S)";
-    final String MICHAEL_NAME = "MICHEAL";
+    final String MICHAEL_NAME = "MICHAEL";
     final int MICHAEL_CPS = 2;
     final int MICHAEL_COST = 2;
 

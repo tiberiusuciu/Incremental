@@ -3,6 +3,7 @@ package com.example.ergo.incremental.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,19 @@ public class ShopFragment extends Fragment {
                 myClass = Class.forName("com.example.ergo.incremental.farmer." + farmerClassName );
                 farmer = (Farmer) myClass.newInstance();
                 MainActivity.user.addFarmer(farmer);
+                /* UNSTABLE
+                if(!MainActivity.user.findSpecificAmountMonnaie(farmerPrice[position], 2)) {
+                    Log.d("position!!!!!!", position + "");
+                    Log.d("firstPOSITION!!!!!!", listView.getFirstVisiblePosition() + "");
+                    Log.d("LASTPOSITION!!!!!!", listView.getLastVisiblePosition() + "");
+                    if(position > listView.getLastVisiblePosition() - listView.getFirstVisiblePosition()){
+                        position -= listView.getFirstVisiblePosition();
+                        Log.d("NOUVELLE POSITION", position + "");
+                    }
+                    TextView textView = (TextView) listView.getChildAt(position).findViewById(R.id.textView);
+                    textView.setTextColor(getResources().getColor(R.color.basicGray));
+                }
+                */
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (java.lang.InstantiationException e) {

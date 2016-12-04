@@ -15,9 +15,11 @@ import com.example.ergo.incremental.threads.RandomEventThread;
 
 public class FarmerThread extends Activity implements Runnable {
     protected Context context;
+    private static boolean isThreadStopped;
 
     public FarmerThread(Context context) {
         this.context = context;
+        isThreadStopped = false;
     }
     // TODO This needs to be a singleton
     // TODO the main loop will be separated from the run method, in order to reuse the code for each level
@@ -26,9 +28,11 @@ public class FarmerThread extends Activity implements Runnable {
         try {
             do{
                 Thread.sleep(1000);
-                int codePerSecond = MainActivity.user.getCodesPerSecond();
-                updateCode(codePerSecond);
-                setText((int)(codePerSecond * RandomEventThread.newCPS) + "");
+                if(!isThreadStopped) {
+                    int codePerSecond = MainActivity.user.getCodesPerSecond();
+                    updateCode(codePerSecond);
+                    setText((int) (codePerSecond * RandomEventThread.newCPS) + "");
+                }
             } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -60,5 +64,13 @@ public class FarmerThread extends Activity implements Runnable {
                 }
             }
         });
+    }
+
+    public static boolean isThreadStopped() {
+        return isThreadStopped;
+    }
+
+    public static void setIsThreadStopped(boolean isThreadStopped) {
+        FarmerThread.isThreadStopped = isThreadStopped;
     }
 }

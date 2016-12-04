@@ -15,17 +15,21 @@ import com.example.ergo.incremental.fragment.StatsFragment;
 public class EllapsedTimeThread extends Activity implements Runnable {
     protected Context context;
     protected static int ellapsedTime;
+    private static boolean isThreadStopped;
 
     public EllapsedTimeThread(Context context) {
         this.context = context;
         ellapsedTime = 0;
+        isThreadStopped = false;
     }
     @Override
     public void run() {
         try {
             do{
                 Thread.sleep(1000);
-                ellapsedTime++;
+                if(!isThreadStopped) {
+                    ellapsedTime++;
+                }
             } while(!Game.isGameOver);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -34,5 +38,13 @@ public class EllapsedTimeThread extends Activity implements Runnable {
 
     public static int getEllapsedTime() {
         return ellapsedTime;
+    }
+
+    public static boolean isThreadStopped() {
+        return isThreadStopped;
+    }
+
+    public static void setIsThreadStopped(boolean isThreadStopped) {
+        EllapsedTimeThread.isThreadStopped = isThreadStopped;
     }
 }

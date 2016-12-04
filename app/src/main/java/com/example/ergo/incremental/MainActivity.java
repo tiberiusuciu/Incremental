@@ -95,6 +95,26 @@ public class MainActivity extends AppCompatActivity {
         return mContext;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        timerThread.setIsThreadStopped(true);
+        currencyThread.setIsThreadStopped(true);
+        farmerThread.setIsThreadStopped(true);
+        randomEventThread.setIsThreadStopped(true);
+        ellapsedTimeThread.setIsThreadStopped(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        timerThread.setIsThreadStopped(false);
+        currencyThread.setIsThreadStopped(false);
+        farmerThread.setIsThreadStopped(false);
+        randomEventThread.setIsThreadStopped(false);
+        ellapsedTimeThread.setIsThreadStopped(false);
+    }
+
     private class CustomAdapter extends FragmentPagerAdapter {
 
         private String fragments[] = {
