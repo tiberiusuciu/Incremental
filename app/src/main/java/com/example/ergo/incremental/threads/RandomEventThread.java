@@ -1,9 +1,10 @@
-package com.example.ergo.incremental;
+package com.example.ergo.incremental.threads;
 
 import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.ergo.incremental.User;
 import com.example.ergo.incremental.core_mechanics.Game;
 import com.example.ergo.incremental.currency.Currency;
 import com.example.ergo.incremental.fragment.EventFragment;

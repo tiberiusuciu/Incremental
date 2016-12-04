@@ -1,13 +1,13 @@
-package com.example.ergo.incremental;
+package com.example.ergo.incremental.threads;
 
 import android.app.Activity;
 import android.content.Context;
-import android.widget.TextView;
 
+import com.example.ergo.incremental.MainActivity;
+import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.core_mechanics.Game;
-import com.example.ergo.incremental.fragment.ShopFragment;
 import com.example.ergo.incremental.fragment.StatsFragment;
-import com.example.ergo.incremental.utils.GameValues;
+import com.example.ergo.incremental.threads.RandomEventThread;
 
 /**
  * Created by ergo on 02/12/16.
@@ -26,7 +26,7 @@ public class FarmerThread extends Activity implements Runnable {
         try {
             do{
                 Thread.sleep(1000);
-                int codePerSecond = MainActivity.user.codesPerSecond;
+                int codePerSecond = MainActivity.user.getCodesPerSecond();
                 updateCode(codePerSecond);
                 setText((int)(codePerSecond * RandomEventThread.newCPS) + "");
             } while(true);

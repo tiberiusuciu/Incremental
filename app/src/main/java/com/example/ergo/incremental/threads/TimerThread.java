@@ -1,10 +1,11 @@
-package com.example.ergo.incremental;
+package com.example.ergo.incremental.threads;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.core_mechanics.Game;
 import com.example.ergo.incremental.fragment.StatsFragment;
 import com.example.ergo.incremental.utils.GameValues;

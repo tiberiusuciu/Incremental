@@ -12,6 +12,10 @@ import android.os.Bundle;
 import com.example.ergo.incremental.fragment.FarmersFragment;
 import com.example.ergo.incremental.fragment.FarmingFragment;
 import com.example.ergo.incremental.fragment.ShopFragment;
+import com.example.ergo.incremental.threads.FarmerThread;
+import com.example.ergo.incremental.threads.RandomCurrencyThread;
+import com.example.ergo.incremental.threads.RandomEventThread;
+import com.example.ergo.incremental.threads.TimerThread;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     public static User user;
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(tab.getPosition());
             }
         });
-
+        mContext = this.getApplicationContext();
         viewPager.setOffscreenPageLimit(3);
 
     }
@@ -64,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         new Thread(currencyThread).start();
         new Thread(farmerThread).start();
         new Thread(randomEventThread).start();
+    }
+
+    public static Context getAppContext(){
+        return mContext;
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {
@@ -101,4 +110,5 @@ public class MainActivity extends AppCompatActivity {
             return fragments[position];
         }
     }
+
 }

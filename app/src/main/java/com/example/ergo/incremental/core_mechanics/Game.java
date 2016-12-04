@@ -1,5 +1,9 @@
 package com.example.ergo.incremental.core_mechanics;
 
+import android.content.Intent;
+
+import com.example.ergo.incremental.GameOver;
+import com.example.ergo.incremental.MainActivity;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.fragment.StatsFragment;
 import com.example.ergo.incremental.utils.GameValues;
@@ -37,6 +41,13 @@ public class Game {
 
     public static void gameOver(){
         isGameOver = true;
+        Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        MainActivity.getAppContext().startActivity(intent);
+
     }
 
     public static String formatTime(int seconds) {

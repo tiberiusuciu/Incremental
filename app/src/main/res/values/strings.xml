@@ -30,4 +30,5 @@
     <string name="beggining_code">Start working to make some code</string>
     <string name="level">Level:</string>
     <string name="code_per_second">Codes Per Second</string>
+    <string name="title_activity_game_over">GameOver</string>
 </resources>
