@@ -47,7 +47,7 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
                         eventIsOn = true;
                     }
                 }
-            } while(!Game.isGameOver);
+            } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

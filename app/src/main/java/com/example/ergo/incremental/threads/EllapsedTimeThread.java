@@ -30,10 +30,14 @@ public class EllapsedTimeThread extends Activity implements Runnable {
                 if(!isThreadStopped) {
                     ellapsedTime++;
                 }
-            } while(!Game.isGameOver);
+            } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setEllapsedTime(int ellapsedTime) {
+        EllapsedTimeThread.ellapsedTime = ellapsedTime;
     }
 
     public static int getEllapsedTime() {

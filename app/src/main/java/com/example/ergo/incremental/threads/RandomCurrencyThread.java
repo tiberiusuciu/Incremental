@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ergo.incremental.MainActivity;
 import com.example.ergo.incremental.User;
 import com.example.ergo.incremental.core_mechanics.Game;
 import com.example.ergo.incremental.currency.Currency;
@@ -47,7 +48,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
                         }
                     }
                 }
-            } while(!Game.isGameOver);
+            } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

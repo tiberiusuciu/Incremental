@@ -1,6 +1,7 @@
 package com.example.ergo.incremental;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
@@ -23,6 +24,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.ergo.incremental.core_mechanics.Game;
+import com.example.ergo.incremental.currency.Currency;
+import com.example.ergo.incremental.farmer.Farmer;
 import com.example.ergo.incremental.fragment.FarmersFragment;
 import com.example.ergo.incremental.fragment.FarmingFragment;
 import com.example.ergo.incremental.fragment.ShopFragment;
@@ -31,6 +35,9 @@ import com.example.ergo.incremental.threads.FarmerThread;
 import com.example.ergo.incremental.threads.RandomCurrencyThread;
 import com.example.ergo.incremental.threads.RandomEventThread;
 import com.example.ergo.incremental.threads.TimerThread;
+import com.example.ergo.incremental.utils.UserStats;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,13 +53,23 @@ public class MainActivity extends AppCompatActivity {
     private static EllapsedTimeThread ellapsedTimeThread = null;
     private LinearLayout mainActivity = null;
     private int colorValue = -1;
-    private boolean colorChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        /*
+        Intent intent = getIntent();
+        String reset = intent.getStringExtra("reset");
+        if(reset != null) {
+            if(reset.equals("true")){
+                user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
+                user.setTravaileurs(new ArrayList<Farmer>());
+                user.setMonnaie(new ArrayList<Currency>());
+                user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
+            }
+        }
+        */
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -95,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(timerThread == null) {
             timerThread = new TimerThread(getApplicationContext());
+            Thread timer = new Thread(timerThread);
             new Thread(timerThread).start();
         }
         if(currencyThread == null) {

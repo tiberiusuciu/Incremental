@@ -8,6 +8,10 @@ import com.example.ergo.incremental.MainActivity;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.fragment.StatsFragment;
 import com.example.ergo.incremental.threads.EllapsedTimeThread;
+import com.example.ergo.incremental.threads.FarmerThread;
+import com.example.ergo.incremental.threads.RandomCurrencyThread;
+import com.example.ergo.incremental.threads.RandomEventThread;
+import com.example.ergo.incremental.threads.TimerThread;
 import com.example.ergo.incremental.utils.GameValues;
 import com.example.ergo.incremental.utils.ShopFragmentInterface;
 
@@ -48,6 +52,13 @@ public class Game {
         int totalFarmers = MainActivity.user.getTravaileurs().size();
         intent.putExtra("ellapsedTime", ellapsedTime + "");
         intent.putExtra("totalFarmers", totalFarmers + "");
+        /*
+        TimerThread.setIsThreadStopped(true);
+        RandomCurrencyThread.setIsThreadStopped(true);
+        FarmerThread.setIsThreadStopped(true);
+        RandomEventThread.setIsThreadStopped(true);
+        EllapsedTimeThread.setIsThreadStopped(true);
+        */
         MainActivity.getAppContext().startActivity(intent);
 
     }

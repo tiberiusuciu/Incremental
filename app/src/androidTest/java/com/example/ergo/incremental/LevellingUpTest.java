@@ -38,6 +38,7 @@ public class LevellingUpTest {
                             isDisplayed()));
             appCompatButton.perform(click());
         }
+
         onView(withId(R.id.lvl)).check(matches(withText("2")));
     }
 
