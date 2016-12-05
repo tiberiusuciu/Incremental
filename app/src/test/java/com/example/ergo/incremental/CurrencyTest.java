@@ -1,26 +1,26 @@
 package com.example.ergo.incremental;
 
-import com.example.ergo.incremental.currency.Absence;
-import com.example.ergo.incremental.currency.Anime;
-import com.example.ergo.incremental.currency.Backflip;
-import com.example.ergo.incremental.currency.Blink;
-import com.example.ergo.incremental.currency.CaffeInn;
-import com.example.ergo.incremental.currency.Coiffure;
-import com.example.ergo.incremental.currency.Cousin;
-import com.example.ergo.incremental.currency.DarkSouls;
-import com.example.ergo.incremental.currency.Dnd;
-import com.example.ergo.incremental.currency.FrereJumeau;
-import com.example.ergo.incremental.currency.Kirikou;
-import com.example.ergo.incremental.currency.Linux;
-import com.example.ergo.incremental.currency.Magic;
-import com.example.ergo.incremental.currency.Motivation;
-import com.example.ergo.incremental.currency.Nourriture;
-import com.example.ergo.incremental.currency.Party;
-import com.example.ergo.incremental.currency.Piano;
-import com.example.ergo.incremental.currency.Principe;
-import com.example.ergo.incremental.currency.Silence;
-import com.example.ergo.incremental.currency.Sommeil;
-import com.example.ergo.incremental.utils.CurrencyNames;
+import com.example.ergo.incremental.model.currency.Absence;
+import com.example.ergo.incremental.model.currency.Anime;
+import com.example.ergo.incremental.model.currency.Backflip;
+import com.example.ergo.incremental.model.currency.Blink;
+import com.example.ergo.incremental.model.currency.CaffeInn;
+import com.example.ergo.incremental.model.currency.Coiffure;
+import com.example.ergo.incremental.model.currency.Cousin;
+import com.example.ergo.incremental.model.currency.DarkSouls;
+import com.example.ergo.incremental.model.currency.Dnd;
+import com.example.ergo.incremental.model.currency.FrereJumeau;
+import com.example.ergo.incremental.model.currency.Kirikou;
+import com.example.ergo.incremental.model.currency.Linux;
+import com.example.ergo.incremental.model.currency.Magic;
+import com.example.ergo.incremental.model.currency.Motivation;
+import com.example.ergo.incremental.model.currency.Nourriture;
+import com.example.ergo.incremental.model.currency.Party;
+import com.example.ergo.incremental.model.currency.Piano;
+import com.example.ergo.incremental.model.currency.Principe;
+import com.example.ergo.incremental.model.currency.Silence;
+import com.example.ergo.incremental.model.currency.Sommeil;
+import com.example.ergo.incremental.model.utils.CurrencyNames;
 
 import org.junit.Test;
 

@@ -1,15 +1,15 @@
 package com.example.ergo.incremental;
 
-import com.example.ergo.incremental.core_mechanics.Game;
-import com.example.ergo.incremental.currency.Coiffure;
-import com.example.ergo.incremental.currency.Currency;
-import com.example.ergo.incremental.currency.Principe;
-import com.example.ergo.incremental.farmer.Farmer;
-import com.example.ergo.incremental.farmer.KevinFarmer;
-import com.example.ergo.incremental.farmer.TiberiuFarmer;
-import com.example.ergo.incremental.utils.CurrencyNames;
-import com.example.ergo.incremental.utils.FarmersStats;
-import com.example.ergo.incremental.utils.UserStats;
+import com.example.ergo.incremental.model.User;
+import com.example.ergo.incremental.model.currency.Coiffure;
+import com.example.ergo.incremental.model.currency.Currency;
+import com.example.ergo.incremental.model.currency.Principe;
+import com.example.ergo.incremental.model.farmer.Farmer;
+import com.example.ergo.incremental.model.farmer.KevinFarmer;
+import com.example.ergo.incremental.model.farmer.TiberiuFarmer;
+import com.example.ergo.incremental.model.utils.CurrencyNames;
+import com.example.ergo.incremental.model.utils.FarmersStats;
+import com.example.ergo.incremental.model.utils.UserStats;
 
 import org.junit.Test;
 
