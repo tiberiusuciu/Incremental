@@ -1,13 +1,27 @@
 package com.example.ergo.incremental;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.content.DialogInterface;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.ergo.incremental.fragment.FarmersFragment;
 import com.example.ergo.incremental.fragment.FarmingFragment;
@@ -30,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private static FarmerThread farmerThread = null;
     private static RandomEventThread randomEventThread = null;
     private static EllapsedTimeThread ellapsedTimeThread = null;
+    private LinearLayout mainActivity = null;
+    private int colorValue = -1;
+    private boolean colorChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
         });
         mContext = this.getApplicationContext();
         viewPager.setOffscreenPageLimit(3);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        loadPreferences();
+        mainActivity = (LinearLayout) findViewById(R.id.activity_main);
+        if(colorValue != -1) {
+            mainActivity.setBackgroundColor(colorValue);
+        }
 
     }
 
@@ -91,6 +115,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void savePreferences(int colorValue){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().putString("colorValue", colorValue + "").apply();
+    }
+
+    private void loadPreferences() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getString("colorValue", "").length() > 0) {
+            colorValue = Integer.parseInt(preferences.getString("colorValue", ""));
+        }
+    }
+
     public static Context getAppContext(){
         return mContext;
     }
@@ -98,21 +134,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        timerThread.setIsThreadStopped(true);
-        currencyThread.setIsThreadStopped(true);
-        farmerThread.setIsThreadStopped(true);
-        randomEventThread.setIsThreadStopped(true);
-        ellapsedTimeThread.setIsThreadStopped(true);
+        TimerThread.setIsThreadStopped(true);
+        RandomCurrencyThread.setIsThreadStopped(true);
+        FarmerThread.setIsThreadStopped(true);
+        RandomEventThread.setIsThreadStopped(true);
+        EllapsedTimeThread.setIsThreadStopped(true);
     }
 
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
-        timerThread.setIsThreadStopped(false);
-        currencyThread.setIsThreadStopped(false);
-        farmerThread.setIsThreadStopped(false);
-        randomEventThread.setIsThreadStopped(false);
-        ellapsedTimeThread.setIsThreadStopped(false);
+        TimerThread.setIsThreadStopped(false);
+        RandomCurrencyThread.setIsThreadStopped(false);
+        FarmerThread.setIsThreadStopped(false);
+        RandomEventThread.setIsThreadStopped(false);
+        EllapsedTimeThread.setIsThreadStopped(false);
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {
@@ -151,4 +187,73 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.changeColor:
+                changeColor();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void changeColor() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Please choose your color preferences");
+        LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+        final View view = factory.inflate(R.layout.color_selection_dialogue, null);
+        builder.setView(view);
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                EditText red = (EditText) view.findViewById(R.id.redAmount);
+                EditText green = (EditText) view.findViewById(R.id.greenAmount);
+                EditText blue = (EditText) view.findViewById(R.id.blueAmount);
+                String redText = red.getText().toString();
+                String greenText = green.getText().toString();
+                String blueText = blue.getText().toString();
+                if(redText.equals("")){
+                    redText = "255";
+                }
+                if(greenText.equals("")){
+                    greenText = "255";
+                }
+                if(blueText.equals("")){
+                    blueText = "255";
+                }
+                int redValue = Integer.parseInt(redText);
+                int greenValue = Integer.parseInt(greenText);
+                int blueValue = Integer.parseInt(blueText);
+                if(redValue < 0) {
+                    redValue = 0;
+                } else if (redValue > 255) {
+                    redValue = 255;
+                }
+                if(greenValue < 0) {
+                    greenValue = 0;
+                } else if (greenValue > 255) {
+                    greenValue = 255;
+                }
+                if(blueValue < 0) {
+                    blueValue = 0;
+                } else if (blueValue > 255) {
+                    blueValue = 255;
+                }
+                colorValue = Color.rgb(redValue, greenValue, blueValue);
+                mainActivity.setBackgroundColor(colorValue);
+                savePreferences(colorValue);
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
