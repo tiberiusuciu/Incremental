@@ -1,6 +1,5 @@
 package com.example.ergo.incremental;
 
-import com.example.ergo.incremental.core_mechanics.Game;
 import com.example.ergo.incremental.currency.Absence;
 import com.example.ergo.incremental.currency.Anime;
 import com.example.ergo.incremental.currency.Backflip;
@@ -22,7 +21,6 @@ import com.example.ergo.incremental.currency.Principe;
 import com.example.ergo.incremental.currency.Silence;
 import com.example.ergo.incremental.currency.Sommeil;
 import com.example.ergo.incremental.utils.CurrencyNames;
-import com.example.ergo.incremental.utils.GameValues;
 
 import org.junit.Test;
 
