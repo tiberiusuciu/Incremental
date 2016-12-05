@@ -1,13 +1,10 @@
 package com.example.ergo.incremental;
 
-import android.util.Log;
-
 import com.example.ergo.incremental.currency.Currency;
 import com.example.ergo.incremental.farmer.Farmer;
 import com.example.ergo.incremental.utils.UserStats;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,8 +21,8 @@ public class User implements UserStats {
     public User(){
         monnaie = new ArrayList<Currency>();
         travaileurs = new ArrayList<Farmer>();
-        codesPerSecond = startingCodesPerSecond;
-        codesPerTap = startingCodesPerTap;
+        codesPerSecond = STARTING_CODES_PER_SECOND;
+        codesPerTap = STARTING_CODES_PER_TAP;
     }
 
     public void addMonnaie(Currency c) {
@@ -56,15 +53,17 @@ public class User implements UserStats {
     }
     // FindSpecificAmountMonnaie must always be called before this method
     public void removeSpecificAmountMonnaie(String currencyName, int requestedAmount) {
-        int amountDeleted = 0;
-        ArrayList toRemove = new ArrayList();
-        for (Currency cur : this.monnaie) {
-            if (cur.getName().equals(currencyName) && amountDeleted < 2) {
-                toRemove.add(cur);
-                amountDeleted++;
+        if(findSpecificAmountMonnaie(currencyName, requestedAmount)){
+            int amountDeleted = 0;
+            ArrayList toRemove = new ArrayList();
+            for (Currency cur : this.monnaie) {
+                if (cur.getName().equals(currencyName) && amountDeleted < 2) {
+                    toRemove.add(cur);
+                    amountDeleted++;
+                }
             }
+            this.monnaie.removeAll(toRemove);
         }
-        this.monnaie.removeAll(toRemove);
     }
 
     public void addFarmer(Farmer f) {
@@ -80,14 +79,6 @@ public class User implements UserStats {
             }
         }
         return amountFound;
-    }
-
-    public void applyNewCPSToSpecificFarmer(String farmerName, int newCPS) {
-        for(Farmer farmer: travaileurs) {
-            if(farmer.getName().equals(farmerName)) {
-                farmer.setCodesPerSeconds(newCPS);
-            }
-        }
     }
 
     public void calculateCodesPerSecond() {
@@ -127,6 +118,8 @@ public class User implements UserStats {
     }
 
     public void setCodesPerTap(int codesPerTap) {
-        this.codesPerTap = codesPerTap;
+        if(codesPerTap >= 1) {
+            this.codesPerTap = codesPerTap;
+        }
     }
 }

@@ -5,6 +5,6 @@ package com.example.ergo.incremental.utils;
  */
 
 public interface UserStats {
-    int startingCodesPerSecond = 0;
-    int startingCodesPerTap = 0;
+    final int STARTING_CODES_PER_SECOND = 0;
+    final int STARTING_CODES_PER_TAP = 0;
 }
