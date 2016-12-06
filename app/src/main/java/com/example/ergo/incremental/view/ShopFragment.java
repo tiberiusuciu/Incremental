@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -59,19 +60,10 @@ public class ShopFragment extends Fragment {
                 myClass = Class.forName("com.example.ergo.incremental.model.farmer." + farmerClassName );
                 farmer = (Farmer) myClass.newInstance();
                 MainActivity.user.addFarmer(farmer);
-                /* UNSTABLE
-                if(!MainActivity.user.findSpecificAmountMonnaie(farmerPrice[position], 2)) {
-                    Log.d("position!!!!!!", position + "");
-                    Log.d("firstPOSITION!!!!!!", listView.getFirstVisiblePosition() + "");
-                    Log.d("LASTPOSITION!!!!!!", listView.getLastVisiblePosition() + "");
-                    if(position > listView.getLastVisiblePosition() - listView.getFirstVisiblePosition()){
-                        position -= listView.getFirstVisiblePosition();
-                        Log.d("NOUVELLE POSITION", position + "");
-                    }
-                    TextView textView = (TextView) listView.getChildAt(position).findViewById(R.id.textView);
-                    textView.setTextColor(getResources().getColor(R.color.basicGray));
-                }
-                */
+
+                // Mise à jour de mes listeViews
+                ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
+                ((BaseAdapter)FarmersFragment.listViewofFarmers.getAdapter()).notifyDataSetChanged();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (java.lang.InstantiationException e) {
