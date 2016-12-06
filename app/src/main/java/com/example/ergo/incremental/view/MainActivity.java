@@ -2,8 +2,12 @@ package com.example.ergo.incremental.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.DialogInterface;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private static RandomEventThread randomEventThread = null;
     private static EllapsedTimeThread ellapsedTimeThread = null;
     private LinearLayout mainActivity = null;
-    private int colorValue = -1;
+    private int backgroundColorValue = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +92,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         loadPreferences();
-        mainActivity = (LinearLayout) findViewById(R.id.activity_main);
-        if(colorValue != -1) {
-            mainActivity.setBackgroundColor(colorValue);
-        }
-
     }
 
     @Override
@@ -121,17 +121,21 @@ public class MainActivity extends AppCompatActivity {
             ellapsedTimeThread = new EllapsedTimeThread(getApplicationContext());
             new Thread(ellapsedTimeThread).start();
         }
+        mainActivity = (LinearLayout) findViewById(R.id.activity_main);
+        if(backgroundColorValue != -1) {
+            mainActivity.setBackgroundColor(backgroundColorValue);
+        }
     }
 
-    private void savePreferences(int colorValue){
+    private void savePreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putString("colorValue", colorValue + "").apply();
+        preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
     }
 
     private void loadPreferences() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(preferences.getString("colorValue", "").length() > 0) {
-            colorValue = Integer.parseInt(preferences.getString("colorValue", ""));
+        if(preferences.getString("backgroundColorValue", "").length() > 0) {
+            backgroundColorValue = Integer.parseInt(preferences.getString("backgroundColorValue", ""));
         }
     }
 
@@ -205,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.changeColor:
+            case R.id.changeBackgroundColor:
                 changeColor();
                 return true;
             default:
@@ -220,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
         final View view = factory.inflate(R.layout.color_selection_dialogue, null);
         builder.setView(view);
         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText red = (EditText) view.findViewById(R.id.redAmount);
@@ -255,9 +260,9 @@ public class MainActivity extends AppCompatActivity {
                 } else if (blueValue > 255) {
                     blueValue = 255;
                 }
-                colorValue = Color.rgb(redValue, greenValue, blueValue);
-                mainActivity.setBackgroundColor(colorValue);
-                savePreferences(colorValue);
+                backgroundColorValue = Color.rgb(redValue, greenValue, blueValue);
+                mainActivity.setBackgroundColor(backgroundColorValue);
+                savePreferences();
             }
         });
 

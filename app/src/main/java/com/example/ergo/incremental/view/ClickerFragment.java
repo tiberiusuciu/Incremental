@@ -1,5 +1,6 @@
 package com.example.ergo.incremental.view;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,13 +19,12 @@ import com.example.ergo.incremental.controller.core_mechanics.Game;
 
 // TODO remove STATSFRAGMENT and put it in a variable, it will be more cleaner
 public class ClickerFragment extends Fragment {
-    Button button;
+    private static Button button;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.clicker_fragment, container, false);
         button = (Button) v.findViewById(R.id.button);
-
         button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + 1);
@@ -39,5 +39,13 @@ public class ClickerFragment extends Fragment {
             }
         );
         return v;
+    }
+
+    public static Button getButton() {
+        return button;
+    }
+
+    public static void setButton(Button button) {
+        ClickerFragment.button = button;
     }
 }
