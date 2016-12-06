@@ -9,8 +9,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Current Event"
-            android:layout_width="wrap_content"
+            android:text="@string/current_event"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
             android:textAlignment="center"
@@ -21,12 +21,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <TextView
-            android:text="event"
-            android:layout_width="match_parent"
+            android:text=""
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/eventName"
             android:layout_weight="1"

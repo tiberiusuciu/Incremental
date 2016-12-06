@@ -5,9 +5,11 @@ import android.content.Context;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.User;
 import com.example.ergo.incremental.model.currency.Currency;
 import com.example.ergo.incremental.view.FarmersFragment;
+import com.example.ergo.incremental.view.MainActivity;
 import com.example.ergo.incremental.view.ShopFragment;
 import com.example.ergo.incremental.view.StatsFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
@@ -72,7 +74,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(context, "You've receiced currency " + currency.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, MainActivity.getAppContext().getString(R.string.receive_notification) + currency.getName(), Toast.LENGTH_SHORT).show();
                 // Mettre a jour la liste de fermiers
                 ((BaseAdapter)ShopFragment.listView.getAdapter()).notifyDataSetChanged();
             }

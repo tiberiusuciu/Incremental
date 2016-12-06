@@ -45,13 +45,6 @@ public class Game {
         int totalFarmers = MainActivity.user.getTravaileurs().size();
         intent.putExtra("ellapsedTime", ellapsedTime + "");
         intent.putExtra("totalFarmers", totalFarmers + "");
-        /*
-        TimerThread.setIsThreadStopped(true);
-        RandomCurrencyThread.setIsThreadStopped(true);
-        FarmerThread.setIsThreadStopped(true);
-        RandomEventThread.setIsThreadStopped(true);
-        EllapsedTimeThread.setIsThreadStopped(true);
-        */
         MainActivity.getAppContext().startActivity(intent);
 
     }

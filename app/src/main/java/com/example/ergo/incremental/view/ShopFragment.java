@@ -55,7 +55,15 @@ public class ShopFragment extends Fragment {
             try {
                 String farmerClassName = ShopFragmentInterface.farmers[position];
                 farmerClassName = farmerClassName.toLowerCase();
-                farmerClassName = farmerClassName.substring(0, 1).toUpperCase() + farmerClassName.substring(1);
+                if(farmerClassName.indexOf(" ") >= 0) {
+                    String[] temporary = farmerClassName.split(" ");
+                    farmerClassName = "";
+                    for(int i = 0; i < temporary.length; i++) {
+                        farmerClassName += temporary[i].substring(0, 1).toUpperCase() + temporary[i].substring(1);
+                    }
+                }else {
+                    farmerClassName = farmerClassName.substring(0, 1).toUpperCase() + farmerClassName.substring(1);
+                }
                 farmerClassName += "Farmer";
                 myClass = Class.forName("com.example.ergo.incremental.model.farmer." + farmerClassName );
                 farmer = (Farmer) myClass.newInstance();
@@ -73,7 +81,7 @@ public class ShopFragment extends Fragment {
             }
         }
         else {
-            Toast.makeText(getContext(), "You do not have enough to buy a " + farmers[position], Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.not_enough_money) + farmers[position], Toast.LENGTH_SHORT).show();
         }
 
     }

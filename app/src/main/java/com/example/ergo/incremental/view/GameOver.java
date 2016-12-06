@@ -41,7 +41,7 @@ public class GameOver extends AppCompatActivity {
 
     }
 
-    protected void playAgain(View view) {
+    public void playAgain(View view) {
         Intent myNewIntent = new Intent(MainActivity.getAppContext(), MainActivity.class);
 
         myNewIntent.putExtra("reset", "true");

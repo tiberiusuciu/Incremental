@@ -24,7 +24,7 @@
             android:paddingLeft="10dp">
 
             <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
@@ -32,7 +32,7 @@
                 android:textStyle="normal|bold" />
 
             <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/subTextView"
@@ -40,7 +40,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="TextView"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/price"

@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeColor() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Please choose your color preferences");
+        builder.setMessage(R.string.choose_color);
         LayoutInflater factory = LayoutInflater.from(MainActivity.this);
         final View view = factory.inflate(R.layout.color_selection_dialogue, null);
         builder.setView(view);
