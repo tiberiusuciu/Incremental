@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
@@ -17,11 +18,12 @@ import com.example.ergo.incremental.R;
 public class CustomListObtainedFarmers extends ArrayAdapter<String> {
     private final Activity context;
     private final String[] farmerNames;
-
-    public CustomListObtainedFarmers(Activity context, String[] farmerNames) {
+    private final Integer[] imageId;
+    public CustomListObtainedFarmers(Activity context, String[] farmerNames, Integer[] imageId) {
         super(context, R.layout.obtained_farmer_list_single, farmerNames);
         this.context = context;
         this.farmerNames = farmerNames;
+        this.imageId = imageId;
     }
 
     @NonNull
@@ -32,9 +34,12 @@ public class CustomListObtainedFarmers extends ArrayAdapter<String> {
 
         TextView mainText = (TextView) rowView.findViewById(R.id.textView);
         TextView priceText = (TextView) rowView.findViewById(R.id.amount);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
+
 
         mainText.setText(farmerNames[position]);
         priceText.setText(MainActivity.user.countAllInstancesOfSpecificFarmer(farmerNames[position]) + "");
+        imageView.setImageResource(imageId[position]);
         return rowView;
     }
 }

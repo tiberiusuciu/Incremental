@@ -27,7 +27,7 @@
     <string name="civilisation">\'Je doit jouer CIV6 jusqu\'à ce que Gandhi meurt\' -Xavier -40%CPS</string>
     <string name="lan">Plein de TP à faire mais Xavier organise un LAN! -40%CPS</string>
     <string name="lunchbox">\'Boîte à lunch pas trouvé, j\'vais battre Miechko!\' -Guillaume -10%CPS</string>
-    <string name="bouteille_deau">\'Bouteille d\'eau pas trouvé, j\'vais vattre Adam!\' -Guillaume -10%CPS</string>
+    <string name="bouteille_deau">\'Bouteille d\'eau pas trouvé, j\'vais battre Adam!\' -Guillaume -10%CPS</string>
     <string name="bug">Le bug n\'était pas un bug, il manquait juste un \';\'! +20%CPS</string>
     <string name="no_sleep">Pas dormis de la nuit, finit plusieurs TP! +80%CPS</string>
     <string name="stackoverflow">Découverte de Stackoverflow! +150%CPS</string>

@@ -1,5 +1,7 @@
 package com.example.ergo.incremental.model.utils;
 
+import com.example.ergo.incremental.R;
+
 /**
  * Ici repose une classe pour réduire la complexité de la class ShopFragment
  */
@@ -100,27 +102,26 @@ public interface ShopFragmentInterface {
             FarmersStats.XAVIER_CPS + " " + FarmersStats.PERFORMANCE_UNIT
     };
 
-    //TODO: Find images?
     Integer[] images = {
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20
+            R.drawable.adam,
+            R.drawable.david,
+            R.drawable.greg,
+            R.drawable.guillaume,
+            R.drawable.herve,
+            R.drawable.jd,
+            R.drawable.jeb,
+            R.drawable.jess,
+            R.drawable.jimmy,
+            R.drawable.jo,
+            R.drawable.kevin,
+            R.drawable.miechko,
+            R.drawable.michael,
+            R.drawable.nicolas,
+            R.drawable.samuel,
+            R.drawable.seb,
+            R.drawable.soares,
+            R.drawable.tiberiu,
+            R.drawable.vincent,
+            R.drawable.xavier
     };
 }

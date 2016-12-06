@@ -13,7 +13,9 @@
             android:layout_height="match_parent"
             app:srcCompat="@color/colorAccent"
             android:id="@+id/imageView"
-            android:layout_weight="4" />
+            android:layout_weight="4"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:orientation="vertical"

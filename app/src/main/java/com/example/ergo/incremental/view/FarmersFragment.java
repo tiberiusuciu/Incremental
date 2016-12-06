@@ -19,6 +19,7 @@ public class FarmersFragment extends Fragment {
 
     public static ListView listViewofFarmers;
     protected String[] farmers;
+    protected Integer[] images;
 
     @Nullable
     @Override
@@ -26,8 +27,9 @@ public class FarmersFragment extends Fragment {
         View view = inflater.inflate(R.layout.farmers_fragment, container, false);
 
         farmers = ShopFragmentInterface.farmers;
+        images = ShopFragmentInterface.images;
 
-        CustomListObtainedFarmers adapter = new CustomListObtainedFarmers(getActivity(), farmers);
+        CustomListObtainedFarmers adapter = new CustomListObtainedFarmers(getActivity(), farmers, images);
         listViewofFarmers = (ListView) view.findViewById(R.id.listviewObtainedFarmers);
         listViewofFarmers.setAdapter(adapter);
 
