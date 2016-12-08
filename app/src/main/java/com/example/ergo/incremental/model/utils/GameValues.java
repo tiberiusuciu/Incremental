@@ -12,7 +12,7 @@ public interface GameValues {
     final int STARTING_LEVEL = 1;
     final int MAX_NIVEAU = 24;
     final int MONNAIE_A_CHAQUE_X_SECONDES = 5;
-    final double CODE_A_CREER_DE_BASE = 2;
+    final double CODE_A_CREER_DE_BASE = 1.5;
     final String[] currencyNames = {
         "Absence",
         "Anime",

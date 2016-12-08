@@ -2,6 +2,7 @@ package com.example.ergo.incremental.controller.core_mechanics;
 
 import android.content.Intent;
 
+import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.view.GameOver;
 import com.example.ergo.incremental.view.MainActivity;
 import com.example.ergo.incremental.view.ShopFragment;

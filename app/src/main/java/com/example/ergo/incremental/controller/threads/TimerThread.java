@@ -50,6 +50,7 @@ public class TimerThread extends Activity implements Runnable {
             @Override
             public void run() {
                 Game.downgrade();
+                StatsFragment.codeText.setText(context.getString(R.string.beggining_code));
             }
         });
     }
