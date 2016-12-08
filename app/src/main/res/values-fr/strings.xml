@@ -14,8 +14,8 @@
     <string name="time_indicator">Temps Restants: </string>
     <string name="remaining_code">Code Restant: </string>
     <string name="beggining_code">Veuillez travailler pour générer du code</string>
-    <string name="level">Niveau:</string>
-    <string name="code_per_second">Codes Par Seconde:</string>
+    <string name="level">Niveau</string>
+    <string name="code_per_second">Codes Par Seconde</string>
     <string name="receive_notification">"Vous avez reçu 1 "</string>
     <string name="fin_session">La fin de session approche, tous les programmeurs travaillent extra! +100%CPS</string>
     <string name="eclipse_install">Les programmeurs doivent ré-installer Eclipse! -50%CPS</string>
@@ -71,4 +71,5 @@
     <string name="blue">Bleu:</string>
     <string name="current_event">Évenement actuel</string>
     <string name="change_background_color">Changer la couleur du fond d\'écran</string>
+    <string name="level_description">Description du niveau</string>
 </resources>

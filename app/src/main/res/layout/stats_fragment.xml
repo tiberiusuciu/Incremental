@@ -7,8 +7,11 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
         <ProgressBar
             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -48,12 +51,31 @@
             android:textAlignment="center"
             android:textStyle="normal|bold"
             android:textColor="@color/clickerBackground" />
+
+        <TextView
+            android:text="@string/level_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/levelDescriptionTxt"
+            android:layout_weight="0"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/levelDescription"
+            android:textAlignment="center"
+            android:paddingTop="5dp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
         <LinearLayout
@@ -67,7 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:textAlignment="center" />
 
             <TextView
                 android:text=""
@@ -91,7 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView3"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:textAlignment="center" />
 
             <TextView
                 android:text=""

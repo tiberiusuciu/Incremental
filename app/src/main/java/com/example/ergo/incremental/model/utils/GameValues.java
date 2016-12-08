@@ -12,7 +12,7 @@ public interface GameValues {
     final int STARTING_LEVEL = 1;
     final int MAX_NIVEAU = 24;
     final int MONNAIE_A_CHAQUE_X_SECONDES = 5;
-    final double CODE_A_CREER_DE_BASE = 2;
+    final double CODE_A_CREER_DE_BASE = 1.8;
     final String[] currencyNames = {
         "Absence",
         "Anime",
@@ -125,5 +125,32 @@ public interface GameValues {
             2.2,
             2,
             1.5
+    };
+    //Ce sont une des seuls valeurs que je n'ai pas convertis en anglais et français, car c'est des noms spécifiques
+    final String[] classNames = {
+            MainActivity.getAppContext().getString(R.string.maths1),
+            MainActivity.getAppContext().getString(R.string.prog1),
+            MainActivity.getAppContext().getString(R.string.computers),
+            MainActivity.getAppContext().getString(R.string.internet),
+            MainActivity.getAppContext().getString(R.string.prog2),
+            MainActivity.getAppContext().getString(R.string.os),
+            MainActivity.getAppContext().getString(R.string.web1),
+            MainActivity.getAppContext().getString(R.string.prog3),
+            MainActivity.getAppContext().getString(R.string.network),
+            MainActivity.getAppContext().getString(R.string.web2),
+            MainActivity.getAppContext().getString(R.string.uml), 
+            MainActivity.getAppContext().getString(R.string.maths2), 
+            MainActivity.getAppContext().getString(R.string.comm),
+            MainActivity.getAppContext().getString(R.string.prog4),
+            MainActivity.getAppContext().getString(R.string.security),
+            MainActivity.getAppContext().getString(R.string.db),
+            MainActivity.getAppContext().getString(R.string.enterprise),
+            MainActivity.getAppContext().getString(R.string.prog_ui),
+            MainActivity.getAppContext().getString(R.string.qa),
+            MainActivity.getAppContext().getString(R.string.multi_tier),
+            MainActivity.getAppContext().getString(R.string.oibd),
+            MainActivity.getAppContext().getString(R.string.solutions),
+            MainActivity.getAppContext().getString(R.string.project),
+            MainActivity.getAppContext().getString(R.string.seminar)
     };
 }

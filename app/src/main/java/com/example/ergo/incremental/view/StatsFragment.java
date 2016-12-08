@@ -25,6 +25,7 @@ public class StatsFragment extends Fragment {
     public static TextView codeText;
     public static TextView codesPerSecond;
     public static TextView currentLevel;
+    public static TextView levelDescription;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +45,9 @@ public class StatsFragment extends Fragment {
         codesPerSecond.setText((int)(MainActivity.user.getCodesPerSecond() * RandomEventThread.getNewCPS()) + "");
         currentLevel = (TextView) v.findViewById(R.id.lvl);
         currentLevel.setText(Game.currentLevel + "");
+
+        levelDescription = (TextView) v.findViewById(R.id.levelDescription);
+        levelDescription.setText(GameValues.classNames[Game.currentLevel]);
 
         return v;
     }
