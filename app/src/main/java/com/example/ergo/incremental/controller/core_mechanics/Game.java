@@ -30,17 +30,31 @@ public class Game {
         if(currentLevel < GameValues.MAX_NIVEAU){
             currentLevel++;
             calculateCodeToMake();
-            StatsFragment.timeBar.setProgress(0);
-            StatsFragment.currentLevel.setText(currentLevel + "");
-            // Le -1 s'explique puisqu'on commence au niveau 1, mais on veut commencer a accéder à notre collection à partir de 0
-            StatsFragment.levelDescription.setText(GameValues.classNames[currentLevel - 1]);
+            renderUI();
         }
         else {
             gameOver();
         }
     }
 
-    public static void gameOver(){
+    public static void downgrade() {
+        if(currentLevel > 1) {
+            currentLevel--;
+            calculateCodeToMake();
+            renderUI();
+        }
+    }
+
+    private static void renderUI() {
+        StatsFragment.timeBar.setProgress(0);
+        StatsFragment.codeBar.setProgress(0);
+        StatsFragment.codeBar.setMax(codeToMake);
+        StatsFragment.currentLevel.setText(currentLevel + "");
+        // Le -1 s'explique puisqu'on commence au niveau 1, mais on veut commencer a accéder à notre collection à partir de 0
+        StatsFragment.levelDescription.setText(GameValues.classNames[currentLevel - 1]);
+    }
+
+    private static void gameOver(){
         isGameOver = true;
         Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

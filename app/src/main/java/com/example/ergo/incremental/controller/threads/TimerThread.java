@@ -30,14 +30,28 @@ public class TimerThread extends Activity implements Runnable {
             do{
                 Thread.sleep(1000);
                 if(!isThreadStopped) {
-                    StatsFragment.timeBar.setProgress(StatsFragment.timeBar.getProgress() + 1);
-                    String textForTime = this.context.getString(R.string.time_indicator) + " " + Game.formatTime(GameValues.TEMPS_PAR_NIVEAU - StatsFragment.timeBar.getProgress());
-                    setText(StatsFragment.timeText, textForTime);
+                    if(StatsFragment.timeBar.getProgress() == StatsFragment.timeBar.getMax()) {
+                        runDowngrade();
+                    }
+                    else {
+                        StatsFragment.timeBar.setProgress(StatsFragment.timeBar.getProgress() + 1);
+                        String textForTime = this.context.getString(R.string.time_indicator) + " " + Game.formatTime(GameValues.TEMPS_PAR_NIVEAU - StatsFragment.timeBar.getProgress());
+                        setText(StatsFragment.timeText, textForTime);
+                    }
                 }
             } while(StatsFragment.timeBar.getProgress() <= GameValues.TEMPS_PAR_NIVEAU);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void runDowngrade() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Game.downgrade();
+            }
+        });
     }
 
     private void setText(final TextView text, final String value) {

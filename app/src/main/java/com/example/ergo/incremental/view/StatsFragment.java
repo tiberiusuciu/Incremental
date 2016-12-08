@@ -47,7 +47,7 @@ public class StatsFragment extends Fragment {
         currentLevel.setText(Game.currentLevel + "");
 
         levelDescription = (TextView) v.findViewById(R.id.levelDescription);
-        levelDescription.setText(GameValues.classNames[Game.currentLevel]);
+        levelDescription.setText(GameValues.classNames[Game.currentLevel - 1]);
 
         return v;
     }
