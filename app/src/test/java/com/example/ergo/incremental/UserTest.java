@@ -1,10 +1,17 @@
 package com.example.ergo.incremental;
 
+import android.util.Log;
+
+import com.example.ergo.incremental.model.Farmers;
+import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.User;
+import com.example.ergo.incremental.model.Wallet;
 import com.example.ergo.incremental.model.utils.CurrencyNames;
 import com.example.ergo.incremental.model.utils.FarmersStats;
+import com.example.ergo.incremental.model.utils.GameValues;
 import com.example.ergo.incremental.model.utils.UserStats;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,20 +20,17 @@ import static org.junit.Assert.assertEquals;
 
 public class UserTest {
     public User user = new User();
-    public TiberiuFarmer tiberiuFarmer = new TiberiuFarmer();
-    public KevinFarmer kevinFarmer = new KevinFarmer();
-    public Coiffure coiffure01 = new Coiffure();
-    public Coiffure coiffure02 = new Coiffure();
-    public Principe principe = new Principe();
 
     @Test
     public void initial_monnaie_size() throws  Exception {
-        assertEquals(user.getMonnaie().size(), 0);
+        user.getWallet().reset();
+        assertEquals(user.getWallet().getTotalAmountOfAllCurrencies(), 0);
     }
 
     @Test
     public void initial_farmer_size() throws  Exception {
-        assertEquals(user.getTravaileurs().size(), 0);
+        user.getTeam().reset();
+        assertEquals(user.getTeam().getTotalAmountOfAllProgrammers(), 0);
     }
 
     @Test
@@ -36,95 +40,80 @@ public class UserTest {
 
     @Test
     public void initial_codes_per_second() throws Exception {
+        user.getTeam().reset();
         assertEquals(user.getCodesPerSecond(), UserStats.STARTING_CODES_PER_SECOND);
     }
 
     @Test
     public void add_monnaie() throws Exception {
-        user.addMonnaie(coiffure01);
-        assertEquals(user.getMonnaie().size(), 1);
-    }
-
-    @Test
-    public void count_all_instances_of_specific_monnaie() throws Exception {
-        user.addMonnaie(coiffure01);
-        user.addMonnaie(coiffure02);
-        assertEquals(user.countAllInstancesOfSpecificMonnaie(CurrencyNames.COIFFURE_NOM), 2);
+        user.getWallet().reset();
+        user.addMonnaie(Wallet.Currency.LINUX);
+        assertEquals(user.countAllInstancesOfSpecificMonnaie(Wallet.Currency.LINUX), 1);
     }
 
     @Test
     public void find_specific_amount_monnaie() throws Exception{
-        user.addMonnaie(coiffure01);
-        assertEquals(user.findSpecificAmountMonnaie(CurrencyNames.COIFFURE_NOM, 1), true);
+        user.getWallet().reset();
+        user.addMonnaie(Wallet.Currency.LINUX);
+        assertEquals(user.findSpecificAmountMonnaie(Wallet.Currency.LINUX, 1), true);
     }
 
     @Test
     public void find_specific_amount_monnaie_not_found() throws  Exception {
-        user.addMonnaie(coiffure01);
-        assertEquals(user.findSpecificAmountMonnaie(CurrencyNames.COIFFURE_NOM, 2), false);
+        user.getWallet().reset();
+        user.addMonnaie(Wallet.Currency.LINUX);
+        assertEquals(user.findSpecificAmountMonnaie(Wallet.Currency.LINUX, 2), false);
     }
 
     @Test
     public void remove_specific_amount_monnaie() throws Exception {
-        user.addMonnaie(coiffure01);
-        user.addMonnaie(coiffure02);
-        user.addMonnaie(principe);
-        user.removeSpecificAmountMonnaie(CurrencyNames.PRINCIPE_NOM, 1);
-        assertEquals(user.getMonnaie().size(), 2);
+        user.getWallet().reset();
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.PRINCIPE);
+        user.removeSpecificAmountMonnaie(Wallet.Currency.PRINCIPE, 1);
+        assertEquals(user.findSpecificAmountMonnaie(Wallet.Currency.PRINCIPE, 1), false);
     }
 
     @Test
     public void remove_specific_amount_monnaie_not_found() throws Exception {
-        user.addMonnaie(coiffure01);
-        user.addMonnaie(coiffure02);
-        user.addMonnaie(principe);
-        user.removeSpecificAmountMonnaie(CurrencyNames.PRINCIPE_NOM, 23423);
-        assertEquals(user.getMonnaie().size(), 3);
+        user.getWallet().reset();
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.PRINCIPE);
+        user.removeSpecificAmountMonnaie(Wallet.Currency.PRINCIPE, 23423);
+        assertEquals(user.findSpecificAmountMonnaie(Wallet.Currency.PRINCIPE, 1), true);
     }
 
     @Test
     public void add_farmer() throws Exception {
-        user.addFarmer(tiberiuFarmer);
-        assertEquals(user.getTravaileurs().size(), 1);
+        user.getTeam().reset();
+        user.addFarmer(Team.Programmers.ADAM);
+        assertEquals(user.getTeam().getTotalAmountOfAllProgrammers(), 1);
     }
 
     @Test
     public void count_all_instances_of_specific_farmer() throws Exception{
-        user.addFarmer(tiberiuFarmer);
-        user.addFarmer(kevinFarmer);
-        assertEquals(user.countAllInstancesOfSpecificFarmer(FarmersStats.TIBERIU_NAME), 1);
+        user.getTeam().reset();
+        user.addFarmer(Team.Programmers.ADAM);
+        user.addFarmer(Team.Programmers.KEVIN);
+        assertEquals(user.countAllInstancesOfSpecificFarmer(Team.Programmers.ADAM), 1);
     }
 
     @Test
     public void count_all_instances_of_specific_farmer_not_found() throws Exception{
-        user.addFarmer(kevinFarmer);
-        assertEquals(user.countAllInstancesOfSpecificFarmer(FarmersStats.TIBERIU_NAME), 0);
+        user.getTeam().reset();
+        user.addFarmer(Team.Programmers.KEVIN);
+        assertEquals(user.countAllInstancesOfSpecificFarmer(Team.Programmers.ADAM), 0);
     }
 
     @Test
     public void calculate_codes_per_second() throws Exception {
-        user.addFarmer(tiberiuFarmer);
-        user.addFarmer(kevinFarmer);
+        user.getTeam().reset();
+        user.addFarmer(Team.Programmers.ADAM); // index 0 dans CPS
+        user.addFarmer(Team.Programmers.KEVIN); // index 10 dans CPS
         user.calculateCodesPerSecond();
-        assertEquals(user.getCodesPerSecond(), tiberiuFarmer.getCodesPerSeconds() + kevinFarmer.getCodesPerSeconds());
-    }
-
-    @Test
-    public void set_monnaie() throws Exception {
-        ArrayList<Currency> currencies = new ArrayList<Currency>();
-        currencies.add(coiffure01);
-        currencies.add(coiffure02);
-        user.setMonnaie(currencies);
-        assertEquals(user.getMonnaie().size(), 2);
-    }
-
-    @Test
-    public void set_travaileurs() throws Exception {
-        ArrayList<Farmer> farmers = new ArrayList<Farmer>();
-        farmers.add(tiberiuFarmer);
-        farmers.add(kevinFarmer);
-        user.setTravaileurs(farmers);
-        assertEquals(user.getTravaileurs().size(), 2);
+        assertEquals(user.getCodesPerSecond(), FarmersStats.cps[0] + FarmersStats.cps[10]);
     }
 
     @Test

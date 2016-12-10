@@ -50,8 +50,8 @@ public class GameOver extends AppCompatActivity {
         Game.currentLevel = 0;
         Game.levelUp();
         MainActivity.user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
-        MainActivity.user.setTeam(new Team());
-        MainActivity.user.setWallet(new Wallet());
+        MainActivity.user.resetTeam();
+        MainActivity.user.resetWallet();
         MainActivity.user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
 
         startActivity(myNewIntent);

@@ -50,4 +50,8 @@ public class Team {
         }
         return total;
     }
+
+    public void reset() {
+        amount = initProgrammersMap();
+    }
 }

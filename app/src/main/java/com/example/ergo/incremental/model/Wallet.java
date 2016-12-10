@@ -33,4 +33,16 @@ public class Wallet {
     public int getAmountOfCurrency(Currency currency){
         return amount.get(currency);
     }
+
+    public int getTotalAmountOfAllCurrencies() {
+        int total = 0;
+        for(Currency currency : Currency.values()){
+            total += getAmountOfCurrency(currency);
+        }
+        return total;
+    }
+
+    public void reset() {
+        amount = initCurrenciesMap();
+    }
 }

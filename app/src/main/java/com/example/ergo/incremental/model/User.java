@@ -86,4 +86,11 @@ public class User implements UserStats {
         }
     }
 
+    public void resetWallet() {
+        wallet.reset();
+    }
+
+    public void resetTeam() {
+        team.reset();
+    }
 }
