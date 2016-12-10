@@ -143,13 +143,23 @@ public class MainActivity extends AppCompatActivity {
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
         preferences.edit().putString("currentLevel", Game.currentLevel + "").apply();
         preferences.edit().putString("isGameOver", Game.isGameOver + "").apply();
+        preferences.edit().putString("ellapsedTimeThreadEllapsedTime", EllapsedTimeThread.getEllapsedTime() + "").apply();
+        preferences.edit().putString("randomEventThreadEventIsOn", RandomEventThread.eventIsOn + "").apply();
+        preferences.edit().putString("randomEventThreadEventTimeRemainder", RandomEventThread.eventTimeRemainder + "").apply();
+        preferences.edit().putString("randomEventThreadNewCPS", RandomEventThread.newCPS + "").apply();
+        preferences.edit().putString("randomEventThreadEventName", RandomEventThread.getEventName()).apply();
+
+        preferences.edit().putString("timeBarProgress", StatsFragment.timeBar.getProgress() + "").apply();
+
+        preferences.edit().putString("codeBarMax", StatsFragment.codeBar.getMax() + "").apply();
+        preferences.edit().putString("codeBarProgress", StatsFragment.codeBar.getProgress() + "").apply();
 
         Gson gson = new Gson();
 
         String jsonUser = gson.toJson(user);
         String jsonTeam = gson.toJson(Team.getAmount());
         String jsonWallet = gson.toJson(Wallet.getAmount());
-        
+
         preferences.edit().putString("userObject", jsonUser).apply();
         preferences.edit().putString("teamObject", jsonTeam).apply();
         preferences.edit().putString("walletObject", jsonWallet).apply();
@@ -185,6 +195,32 @@ public class MainActivity extends AppCompatActivity {
             Game.currentLevel = Integer.parseInt(preferences.getString("currentLevel", ""));
             Game.isGameOver = Boolean.parseBoolean(preferences.getString("isGameOver", ""));
         }
+        if(!preferences.getString("ellapsedTimeThreadEllapsedTime", "").equals("")) {
+            EllapsedTimeThread.setEllapsedTime(Integer.parseInt(preferences.getString("ellapsedTimeThreadEllapsedTime", "")));
+        }
+
+        if(!preferences.getString("randomEventThreadEventIsOn", "").equals("") &&
+                !preferences.getString("randomEventThreadEventTimeRemainder", "").equals("") &&
+                !preferences.getString("randomEventThreadNewCPS", "").equals("") &&
+                !preferences.getString("randomEventThreadEventName", "").equals("")) {
+            RandomEventThread.eventIsOn = Boolean.parseBoolean(preferences.getString("randomEventThreadEventIsOn", ""));
+            RandomEventThread.eventTimeRemainder = Integer.parseInt(preferences.getString("randomEventThreadEventTimeRemainder", ""));
+            RandomEventThread.setNewCPS(Double.parseDouble(preferences.getString("randomEventThreadNewCPS", "")));
+            RandomEventThread.setEventName(preferences.getString("randomEventThreadEventName", ""));
+        }
+
+        if(!preferences.getString("timeBarProgress", "").equals("")) {
+            StatsFragment.timeProgress = Integer.parseInt(preferences.getString("timeBarProgress", ""));
+            //StatsFragment.timeBar.setProgress(Integer.parseInt(preferences.getString("timeBarProgress", "")));
+        }
+
+        if(!preferences.getString("codeBarMax", "").equals("") &&
+                !preferences.getString("codeBarProgress", "").equals("")) {
+
+            StatsFragment.codeProgress = Integer.parseInt(preferences.getString("codeBarProgress", ""));
+            //StatsFragment.codeBar.setMax(Integer.parseInt(preferences.getString("codeBarMax", "")));
+            //StatsFragment.codeBar.setProgress(Integer.parseInt(preferences.getString("codeBarProgress", "")));
+        }
     }
 
     public static Context getAppContext(){
@@ -216,7 +252,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("SAVING", "SAVING THAT USER");
         savePreferences();
     }
 
