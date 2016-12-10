@@ -211,15 +211,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(!preferences.getString("timeBarProgress", "").equals("")) {
             StatsFragment.timeProgress = Integer.parseInt(preferences.getString("timeBarProgress", ""));
-            //StatsFragment.timeBar.setProgress(Integer.parseInt(preferences.getString("timeBarProgress", "")));
         }
 
         if(!preferences.getString("codeBarMax", "").equals("") &&
                 !preferences.getString("codeBarProgress", "").equals("")) {
-
+            Game.codeToMake = Integer.parseInt(preferences.getString("codeBarMax", ""));
             StatsFragment.codeProgress = Integer.parseInt(preferences.getString("codeBarProgress", ""));
-            //StatsFragment.codeBar.setMax(Integer.parseInt(preferences.getString("codeBarMax", "")));
-            //StatsFragment.codeBar.setProgress(Integer.parseInt(preferences.getString("codeBarProgress", "")));
         }
     }
 

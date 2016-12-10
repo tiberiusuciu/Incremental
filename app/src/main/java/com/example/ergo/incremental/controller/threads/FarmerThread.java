@@ -2,6 +2,7 @@ package com.example.ergo.incremental.controller.threads;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.ergo.incremental.controller.MainActivity;
 import com.example.ergo.incremental.R;

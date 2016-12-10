@@ -8,9 +8,9 @@ import java.util.Map;
  */
 
 public class Wallet {
-    public enum Currency { ABSCENCE, ANIME, BACKFLIP, BLINK, CAFFEINN, COIFFURE, COUSIN, DARKSOULS,
-                            DND, FREREJUMEAU, KIRIKOU, LINUX, MAGIC, MOTIVATION, NOURRITURE, PARTY,
-                            PIANO, PRINCIPE, SILENCE, SOMMEIL }
+    public enum Currency { LINUX, ANIME, SILENCE, NOURRITURE, KIRIKOU, DND, PARTY, PIANO, BLINK,
+                            MOTIVATION, PRINCIPE, SOMMEIL, MAGIC, COUSIN, BACKFLIP, DARKSOULS,
+                            FREREJUMEAU, COIFFURE, CAFFEINN, ABSCENCE}
 
     private static Map<Currency, Integer> amount = initCurrenciesMap();
 
