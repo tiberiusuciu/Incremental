@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.example.ergo.incremental.model.User;
-import com.example.ergo.incremental.view.EventFragment;
+import com.example.ergo.incremental.controller.EventFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.view;
+package com.example.ergo.incremental.controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

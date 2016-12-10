@@ -18,6 +18,7 @@ public class User implements UserStats {
     protected List<Farmer> travaileurs;
     protected int codesPerSecond;
     protected int codesPerTap;
+
     public User(){
         monnaie = new ArrayList<Currency>();
         travaileurs = new ArrayList<Farmer>();
@@ -122,4 +123,5 @@ public class User implements UserStats {
             this.codesPerTap = codesPerTap;
         }
     }
+
 }

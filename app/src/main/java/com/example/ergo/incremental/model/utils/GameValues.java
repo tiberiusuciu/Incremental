@@ -1,7 +1,7 @@
 package com.example.ergo.incremental.model.utils;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.view.MainActivity;
+import com.example.ergo.incremental.controller.MainActivity;
 
 /**
  * Ici repose les valeurs par defauts du jeu
@@ -35,7 +35,8 @@ public interface GameValues {
         "Silence",
         "Sommeil"
     };
-
+    // TODO: Make event time last defined in this class instead of randomEbentThread class
+    // Ceci est ma collection d'événements rassemblé dans un array de String. Je ne fait qu'en chosir un aléatoirement selon un temps
     final String[] eventNames = {
             MainActivity.getAppContext().getString(R.string.fin_session),
             MainActivity.getAppContext().getString(R.string.eclipse_install),

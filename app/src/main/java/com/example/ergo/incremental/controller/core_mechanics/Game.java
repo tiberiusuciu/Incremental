@@ -3,10 +3,9 @@ package com.example.ergo.incremental.controller.core_mechanics;
 import android.content.Intent;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.view.GameOver;
-import com.example.ergo.incremental.view.MainActivity;
-import com.example.ergo.incremental.view.ShopFragment;
-import com.example.ergo.incremental.view.StatsFragment;
+import com.example.ergo.incremental.controller.GameOver;
+import com.example.ergo.incremental.controller.MainActivity;
+import com.example.ergo.incremental.controller.StatsFragment;
 import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.model.utils.GameValues;
 
@@ -53,9 +52,10 @@ public class Game {
         StatsFragment.currentLevel.setText(currentLevel + "");
         // Le -1 s'explique puisqu'on commence au niveau 1, mais on veut commencer a accéder à notre collection à partir de 0
         StatsFragment.levelDescription.setText(GameValues.classNames[currentLevel - 1]);
+        StatsFragment.codeText.setText(MainActivity.getAppContext().getString(R.string.beggining_code));
     }
 
-    private static void gameOver(){
+    private static void gameOver() {
         isGameOver = true;
         Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -8,7 +8,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 
 import com.example.ergo.incremental.controller.core_mechanics.Game;
 import com.example.ergo.incremental.model.User;
-import com.example.ergo.incremental.view.MainActivity;
+import com.example.ergo.incremental.controller.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

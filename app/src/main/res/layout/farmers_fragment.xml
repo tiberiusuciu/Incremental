@@ -7,7 +7,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.example.ergo.incremental.view.EventFragment"
+        android:name="com.example.ergo.incremental.controller.EventFragment"
         android:id="@+id/fragment3"
         tools:layout="@layout/event_fragment" />
 

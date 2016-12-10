@@ -6,7 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.example.ergo.incremental.view.MainActivity;
+import com.example.ergo.incremental.controller.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

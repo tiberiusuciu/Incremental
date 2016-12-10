@@ -3,10 +3,10 @@ package com.example.ergo.incremental.controller.threads;
 import android.app.Activity;
 import android.content.Context;
 
-import com.example.ergo.incremental.view.MainActivity;
+import com.example.ergo.incremental.controller.MainActivity;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.controller.core_mechanics.Game;
-import com.example.ergo.incremental.view.StatsFragment;
+import com.example.ergo.incremental.controller.StatsFragment;
 
 /**
  * Created by ergo on 02/12/16.

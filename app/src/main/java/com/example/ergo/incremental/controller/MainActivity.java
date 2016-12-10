@@ -1,10 +1,8 @@
-package com.example.ergo.incremental.view;
+package com.example.ergo.incremental.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
@@ -17,12 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.DialogInterface;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -33,6 +31,12 @@ import com.example.ergo.incremental.controller.threads.FarmerThread;
 import com.example.ergo.incremental.controller.threads.RandomCurrencyThread;
 import com.example.ergo.incremental.controller.threads.RandomEventThread;
 import com.example.ergo.incremental.controller.threads.TimerThread;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+import java.lang.reflect.Type;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private static RandomEventThread randomEventThread = null;
     private static EllapsedTimeThread ellapsedTimeThread = null;
     private LinearLayout mainActivity = null;
-    private int backgroundColorValue = -1;
+    private Integer backgroundColorValue = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             new Thread(ellapsedTimeThread).start();
         }
         mainActivity = (LinearLayout) findViewById(R.id.activity_main);
-        if(backgroundColorValue != -1) {
+        if(backgroundColorValue != null) {
             mainActivity.setBackgroundColor(backgroundColorValue);
         }
     }
@@ -130,13 +134,29 @@ public class MainActivity extends AppCompatActivity {
     private void savePreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
+        /*
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        preferences.edit().putString("userObject", json).apply();
+        */
     }
 
     private void loadPreferences() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(preferences.getString("backgroundColorValue", "").length() > 0) {
+        if(!preferences.getString("backgroundColorValue", "").equals("")) {
             backgroundColorValue = Integer.parseInt(preferences.getString("backgroundColorValue", ""));
         }
+        /*
+        Log.d("PREPPING TO LOAD", "PREPPING TO LOAD");
+        if(!preferences.getString("userObject", "").equals("")) {
+            Gson gson = new Gson();
+            String json = preferences.getString("userObject", "");
+            Log.d("LOADING", "LOADING USER");
+            Log.d("JSON OBJ", json);
+            user = gson.fromJson(json, User.class);
+            Log.d("AMOUNTS OF FARMERS", user.getTravaileurs().size() + "");
+        }
+        */
     }
 
     public static Context getAppContext(){
@@ -161,6 +181,15 @@ public class MainActivity extends AppCompatActivity {
         FarmerThread.setIsThreadStopped(false);
         RandomEventThread.setIsThreadStopped(false);
         EllapsedTimeThread.setIsThreadStopped(false);
+    }
+
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("SAVING", "SAVING THAT USER");
+        savePreferences();
     }
 
     private class CustomAdapter extends FragmentPagerAdapter {
@@ -245,19 +274,20 @@ public class MainActivity extends AppCompatActivity {
                 int redValue = Integer.parseInt(redText);
                 int greenValue = Integer.parseInt(greenText);
                 int blueValue = Integer.parseInt(blueText);
+
                 if(redValue < 0) {
                     redValue = 0;
-                } else if (redValue > 255) {
+                } else if (redValue >= 255) {
                     redValue = 255;
                 }
                 if(greenValue < 0) {
                     greenValue = 0;
-                } else if (greenValue > 255) {
+                } else if (greenValue >= 255) {
                     greenValue = 255;
                 }
                 if(blueValue < 0) {
                     blueValue = 0;
-                } else if (blueValue > 255) {
+                } else if (blueValue >= 255) {
                     blueValue = 255;
                 }
                 backgroundColorValue = Color.rgb(redValue, greenValue, blueValue);

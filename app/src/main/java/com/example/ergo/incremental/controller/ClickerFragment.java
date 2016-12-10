@@ -1,6 +1,5 @@
-package com.example.ergo.incremental.view;
+package com.example.ergo.incremental.controller;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

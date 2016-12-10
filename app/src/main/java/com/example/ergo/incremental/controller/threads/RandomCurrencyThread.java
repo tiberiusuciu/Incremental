@@ -8,10 +8,9 @@ import android.widget.Toast;
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.User;
 import com.example.ergo.incremental.model.currency.Currency;
-import com.example.ergo.incremental.view.FarmersFragment;
-import com.example.ergo.incremental.view.MainActivity;
-import com.example.ergo.incremental.view.ShopFragment;
-import com.example.ergo.incremental.view.StatsFragment;
+import com.example.ergo.incremental.controller.MainActivity;
+import com.example.ergo.incremental.controller.ShopFragment;
+import com.example.ergo.incremental.controller.StatsFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**

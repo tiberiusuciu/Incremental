@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.view;
+package com.example.ergo.incremental.controller;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;

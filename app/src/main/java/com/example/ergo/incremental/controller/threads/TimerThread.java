@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.controller.core_mechanics.Game;
-import com.example.ergo.incremental.view.StatsFragment;
+import com.example.ergo.incremental.controller.StatsFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
@@ -50,7 +50,6 @@ public class TimerThread extends Activity implements Runnable {
             @Override
             public void run() {
                 Game.downgrade();
-                StatsFragment.codeText.setText(context.getString(R.string.beggining_code));
             }
         });
     }
