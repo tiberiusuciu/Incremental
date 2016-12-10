@@ -1,9 +1,6 @@
 package com.example.ergo.incremental;
 
 import com.example.ergo.incremental.model.User;
-import com.example.ergo.incremental.model.currency.Coiffure;
-import com.example.ergo.incremental.model.currency.Currency;
-import com.example.ergo.incremental.model.currency.Principe;
 import com.example.ergo.incremental.model.farmer.Farmer;
 import com.example.ergo.incremental.model.farmer.KevinFarmer;
 import com.example.ergo.incremental.model.farmer.TiberiuFarmer;

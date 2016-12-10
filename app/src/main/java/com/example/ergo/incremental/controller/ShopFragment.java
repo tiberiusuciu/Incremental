@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.model.Wallet;
 import com.example.ergo.incremental.model.farmer.Farmer;
 import com.example.ergo.incremental.model.utils.ShopFragmentInterface;
 
@@ -48,8 +49,8 @@ public class ShopFragment extends Fragment {
     }
 
     public void itemClicked(View view, int position) {
-        if(MainActivity.user.findSpecificAmountMonnaie(farmerPrice[position], 2)) {
-            MainActivity.user.removeSpecificAmountMonnaie(farmerPrice[position], 2);
+        if(MainActivity.user.findSpecificAmountMonnaie(Wallet.Currency.values()[position], 2)) {
+            MainActivity.user.removeSpecificAmountMonnaie(Wallet.Currency.values()[position], 2);
             Class<?> myClass = null;
             Farmer farmer = null;
             try {

@@ -1,6 +1,5 @@
 package com.example.ergo.incremental.model;
 
-import com.example.ergo.incremental.model.currency.Currency;
 import com.example.ergo.incremental.model.farmer.Farmer;
 import com.example.ergo.incremental.model.utils.UserStats;
 
@@ -14,56 +13,36 @@ import java.util.List;
  */
 
 public class User implements UserStats {
-    protected List<Currency> monnaie;
+    protected Wallet wallet;
+    protected int[] programmeurs;
+    //protected List<Currency> monnaie;
     protected List<Farmer> travaileurs;
     protected int codesPerSecond;
     protected int codesPerTap;
 
     public User(){
-        monnaie = new ArrayList<Currency>();
+        //monnaie = new ArrayList<Currency>();
         travaileurs = new ArrayList<Farmer>();
         codesPerSecond = STARTING_CODES_PER_SECOND;
         codesPerTap = STARTING_CODES_PER_TAP;
+        wallet = new Wallet();
     }
 
-    public void addMonnaie(Currency c) {
-        this.monnaie.add(c);
+    public void addMonnaie(Wallet.Currency c) {
+        this.wallet.addCurrency(c, 1);
     }
 
-    public int countAllInstancesOfSpecificMonnaie(String currencyName) {
-        int amountFound = 0;
-        for(Currency iterator: monnaie) {
-            if(iterator.getName().equals(currencyName)){
-                amountFound++;
-            }
-        }
-        return amountFound;
+    public int countAllInstancesOfSpecificMonnaie(Wallet.Currency c) {
+        return wallet.getAmountOfCurrency(c);
     }
 
-    public boolean findSpecificAmountMonnaie(String currencyName, int amountNeeded) {
-        int amountFound = 0;
-        for(Currency iterator: monnaie) {
-            if(iterator.getName().equals(currencyName)){
-                amountFound++;
-                if(amountFound >= amountNeeded) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean findSpecificAmountMonnaie(Wallet.Currency c, int amountNeeded) {
+        return wallet.getAmountOfCurrency(c) >= amountNeeded;
     }
 
-    public void removeSpecificAmountMonnaie(String currencyName, int requestedAmount) {
-        if(findSpecificAmountMonnaie(currencyName, requestedAmount)){
-            int amountDeleted = 0;
-            ArrayList toRemove = new ArrayList();
-            for (Currency cur : this.monnaie) {
-                if (cur.getName().equals(currencyName) && amountDeleted < 2) {
-                    toRemove.add(cur);
-                    amountDeleted++;
-                }
-            }
-            this.monnaie.removeAll(toRemove);
+    public void removeSpecificAmountMonnaie(Wallet.Currency c, int requestedAmount) {
+        if(findSpecificAmountMonnaie(c, requestedAmount)){
+            wallet.removeCurrency(c, requestedAmount);
         }
     }
 
@@ -90,12 +69,12 @@ public class User implements UserStats {
         setCodesPerSecond(newCodesPerSecond);
     }
 
-    public List<Currency> getMonnaie() {
-        return monnaie;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public void setMonnaie(List<Currency> monnaie) {
-        this.monnaie = monnaie;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     public List<Farmer> getTravaileurs() {
