@@ -45,4 +45,12 @@ public class Wallet {
     public void reset() {
         amount = initCurrenciesMap();
     }
+
+    public static Map<Currency, Integer> getAmount() {
+        return amount;
+    }
+
+    public static void setAmount(Map<Currency, Integer> amount) {
+        Wallet.amount = amount;
+    }
 }

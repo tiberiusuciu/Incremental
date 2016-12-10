@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,18 +26,24 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.controller.core_mechanics.Game;
+import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.User;
 import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.controller.threads.FarmerThread;
 import com.example.ergo.incremental.controller.threads.RandomCurrencyThread;
 import com.example.ergo.incremental.controller.threads.RandomEventThread;
 import com.example.ergo.incremental.controller.threads.TimerThread;
+import com.example.ergo.incremental.model.Wallet;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -134,11 +141,18 @@ public class MainActivity extends AppCompatActivity {
     private void savePreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
-        /*
+        preferences.edit().putString("currentLevel", Game.currentLevel + "").apply();
+        preferences.edit().putString("isGameOver", Game.isGameOver + "").apply();
+
         Gson gson = new Gson();
-        String json = gson.toJson(user);
-        preferences.edit().putString("userObject", json).apply();
-        */
+
+        String jsonUser = gson.toJson(user);
+        String jsonTeam = gson.toJson(Team.getAmount());
+        String jsonWallet = gson.toJson(Wallet.getAmount());
+        
+        preferences.edit().putString("userObject", jsonUser).apply();
+        preferences.edit().putString("teamObject", jsonTeam).apply();
+        preferences.edit().putString("walletObject", jsonWallet).apply();
     }
 
     private void loadPreferences() {
@@ -146,17 +160,31 @@ public class MainActivity extends AppCompatActivity {
         if(!preferences.getString("backgroundColorValue", "").equals("")) {
             backgroundColorValue = Integer.parseInt(preferences.getString("backgroundColorValue", ""));
         }
-        /*
-        Log.d("PREPPING TO LOAD", "PREPPING TO LOAD");
-        if(!preferences.getString("userObject", "").equals("")) {
+        if(!preferences.getString("userObject", "").equals("") &&
+                !preferences.getString("teamObject", "").equals("") &&
+                !preferences.getString("walletObject", "").equals("") &&
+                !preferences.getString("currentLevel", "").equals("") &&
+                !preferences.getString("isGameOver", "").equals("")) {
+
             Gson gson = new Gson();
-            String json = preferences.getString("userObject", "");
-            Log.d("LOADING", "LOADING USER");
-            Log.d("JSON OBJ", json);
-            user = gson.fromJson(json, User.class);
-            Log.d("AMOUNTS OF FARMERS", user.getTravaileurs().size() + "");
+
+            String jsonUser = preferences.getString("userObject", "");
+            String jsonTeam = preferences.getString("teamObject", "");
+            String jsonWallet = preferences.getString("walletObject", "");
+
+            Type typeTeam = new TypeToken<Map<Team.Programmers, Integer>>(){}.getType();
+            Type typeWallet = new TypeToken<Map<Wallet.Currency, Integer>>(){}.getType();
+
+            Map<Team.Programmers, Integer> team = gson.fromJson(jsonTeam, typeTeam);
+            Map<Wallet.Currency, Integer> wallet = gson.fromJson(jsonWallet, typeWallet);
+
+            user = gson.fromJson(jsonUser, User.class);
+            Team.setAmount(team);
+            Wallet.setAmount(wallet);
+
+            Game.currentLevel = Integer.parseInt(preferences.getString("currentLevel", ""));
+            Game.isGameOver = Boolean.parseBoolean(preferences.getString("isGameOver", ""));
         }
-        */
     }
 
     public static Context getAppContext(){

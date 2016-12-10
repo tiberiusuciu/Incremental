@@ -54,4 +54,12 @@ public class Team {
     public void reset() {
         amount = initProgrammersMap();
     }
+
+    public static Map<Programmers, Integer> getAmount() {
+        return amount;
+    }
+
+    public static void setAmount(Map<Programmers, Integer> amount) {
+        Team.amount = amount;
+    }
 }
