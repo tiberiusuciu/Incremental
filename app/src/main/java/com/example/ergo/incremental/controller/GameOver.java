@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.controller.core_mechanics.Game;
+import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.Wallet;
-import com.example.ergo.incremental.model.farmer.Farmer;
 import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.model.utils.UserStats;
 
@@ -50,7 +50,7 @@ public class GameOver extends AppCompatActivity {
         Game.currentLevel = 0;
         Game.levelUp();
         MainActivity.user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
-        MainActivity.user.setTravaileurs(new ArrayList<Farmer>());
+        MainActivity.user.setTeam(new Team());
         MainActivity.user.setWallet(new Wallet());
         MainActivity.user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
 

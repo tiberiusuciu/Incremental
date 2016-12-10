@@ -1,25 +1,5 @@
 package com.example.ergo.incremental;
 
-import com.example.ergo.incremental.model.farmer.AdamFarmer;
-import com.example.ergo.incremental.model.farmer.DavidFarmer;
-import com.example.ergo.incremental.model.farmer.GregFarmer;
-import com.example.ergo.incremental.model.farmer.GuillaumeFarmer;
-import com.example.ergo.incremental.model.farmer.HerveFarmer;
-import com.example.ergo.incremental.model.farmer.JeanDanielFarmer;
-import com.example.ergo.incremental.model.farmer.JebFarmer;
-import com.example.ergo.incremental.model.farmer.JessFarmer;
-import com.example.ergo.incremental.model.farmer.JimmyFarmer;
-import com.example.ergo.incremental.model.farmer.JonathanFarmer;
-import com.example.ergo.incremental.model.farmer.KevinFarmer;
-import com.example.ergo.incremental.model.farmer.MichaelFarmer;
-import com.example.ergo.incremental.model.farmer.MiechkoFarmer;
-import com.example.ergo.incremental.model.farmer.NicolasFarmer;
-import com.example.ergo.incremental.model.farmer.SamuelFarmer;
-import com.example.ergo.incremental.model.farmer.SebFarmer;
-import com.example.ergo.incremental.model.farmer.SoaresFarmer;
-import com.example.ergo.incremental.model.farmer.TiberiuFarmer;
-import com.example.ergo.incremental.model.farmer.VincentFarmer;
-import com.example.ergo.incremental.model.farmer.XavierFarmer;
 import com.example.ergo.incremental.model.utils.FarmersStats;
 
 import org.junit.Test;

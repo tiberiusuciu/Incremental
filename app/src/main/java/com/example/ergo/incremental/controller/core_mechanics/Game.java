@@ -7,7 +7,11 @@ import com.example.ergo.incremental.controller.GameOver;
 import com.example.ergo.incremental.controller.MainActivity;
 import com.example.ergo.incremental.controller.StatsFragment;
 import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
+import com.example.ergo.incremental.model.Team;
+import com.example.ergo.incremental.model.utils.FarmersStats;
 import com.example.ergo.incremental.model.utils.GameValues;
+
+import java.util.HashMap;
 
 /**
  * Ceci est la class qui gère les niveaux ainsi que l'état de la partie (gagné, perdue)
@@ -60,7 +64,7 @@ public class Game {
         Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
-        int totalFarmers = MainActivity.user.getTravaileurs().size();
+        int totalFarmers = MainActivity.user.getTeam().getTotalAmountOfAllProgrammers();
         intent.putExtra("ellapsedTime", ellapsedTime + "");
         intent.putExtra("totalFarmers", totalFarmers + "");
         MainActivity.getAppContext().startActivity(intent);

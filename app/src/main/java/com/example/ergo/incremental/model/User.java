@@ -1,10 +1,6 @@
 package com.example.ergo.incremental.model;
 
-import com.example.ergo.incremental.model.farmer.Farmer;
 import com.example.ergo.incremental.model.utils.UserStats;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Cette Class représente l'usager principale, c'est ici où
@@ -14,18 +10,15 @@ import java.util.List;
 
 public class User implements UserStats {
     protected Wallet wallet;
-    protected int[] programmeurs;
-    //protected List<Currency> monnaie;
-    protected List<Farmer> travaileurs;
+    protected Team team;
     protected int codesPerSecond;
     protected int codesPerTap;
 
     public User(){
-        //monnaie = new ArrayList<Currency>();
-        travaileurs = new ArrayList<Farmer>();
         codesPerSecond = STARTING_CODES_PER_SECOND;
         codesPerTap = STARTING_CODES_PER_TAP;
         wallet = new Wallet();
+        team = new Team();
     }
 
     public void addMonnaie(Wallet.Currency c) {
@@ -46,27 +39,17 @@ public class User implements UserStats {
         }
     }
 
-    public void addFarmer(Farmer f) {
-        this.travaileurs.add(f);
+    public void addFarmer(Team.Programmers p) {
+        team.addProgrammer(p, 1);
         calculateCodesPerSecond();
     }
 
-    public int countAllInstancesOfSpecificFarmer(String farmerName) {
-        int amountFound = 0;
-        for(Farmer farmer: travaileurs) {
-            if(farmer.getName().equals(farmerName)) {
-                amountFound++;
-            }
-        }
-        return amountFound;
+    public int countAllInstancesOfSpecificFarmer(Team.Programmers p) {
+        return team.getAmountOfProgrammers(p);
     }
 
     public void calculateCodesPerSecond() {
-        int newCodesPerSecond = 0;
-        for (Farmer farmer : travaileurs) {
-            newCodesPerSecond += farmer.getCodesPerSeconds();
-        }
-        setCodesPerSecond(newCodesPerSecond);
+        setCodesPerSecond(team.calculateCPSFromTeam());
     }
 
     public Wallet getWallet() {
@@ -77,12 +60,12 @@ public class User implements UserStats {
         this.wallet = wallet;
     }
 
-    public List<Farmer> getTravaileurs() {
-        return travaileurs;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTravaileurs(List<Farmer> travaileurs) {
-        this.travaileurs = travaileurs;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public int getCodesPerSecond() {
