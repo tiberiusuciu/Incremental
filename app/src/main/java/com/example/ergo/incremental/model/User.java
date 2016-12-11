@@ -56,16 +56,9 @@ public class User implements UserStats {
         return wallet;
     }
 
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
-    }
 
     public Team getTeam() {
         return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 
     public int getCodesPerSecond() {

@@ -27,10 +27,6 @@ public class Team {
         amount.put(programmers, amount.get(programmers) + amountOfProgrammers);
     }
 
-    public void removeRemoveProgrammer(Programmers programmers, int amountOfProgrammers) {
-        amount.put(programmers, amount.get(programmers) - amountOfProgrammers);
-    }
-
     public int getAmountOfProgrammers(Programmers programmers){
         return amount.get(programmers);
     }

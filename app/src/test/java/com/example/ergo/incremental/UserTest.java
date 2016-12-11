@@ -128,4 +128,26 @@ public class UserTest {
         assertEquals(user.getCodesPerTap(), UserStats.STARTING_CODES_PER_TAP);
     }
 
+    @Test
+    public void reset_wallet() {
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.LINUX);
+        user.addMonnaie(Wallet.Currency.BACKFLIP);
+        user.addMonnaie(Wallet.Currency.BACKFLIP);
+        user.addMonnaie(Wallet.Currency.BACKFLIP);
+        user.resetWallet();
+        assertEquals(user.getWallet().getTotalAmountOfAllCurrencies(), 0);
+    }
+    
+    @Test
+    public void reset_team() {
+        user.addFarmer(Team.Programmers.DAVID);
+        user.addFarmer(Team.Programmers.DAVID);
+        user.addFarmer(Team.Programmers.JEANDANIEL);
+        user.addFarmer(Team.Programmers.JEANDANIEL);
+        user.resetTeam();
+        assertEquals(user.getTeam().getTotalAmountOfAllProgrammers(), 0);
+    }
+
 }
