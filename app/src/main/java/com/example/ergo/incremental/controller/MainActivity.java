@@ -1,6 +1,7 @@
 package com.example.ergo.incremental.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,18 +65,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
+
         Intent intent = getIntent();
         String reset = intent.getStringExtra("reset");
         if(reset != null) {
             if(reset.equals("true")){
-                user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
-                user.setTravaileurs(new ArrayList<Farmer>());
-                user.setMonnaie(new ArrayList<Currency>());
-                user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
+                reset();
+                getIntent().removeExtra("reset");
             }
         }
-        */
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -179,7 +179,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Si il y a un fond d'écran spécifique
-        if(!preferences.getString("backgroundColorValue", "").equals("")) {
+        if(!preferences.getString("backgroundColorValue", "").equals("") &&
+                !preferences.getString("backgroundColorValue", "").equals("null")) {
             backgroundColorValue = Integer.parseInt(preferences.getString("backgroundColorValue", ""));
         }
 
@@ -382,11 +383,18 @@ public class MainActivity extends AppCompatActivity {
         ((BaseAdapter) ProgrammersFragment.getListViewofProgrammers().getAdapter()).notifyDataSetChanged();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Integer tmpBackgroundColor = null;
+        if(!preferences.getString("backgroundColorValue", "").equals("") &&
+                !preferences.getString("backgroundColorValue", "").equals("null")) {
+            tmpBackgroundColor = Integer.parseInt(preferences.getString("backgroundColorValue", "-1"));
+        }
         preferences.edit().clear().apply();
 
-        // on va conserver le fond d'écran, ceci est une décision que j'ai chosit, car je me dit que
+        // on va conserver le fond d'écran, ceci est une décision que j'ai choisit, car je me dit que
         // le fond d'écran n'a rien a avoir avec la partie vraiment
-        preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
+        if(tmpBackgroundColor != null) {
+            preferences.edit().putString("backgroundColorValue", tmpBackgroundColor + "").apply();
+        }
     }
 
     private void changeColor() {

@@ -33,15 +33,16 @@ public class LevellingUpTest {
     @Test
     public void levellingUpTest() {
         User user = new User();
+        int currentLevel = Game.currentLevel;
         for(int i = 0; i < Game.codeToMake; i++) {
             ViewInteraction appCompatButton = onView(
-                    allOf(withId(R.id.button), withText("Work"),
+                    allOf(withId(R.id.button), withText(R.string.cliker_button),
                             withParent(withId(R.id.fragment)),
                             isDisplayed()));
             appCompatButton.perform(click());
         }
 
-        onView(withId(R.id.lvl)).check(matches(withText("2")));
+        onView(withId(R.id.lvl)).check(matches(withText(currentLevel + 1 + "")));
     }
 
 }

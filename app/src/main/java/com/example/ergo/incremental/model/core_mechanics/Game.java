@@ -59,9 +59,9 @@ public class Game {
         Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
-        int totalFarmers = MainActivity.getUser().getTeam().getTotalAmountOfAllProgrammers();
+        int totalProgrammers = MainActivity.getUser().getTeam().getTotalAmountOfAllProgrammers();
         intent.putExtra("ellapsedTime", ellapsedTime + "");
-        intent.putExtra("totalFarmers", totalFarmers + "");
+        intent.putExtra("totalProgrammers", totalProgrammers + "");
         MainActivity.getAppContext().startActivity(intent);
 
     }

@@ -47,15 +47,6 @@ public class GameOver extends AppCompatActivity {
         Intent myNewIntent = new Intent(MainActivity.getAppContext(), MainActivity.class);
 
         myNewIntent.putExtra("reset", "true");
-        EllapsedTimeThread.setEllapsedTime(0);
-        Game.isGameOver = false;
-        Game.currentLevel = 0;
-        Game.levelUp();
-        MainActivity.getUser().setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
-        MainActivity.getUser().resetTeam();
-        MainActivity.getUser().resetWallet();
-        MainActivity.getUser().setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
-
         startActivity(myNewIntent);
     }
 }

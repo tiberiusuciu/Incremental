@@ -5,8 +5,10 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+import android.util.Log;
 
 import com.example.ergo.incremental.controller.MainActivity;
+import com.example.ergo.incremental.controller.StatsFragment;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,12 +33,16 @@ public class TappingWorkButtonTest {
     @Test
     public void tappingWorkButtonTest() {
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.button), withText("Work"),
+                allOf(withId(R.id.button), withText(R.string.cliker_button),
                         withParent(withId(R.id.fragment)),
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        onView(withId(R.id.codeText)).check(matches(withText("Remaining Code: 1")));
+        if(StatsFragment.getCodeBar().getProgress() == 0) {
+            onView(withId(R.id.codeText)).check(matches(withText(R.string.beggining_code)));
+        } else {
+            onView(withId(R.id.codeText)).check(matches(withText(MainActivity.getAppContext().getResources().getString(R.string.remaining_code) + " " + (StatsFragment.getCodeBar().getMax() - StatsFragment.getCodeBar().getProgress()))));
+        }
     }
 
 }
