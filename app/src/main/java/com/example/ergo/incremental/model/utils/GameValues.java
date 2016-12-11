@@ -12,6 +12,9 @@ public interface GameValues {
     int STARTING_LEVEL = 1;
     int MAX_NIVEAU = 24;
     int MONNAIE_A_CHAQUE_X_SECONDES = 5;
+    // Veuillez modifier la valeur en dessous de ce message si vous désirez finir le jeu
+    // rapidement afin d'évaluer l'écran de fin de partie. Vous n'avez que diminiuer la valeur pour
+    // que le jeu se déroule beaucoup plus vite
     double CODE_A_CREER_DE_BASE = 1.8;
     int PRIX_DE_BASE = 2;
     int EVENT_DURATION = 60;
