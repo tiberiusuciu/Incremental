@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.controller.core_mechanics;
+package com.example.ergo.incremental.model.core_mechanics;
 
 import android.content.Intent;
 
@@ -6,7 +6,7 @@ import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.controller.GameOver;
 import com.example.ergo.incremental.controller.MainActivity;
 import com.example.ergo.incremental.controller.StatsFragment;
-import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
+import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
@@ -45,7 +45,7 @@ public class Game {
         }
     }
 
-    private static void renderUI() {
+    public static void renderUI() {
         StatsFragment.timeBar.setProgress(0);
         StatsFragment.codeBar.setProgress(0);
         StatsFragment.codeBar.setMax(codeToMake);
@@ -60,7 +60,7 @@ public class Game {
         Intent intent = new Intent(MainActivity.getAppContext(), GameOver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
-        int totalFarmers = MainActivity.user.getTravaileurs().size();
+        int totalFarmers = MainActivity.user.getTeam().getTotalAmountOfAllProgrammers();
         intent.putExtra("ellapsedTime", ellapsedTime + "");
         intent.putExtra("totalFarmers", totalFarmers + "");
         MainActivity.getAppContext().startActivity(intent);

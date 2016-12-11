@@ -82,14 +82,14 @@
     <string name="total_farmers_bought">Total programmers bought:</string>
     <string name="play_again">Play again!</string>
     <string name="red">Red:</string>
-    <string name="_0_255">0 - 255</string>
+    <string name="_0_255">0 – 255</string>
     <string name="green">Green:</string>
     <string name="blue">Blue:</string>
     <string name="current_event">Current Event</string>
     <string name="change_background_color">Change Background Color</string>
     <string name="level_description">Level description</string>
-    <string name="maths1">201-420-AL - Mathématiques et informatique</string>
-    <string name="prog1">420-101-AL - Algorithmique et programmation</string>
+    <string name="maths1">201–420-AL - Mathématiques et informatique</string>
+    <string name="prog1">420–101-AL - Algorithmique et programmation</string>
     <string name="computers">420-111-AL - Ordinateurs et soutien technique</string>
     <string name="internet">420-123-AL - Internet et multimédia</string>
     <string name="prog2">420-201-AL - Algorithmique et programmation</string>
@@ -111,5 +111,9 @@
     <string name="oibd">420-533-AL - Outils intégrés de base de données</string>
     <string name="solutions">420-603-AL - Solution informatique : les nouvelles tendances du marché</string>
     <string name="project">420-633-AL - Projet d\'intégrateur en entreprise (cours porteur de l\'e.s.p)</string>
-    <string name="seminar">420-650-AL - Séminaire de sujets avancés en informatique</string>
+    <string name="seminar">420–650-AL - Séminaire de sujets avancés en informatique</string>
+    <string name="restart_the_game">Restart the game</string>
+    <string name="restart_game_dialogue">Are you sure you want to restart the game?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

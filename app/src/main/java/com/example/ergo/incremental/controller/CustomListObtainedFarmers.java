@@ -10,10 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.model.Team;
 
-/**
- * Created by ergo on 03/12/16.
- */
 
 public class CustomListObtainedFarmers extends ArrayAdapter<String> {
     private final Activity context;
@@ -38,7 +36,7 @@ public class CustomListObtainedFarmers extends ArrayAdapter<String> {
 
 
         mainText.setText(farmerNames[position]);
-        priceText.setText(MainActivity.user.countAllInstancesOfSpecificFarmer(farmerNames[position]) + "");
+        priceText.setText(MainActivity.user.countAllInstancesOfSpecificFarmer(Team.Programmers.values()[position]) + "");
         imageView.setImageResource(imageId[position]);
         return rowView;
     }

@@ -5,6 +5,12 @@
     <item
         android:id="@+id/changeBackgroundColor"
         android:title="@string/change_background_color"
+        android:icon="@mipmap/change_color_background"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/reset"
+        android:title="@string/restart_the_game"
         app:showAsAction="never"/>
 
 </menu>

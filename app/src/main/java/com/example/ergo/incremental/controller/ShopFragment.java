@@ -12,7 +12,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.model.farmer.Farmer;
+import com.example.ergo.incremental.model.Team;
+import com.example.ergo.incremental.model.Wallet;
+import com.example.ergo.incremental.model.utils.GameValues;
 import com.example.ergo.incremental.model.utils.ShopFragmentInterface;
 
 
@@ -48,37 +50,12 @@ public class ShopFragment extends Fragment {
     }
 
     public void itemClicked(View view, int position) {
-        if(MainActivity.user.findSpecificAmountMonnaie(farmerPrice[position], 2)) {
-            MainActivity.user.removeSpecificAmountMonnaie(farmerPrice[position], 2);
-            Class<?> myClass = null;
-            Farmer farmer = null;
-            try {
-                String farmerClassName = ShopFragmentInterface.farmers[position];
-                farmerClassName = farmerClassName.toLowerCase();
-                if(farmerClassName.indexOf(" ") >= 0) {
-                    String[] temporary = farmerClassName.split(" ");
-                    farmerClassName = "";
-                    for(int i = 0; i < temporary.length; i++) {
-                        farmerClassName += temporary[i].substring(0, 1).toUpperCase() + temporary[i].substring(1);
-                    }
-                }else {
-                    farmerClassName = farmerClassName.substring(0, 1).toUpperCase() + farmerClassName.substring(1);
-                }
-                farmerClassName += "Farmer";
-                myClass = Class.forName("com.example.ergo.incremental.model.farmer." + farmerClassName );
-                farmer = (Farmer) myClass.newInstance();
-                MainActivity.user.addFarmer(farmer);
-
-                // Mise à jour de mes listeViews
-                ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
-                ((BaseAdapter)FarmersFragment.listViewofFarmers.getAdapter()).notifyDataSetChanged();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (java.lang.InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        if(MainActivity.user.findSpecificAmountMonnaie(Wallet.Currency.values()[position], 2)) {
+            MainActivity.user.removeSpecificAmountMonnaie(Wallet.Currency.values()[position], 2);
+            MainActivity.user.addFarmer(Team.Programmers.values()[position]);
+            // Mise à jour de mes listeViews
+            ((BaseAdapter)listView.getAdapter()).notifyDataSetChanged();
+            ((BaseAdapter)FarmersFragment.listViewofFarmers.getAdapter()).notifyDataSetChanged();
         }
         else {
             Toast.makeText(getContext(), getString(R.string.not_enough_money) + farmers[position], Toast.LENGTH_SHORT).show();

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.model.Wallet;
 
 /**
  * Ici repose ma facon specifique pour gerer ma liste de ma boutique
@@ -47,7 +48,7 @@ public class CustomList extends ArrayAdapter<String> {
         subText.setText(farmerPerformance[position]);
         imageView.setImageResource(imageId[position]);
 
-        if(MainActivity.user.findSpecificAmountMonnaie(farmerCost[position], 2)) {
+        if(MainActivity.user.findSpecificAmountMonnaie(Wallet.Currency.values()[position], 2)) {
             mainText.setTextColor(getContext().getResources().getColor(R.color.gold));
         }
         //Todo: to implement

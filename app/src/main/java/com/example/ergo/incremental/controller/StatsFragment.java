@@ -10,8 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.controller.core_mechanics.Game;
-import com.example.ergo.incremental.controller.threads.RandomEventThread;
+import com.example.ergo.incremental.model.core_mechanics.Game;
+import com.example.ergo.incremental.model.threads.RandomEventThread;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
@@ -21,6 +21,8 @@ import com.example.ergo.incremental.model.utils.GameValues;
 public class StatsFragment extends Fragment {
     public static ProgressBar timeBar;
     public static ProgressBar codeBar;
+    public static int codeProgress;
+    public static int timeProgress;
     public static TextView timeText;
     public static TextView codeText;
     public static TextView codesPerSecond;
@@ -32,11 +34,11 @@ public class StatsFragment extends Fragment {
         View v = inflater.inflate(R.layout.stats_fragment, container, false);
         timeBar = (ProgressBar) v.findViewById(R.id.timeBar);
         timeBar.setMax(GameValues.TEMPS_PAR_NIVEAU);
-        timeBar.setProgress(0);
+        timeBar.setProgress(timeProgress);
 
         codeBar = (ProgressBar) v.findViewById(R.id.codeBar);
         codeBar.setMax((int)Game.codeToMake);
-        codeBar.setProgress(0);
+        codeBar.setProgress(codeProgress);
 
         timeText = (TextView) v.findViewById(R.id.timeText);
         codeText = (TextView) v.findViewById(R.id.codeText);

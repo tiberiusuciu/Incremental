@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.controller.threads;
+package com.example.ergo.incremental.model.threads;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,10 +7,10 @@ import android.widget.Toast;
 
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.User;
-import com.example.ergo.incremental.model.currency.Currency;
 import com.example.ergo.incremental.controller.MainActivity;
 import com.example.ergo.incremental.controller.ShopFragment;
 import com.example.ergo.incremental.controller.StatsFragment;
+import com.example.ergo.incremental.model.Wallet;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
@@ -21,7 +21,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
 
     Context context;
     User user;
-    Currency newCurrency = null;
+    Wallet.Currency newCurrency = null;
     private static boolean isThreadStopped;
 
     public RandomCurrencyThread(Context context, User user) {
@@ -50,37 +50,23 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
         }
     }
 
-    private Currency randomCurrency() {
+    private Wallet.Currency randomCurrency() {
         int randomNumber = (int)(Math.random() * GameValues.currencyNames.length);
-        Class<?> myClass = null;
-        Currency currency = null;
-        try {
-            myClass = Class.forName("com.example.ergo.incremental.model.currency." + GameValues.currencyNames[randomNumber]);
-            currency = (Currency) myClass.newInstance();
-            return currency;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } finally {
-            return currency;
-        }
+        return Wallet.Currency.values()[randomNumber];
     }
 
-    private void displayNewCurrency(final Currency currency) {
+    private void displayNewCurrency(final Wallet.Currency currency) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(context, MainActivity.getAppContext().getString(R.string.receive_notification) + currency.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, MainActivity.getAppContext().getString(R.string.receive_notification) + currency.name(), Toast.LENGTH_SHORT).show();
                 // Mettre a jour la liste de fermiers
                 ((BaseAdapter)ShopFragment.listView.getAdapter()).notifyDataSetChanged();
             }
         });
     }
 
-    private void addCurrencyToUser(Currency currency) {
+    private void addCurrencyToUser(Wallet.Currency currency) {
         user.addMonnaie(currency);
     }
 

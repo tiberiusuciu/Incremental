@@ -1,11 +1,6 @@
 package com.example.ergo.incremental.model;
 
-import com.example.ergo.incremental.model.currency.Currency;
-import com.example.ergo.incremental.model.farmer.Farmer;
 import com.example.ergo.incremental.model.utils.UserStats;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Cette Class représente l'usager principale, c'est ici où
@@ -14,96 +9,63 @@ import java.util.List;
  */
 
 public class User implements UserStats {
-    protected List<Currency> monnaie;
-    protected List<Farmer> travaileurs;
+    protected Wallet wallet;
+    protected Team team;
     protected int codesPerSecond;
     protected int codesPerTap;
 
     public User(){
-        monnaie = new ArrayList<Currency>();
-        travaileurs = new ArrayList<Farmer>();
         codesPerSecond = STARTING_CODES_PER_SECOND;
         codesPerTap = STARTING_CODES_PER_TAP;
+        wallet = new Wallet();
+        team = new Team();
     }
 
-    public void addMonnaie(Currency c) {
-        this.monnaie.add(c);
+    public void addMonnaie(Wallet.Currency c) {
+        this.wallet.addCurrency(c, 1);
     }
 
-    public int countAllInstancesOfSpecificMonnaie(String currencyName) {
-        int amountFound = 0;
-        for(Currency iterator: monnaie) {
-            if(iterator.getName().equals(currencyName)){
-                amountFound++;
-            }
-        }
-        return amountFound;
+    public int countAllInstancesOfSpecificMonnaie(Wallet.Currency c) {
+        return wallet.getAmountOfCurrency(c);
     }
 
-    public boolean findSpecificAmountMonnaie(String currencyName, int amountNeeded) {
-        int amountFound = 0;
-        for(Currency iterator: monnaie) {
-            if(iterator.getName().equals(currencyName)){
-                amountFound++;
-                if(amountFound >= amountNeeded) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean findSpecificAmountMonnaie(Wallet.Currency c, int amountNeeded) {
+        return wallet.getAmountOfCurrency(c) >= amountNeeded;
     }
 
-    public void removeSpecificAmountMonnaie(String currencyName, int requestedAmount) {
-        if(findSpecificAmountMonnaie(currencyName, requestedAmount)){
-            int amountDeleted = 0;
-            ArrayList toRemove = new ArrayList();
-            for (Currency cur : this.monnaie) {
-                if (cur.getName().equals(currencyName) && amountDeleted < 2) {
-                    toRemove.add(cur);
-                    amountDeleted++;
-                }
-            }
-            this.monnaie.removeAll(toRemove);
+    public void removeSpecificAmountMonnaie(Wallet.Currency c, int requestedAmount) {
+        if(findSpecificAmountMonnaie(c, requestedAmount)){
+            wallet.removeCurrency(c, requestedAmount);
         }
     }
 
-    public void addFarmer(Farmer f) {
-        this.travaileurs.add(f);
+    public void addFarmer(Team.Programmers p) {
+        team.addProgrammer(p, 1);
         calculateCodesPerSecond();
     }
 
-    public int countAllInstancesOfSpecificFarmer(String farmerName) {
-        int amountFound = 0;
-        for(Farmer farmer: travaileurs) {
-            if(farmer.getName().equals(farmerName)) {
-                amountFound++;
-            }
-        }
-        return amountFound;
+    public int countAllInstancesOfSpecificFarmer(Team.Programmers p) {
+        return team.getAmountOfProgrammers(p);
     }
 
     public void calculateCodesPerSecond() {
-        int newCodesPerSecond = 0;
-        for (Farmer farmer : travaileurs) {
-            newCodesPerSecond += farmer.getCodesPerSeconds();
-        }
-        setCodesPerSecond(newCodesPerSecond);
+        setCodesPerSecond(team.calculateCPSFromTeam());
     }
 
-    public List<Currency> getMonnaie() {
-        return monnaie;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public void setMonnaie(List<Currency> monnaie) {
-        this.monnaie = monnaie;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
-    public List<Farmer> getTravaileurs() {
-        return travaileurs;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTravaileurs(List<Farmer> travaileurs) {
-        this.travaileurs = travaileurs;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public int getCodesPerSecond() {
@@ -124,4 +86,11 @@ public class User implements UserStats {
         }
     }
 
+    public void resetWallet() {
+        wallet.reset();
+    }
+
+    public void resetTeam() {
+        team.reset();
+    }
 }

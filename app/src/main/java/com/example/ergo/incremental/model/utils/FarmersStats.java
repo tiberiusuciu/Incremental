@@ -1,5 +1,9 @@
 package com.example.ergo.incremental.model.utils;
 
+import com.example.ergo.incremental.model.Team;
+
+import java.util.HashMap;
+
 /**
  * This class contains the stats for each Farmer
  * CPS means Codes Per Second
@@ -12,6 +16,8 @@ package com.example.ergo.incremental.model.utils;
  **/
 
 public interface FarmersStats {
+
+    final int[] cps = new int[]{ 12, 2, 20, 10, 20, 4, 6, 4, 3, 3, 12, 2, 4, 6, 5, 5, 7, 1, 10, 5};
 
     final String PERFORMANCE_UNIT = "codes per second";
 

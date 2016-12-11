@@ -15,28 +15,32 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.DialogInterface;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.model.core_mechanics.Game;
+import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.User;
-import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
-import com.example.ergo.incremental.controller.threads.FarmerThread;
-import com.example.ergo.incremental.controller.threads.RandomCurrencyThread;
-import com.example.ergo.incremental.controller.threads.RandomEventThread;
-import com.example.ergo.incremental.controller.threads.TimerThread;
+import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
+import com.example.ergo.incremental.model.threads.FarmerThread;
+import com.example.ergo.incremental.model.threads.RandomCurrencyThread;
+import com.example.ergo.incremental.model.threads.RandomEventThread;
+import com.example.ergo.incremental.model.threads.TimerThread;
+import com.example.ergo.incremental.model.Wallet;
+import com.example.ergo.incremental.model.utils.FarmersStats;
+import com.example.ergo.incremental.model.utils.UserStats;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -134,11 +138,28 @@ public class MainActivity extends AppCompatActivity {
     private void savePreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
-        /*
+        preferences.edit().putString("currentLevel", Game.currentLevel + "").apply();
+        preferences.edit().putString("isGameOver", Game.isGameOver + "").apply();
+        preferences.edit().putString("ellapsedTimeThreadEllapsedTime", EllapsedTimeThread.getEllapsedTime() + "").apply();
+        preferences.edit().putString("randomEventThreadEventIsOn", RandomEventThread.eventIsOn + "").apply();
+        preferences.edit().putString("randomEventThreadEventTimeRemainder", RandomEventThread.eventTimeRemainder + "").apply();
+        preferences.edit().putString("randomEventThreadNewCPS", RandomEventThread.newCPS + "").apply();
+        preferences.edit().putString("randomEventThreadEventName", RandomEventThread.getEventName()).apply();
+
+        preferences.edit().putString("timeBarProgress", StatsFragment.timeBar.getProgress() + "").apply();
+
+        preferences.edit().putString("codeBarMax", StatsFragment.codeBar.getMax() + "").apply();
+        preferences.edit().putString("codeBarProgress", StatsFragment.codeBar.getProgress() + "").apply();
+
         Gson gson = new Gson();
-        String json = gson.toJson(user);
-        preferences.edit().putString("userObject", json).apply();
-        */
+
+        String jsonUser = gson.toJson(user);
+        String jsonTeam = gson.toJson(Team.getAmount());
+        String jsonWallet = gson.toJson(Wallet.getAmount());
+
+        preferences.edit().putString("userObject", jsonUser).apply();
+        preferences.edit().putString("teamObject", jsonTeam).apply();
+        preferences.edit().putString("walletObject", jsonWallet).apply();
     }
 
     private void loadPreferences() {
@@ -146,17 +167,54 @@ public class MainActivity extends AppCompatActivity {
         if(!preferences.getString("backgroundColorValue", "").equals("")) {
             backgroundColorValue = Integer.parseInt(preferences.getString("backgroundColorValue", ""));
         }
-        /*
-        Log.d("PREPPING TO LOAD", "PREPPING TO LOAD");
-        if(!preferences.getString("userObject", "").equals("")) {
+        if(!preferences.getString("userObject", "").equals("") &&
+                !preferences.getString("teamObject", "").equals("") &&
+                !preferences.getString("walletObject", "").equals("") &&
+                !preferences.getString("currentLevel", "").equals("") &&
+                !preferences.getString("isGameOver", "").equals("")) {
+
             Gson gson = new Gson();
-            String json = preferences.getString("userObject", "");
-            Log.d("LOADING", "LOADING USER");
-            Log.d("JSON OBJ", json);
-            user = gson.fromJson(json, User.class);
-            Log.d("AMOUNTS OF FARMERS", user.getTravaileurs().size() + "");
+
+            String jsonUser = preferences.getString("userObject", "");
+            String jsonTeam = preferences.getString("teamObject", "");
+            String jsonWallet = preferences.getString("walletObject", "");
+
+            Type typeTeam = new TypeToken<Map<Team.Programmers, Integer>>(){}.getType();
+            Type typeWallet = new TypeToken<Map<Wallet.Currency, Integer>>(){}.getType();
+
+            Map<Team.Programmers, Integer> team = gson.fromJson(jsonTeam, typeTeam);
+            Map<Wallet.Currency, Integer> wallet = gson.fromJson(jsonWallet, typeWallet);
+
+            user = gson.fromJson(jsonUser, User.class);
+            Team.setAmount(team);
+            Wallet.setAmount(wallet);
+
+            Game.currentLevel = Integer.parseInt(preferences.getString("currentLevel", ""));
+            Game.isGameOver = Boolean.parseBoolean(preferences.getString("isGameOver", ""));
         }
-        */
+        if(!preferences.getString("ellapsedTimeThreadEllapsedTime", "").equals("")) {
+            EllapsedTimeThread.setEllapsedTime(Integer.parseInt(preferences.getString("ellapsedTimeThreadEllapsedTime", "")));
+        }
+
+        if(!preferences.getString("randomEventThreadEventIsOn", "").equals("") &&
+                !preferences.getString("randomEventThreadEventTimeRemainder", "").equals("") &&
+                !preferences.getString("randomEventThreadNewCPS", "").equals("") &&
+                !preferences.getString("randomEventThreadEventName", "").equals("")) {
+            RandomEventThread.eventIsOn = Boolean.parseBoolean(preferences.getString("randomEventThreadEventIsOn", ""));
+            RandomEventThread.eventTimeRemainder = Integer.parseInt(preferences.getString("randomEventThreadEventTimeRemainder", ""));
+            RandomEventThread.setNewCPS(Double.parseDouble(preferences.getString("randomEventThreadNewCPS", "")));
+            RandomEventThread.setEventName(preferences.getString("randomEventThreadEventName", ""));
+        }
+
+        if(!preferences.getString("timeBarProgress", "").equals("")) {
+            StatsFragment.timeProgress = Integer.parseInt(preferences.getString("timeBarProgress", ""));
+        }
+
+        if(!preferences.getString("codeBarMax", "").equals("") &&
+                !preferences.getString("codeBarProgress", "").equals("")) {
+            Game.codeToMake = Integer.parseInt(preferences.getString("codeBarMax", ""));
+            StatsFragment.codeProgress = Integer.parseInt(preferences.getString("codeBarProgress", ""));
+        }
     }
 
     public static Context getAppContext(){
@@ -188,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("SAVING", "SAVING THAT USER");
         savePreferences();
     }
 
@@ -241,9 +298,53 @@ public class MainActivity extends AppCompatActivity {
             case R.id.changeBackgroundColor:
                 changeColor();
                 return true;
+            case R.id.reset:
+                resetDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void resetDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.restart_game_dialogue);
+        builder.setCancelable(true);
+
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                reset();
+            }
+        });
+
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void reset() {
+        user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
+        user.getWallet().reset();
+        user.getTeam().reset();
+        user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
+        Game.currentLevel = 1;
+        Game.calculateCodeToMake();
+        Game.renderUI();
+
+        ((BaseAdapter)ShopFragment.listView.getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter)FarmersFragment.listViewofFarmers.getAdapter()).notifyDataSetChanged();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().apply();
+
+        preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
     }
 
     private void changeColor() {

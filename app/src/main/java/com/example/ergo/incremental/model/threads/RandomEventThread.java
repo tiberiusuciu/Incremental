@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.controller.threads;
+package com.example.ergo.incremental.model.threads;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,9 +14,9 @@ import com.example.ergo.incremental.model.utils.GameValues;
 public class RandomEventThread extends Activity implements Runnable, GameValues {
     Context context;
     User user;
-    boolean eventIsOn = false;
-    int eventTimeRemainder = 0;
-    static double newCPS = 1;
+    public static boolean eventIsOn = false;
+    public static int eventTimeRemainder = 0;
+    public static double newCPS = 1;
     private static String eventName;
     private static boolean isThreadStopped;
 

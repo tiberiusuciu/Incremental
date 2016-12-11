@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.controller.core_mechanics.Game;
+import com.example.ergo.incremental.model.core_mechanics.Game;
 
 /**
  * Ceci est le fragment du bouton pour créer du code
