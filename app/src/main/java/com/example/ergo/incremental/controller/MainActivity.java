@@ -15,34 +15,31 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.LoginFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.DialogInterface;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.controller.core_mechanics.Game;
+import com.example.ergo.incremental.model.core_mechanics.Game;
 import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.User;
-import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
-import com.example.ergo.incremental.controller.threads.FarmerThread;
-import com.example.ergo.incremental.controller.threads.RandomCurrencyThread;
-import com.example.ergo.incremental.controller.threads.RandomEventThread;
-import com.example.ergo.incremental.controller.threads.TimerThread;
+import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
+import com.example.ergo.incremental.model.threads.FarmerThread;
+import com.example.ergo.incremental.model.threads.RandomCurrencyThread;
+import com.example.ergo.incremental.model.threads.RandomEventThread;
+import com.example.ergo.incremental.model.threads.TimerThread;
 import com.example.ergo.incremental.model.Wallet;
+import com.example.ergo.incremental.model.utils.FarmersStats;
+import com.example.ergo.incremental.model.utils.UserStats;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -301,9 +298,53 @@ public class MainActivity extends AppCompatActivity {
             case R.id.changeBackgroundColor:
                 changeColor();
                 return true;
+            case R.id.reset:
+                resetDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void resetDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.restart_game_dialogue);
+        builder.setCancelable(true);
+
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                reset();
+            }
+        });
+
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void reset() {
+        user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
+        user.getWallet().reset();
+        user.getTeam().reset();
+        user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
+        Game.currentLevel = 1;
+        Game.calculateCodeToMake();
+        Game.renderUI();
+
+        ((BaseAdapter)ShopFragment.listView.getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter)FarmersFragment.listViewofFarmers.getAdapter()).notifyDataSetChanged();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().apply();
+
+        preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
     }
 
     private void changeColor() {

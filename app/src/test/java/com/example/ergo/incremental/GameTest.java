@@ -1,6 +1,6 @@
 package com.example.ergo.incremental;
 
-import com.example.ergo.incremental.controller.core_mechanics.Game;
+import com.example.ergo.incremental.model.core_mechanics.Game;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 import org.junit.Test;

@@ -8,13 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.controller.core_mechanics.Game;
-import com.example.ergo.incremental.model.Team;
-import com.example.ergo.incremental.model.Wallet;
-import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
+import com.example.ergo.incremental.model.core_mechanics.Game;
+import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.model.utils.UserStats;
-
-import java.util.ArrayList;
 
 public class GameOver extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.controller.threads;
+package com.example.ergo.incremental.model.threads;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.ergo.incremental.controller.core_mechanics;
+package com.example.ergo.incremental.model.core_mechanics;
 
 import android.content.Intent;
 
@@ -6,12 +6,8 @@ import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.controller.GameOver;
 import com.example.ergo.incremental.controller.MainActivity;
 import com.example.ergo.incremental.controller.StatsFragment;
-import com.example.ergo.incremental.controller.threads.EllapsedTimeThread;
-import com.example.ergo.incremental.model.Team;
-import com.example.ergo.incremental.model.utils.FarmersStats;
+import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.model.utils.GameValues;
-
-import java.util.HashMap;
 
 /**
  * Ceci est la class qui gère les niveaux ainsi que l'état de la partie (gagné, perdue)
@@ -49,7 +45,7 @@ public class Game {
         }
     }
 
-    private static void renderUI() {
+    public static void renderUI() {
         StatsFragment.timeBar.setProgress(0);
         StatsFragment.codeBar.setProgress(0);
         StatsFragment.codeBar.setMax(codeToMake);

@@ -72,4 +72,8 @@
     <string name="current_event">Évenement actuel</string>
     <string name="change_background_color">Changer la couleur du fond d\'écran</string>
     <string name="level_description">Description du niveau</string>
+    <string name="restart_the_game">Recommencer à nouveau</string>
+    <string name="restart_game_dialogue">Êtes-vous sûre de vouloir recommencer la partie?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 </resources>

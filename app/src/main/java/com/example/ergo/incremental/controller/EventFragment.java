@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
-import com.example.ergo.incremental.controller.threads.RandomEventThread;
+import com.example.ergo.incremental.model.threads.RandomEventThread;
 
 /**
  * Created by ergo on 03/12/16.

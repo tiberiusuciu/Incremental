@@ -6,7 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.example.ergo.incremental.controller.core_mechanics.Game;
+import com.example.ergo.incremental.model.core_mechanics.Game;
 import com.example.ergo.incremental.model.User;
 import com.example.ergo.incremental.controller.MainActivity;
 
