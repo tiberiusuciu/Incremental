@@ -72,10 +72,6 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
         user.addMonnaie(currency);
     }
 
-    public static boolean isThreadStopped() {
-        return isThreadStopped;
-    }
-
     public static void setIsThreadStopped(boolean isThreadStopped) {
         RandomCurrencyThread.isThreadStopped = isThreadStopped;
     }

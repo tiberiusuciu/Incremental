@@ -41,7 +41,4 @@ public class ProgrammersFragment extends Fragment {
         return listViewofProgrammers;
     }
 
-    public static void setListViewofProgrammers(ListView listViewofProgrammers) {
-        ProgrammersFragment.listViewofProgrammers = listViewofProgrammers;
-    }
 }

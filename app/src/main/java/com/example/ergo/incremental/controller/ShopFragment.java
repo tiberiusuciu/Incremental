@@ -68,7 +68,4 @@ public class ShopFragment extends Fragment {
         return shopListView;
     }
 
-    public static void setShopListView(ListView shopListView) {
-        ShopFragment.shopListView = shopListView;
-    }
 }

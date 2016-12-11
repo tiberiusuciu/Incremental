@@ -39,10 +39,6 @@ public class EllapsedTimeThread extends Activity implements Runnable {
         return ellapsedTime;
     }
 
-    public static boolean isThreadStopped() {
-        return isThreadStopped;
-    }
-
     public static void setIsThreadStopped(boolean isThreadStopped) {
         EllapsedTimeThread.isThreadStopped = isThreadStopped;
     }

@@ -38,6 +38,10 @@ public class TappingWorkButtonTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        // Étant donné que la partie est sauvegardé entre les tests, je fait un if pour savoir dans
+        // quel cas de niveau nous sommes (au debut du jeu, ou un click avant la fin d'un niveau)
+        // Comme ca, le tests est flexible est s'ajuste selon la situation
+
         if(StatsFragment.getCodeBar().getProgress() == 0) {
             onView(withId(R.id.codeText)).check(matches(withText(R.string.beggining_code)));
         } else {

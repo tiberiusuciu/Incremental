@@ -15,8 +15,6 @@ import com.example.ergo.incremental.model.core_mechanics.Game;
  * Ceci est le fragment du bouton pour faire du code
  */
 
-
-// TODO remove STATSFRAGMENT and put it in a variable, it will be more cleaner
 public class ClickerFragment extends Fragment {
     private static Button button;
     @Nullable

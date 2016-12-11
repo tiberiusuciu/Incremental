@@ -8,14 +8,14 @@ import com.example.ergo.incremental.controller.MainActivity;
  */
 
 public interface GameValues {
-    final int TEMPS_PAR_NIVEAU = 180;
-    final int STARTING_LEVEL = 1;
-    final int MAX_NIVEAU = 24;
-    final int MONNAIE_A_CHAQUE_X_SECONDES = 5;
-    final double CODE_A_CREER_DE_BASE = 1.8;
-    final int PRIX_DE_BASE = 2;
-    final int EVENT_DURATION = 60;
-    final String[] currencyNames = {
+    int TEMPS_PAR_NIVEAU = 180;
+    int STARTING_LEVEL = 1;
+    int MAX_NIVEAU = 24;
+    int MONNAIE_A_CHAQUE_X_SECONDES = 5;
+    double CODE_A_CREER_DE_BASE = 1.8;
+    int PRIX_DE_BASE = 2;
+    int EVENT_DURATION = 60;
+    String[] currencyNames = {
         "Absence",
         "Anime",
         "Backflip",
@@ -39,7 +39,7 @@ public interface GameValues {
     };
 
     // Ceci est ma collection d'événements rassemblé dans un array de String. Je ne fait qu'en chosir un aléatoirement
-    final String[] eventNames = {
+    String[] eventNames = {
             MainActivity.getAppContext().getString(R.string.fin_session),
             MainActivity.getAppContext().getString(R.string.eclipse_install),
             MainActivity.getAppContext().getString(R.string.scrum),
@@ -85,7 +85,7 @@ public interface GameValues {
     };
 
     // Ceci est le pourcentage de changement au CPS
-    final double[] eventEffects = {
+    double[] eventEffects = {
             2,
             0.5,
             1.5,
@@ -131,7 +131,7 @@ public interface GameValues {
     };
     // Ce sont une des seuls valeurs que je n'ai pas convertis en anglais et français, car c'est des noms spécifiques
     // Ceci sont les descriptions pour chaque niveau, c'est la raison pourquoi il y a exactement 24 niveau dans mon jeu
-    final String[] classNames = {
+    String[] classNames = {
             MainActivity.getAppContext().getString(R.string.maths1),
             MainActivity.getAppContext().getString(R.string.prog1),
             MainActivity.getAppContext().getString(R.string.computers),

@@ -64,10 +64,6 @@ public class FarmerThread extends Activity implements Runnable {
         });
     }
 
-    public static boolean isThreadStopped() {
-        return isThreadStopped;
-    }
-
     public static void setIsThreadStopped(boolean isThreadStopped) {
         FarmerThread.isThreadStopped = isThreadStopped;
     }

@@ -58,28 +58,13 @@ public class StatsFragment extends Fragment {
         return timeBar;
     }
 
-    public static void setTimeBar(ProgressBar timeBar) {
-        StatsFragment.timeBar = timeBar;
-    }
-
     public static ProgressBar getCodeBar() {
         return codeBar;
     }
 
-    public static void setCodeBar(ProgressBar codeBar) {
-        StatsFragment.codeBar = codeBar;
-    }
-
-    public static int getCodeProgress() {
-        return codeProgress;
-    }
 
     public static void setCodeProgress(int codeProgress) {
         StatsFragment.codeProgress = codeProgress;
-    }
-
-    public static int getTimeProgress() {
-        return timeProgress;
     }
 
     public static void setTimeProgress(int timeProgress) {
@@ -90,39 +75,19 @@ public class StatsFragment extends Fragment {
         return timeText;
     }
 
-    public static void setTimeText(TextView timeText) {
-        StatsFragment.timeText = timeText;
-    }
-
     public static TextView getCodeText() {
         return codeText;
-    }
-
-    public static void setCodeText(TextView codeText) {
-        StatsFragment.codeText = codeText;
     }
 
     public static TextView getCodesPerSecond() {
         return codesPerSecond;
     }
 
-    public static void setCodesPerSecond(TextView codesPerSecond) {
-        StatsFragment.codesPerSecond = codesPerSecond;
-    }
-
     public static TextView getCurrentLevel() {
         return currentLevel;
     }
 
-    public static void setCurrentLevel(TextView currentLevel) {
-        StatsFragment.currentLevel = currentLevel;
-    }
-
     public static TextView getLevelDescription() {
         return levelDescription;
-    }
-
-    public static void setLevelDescription(TextView levelDescription) {
-        StatsFragment.levelDescription = levelDescription;
     }
 }

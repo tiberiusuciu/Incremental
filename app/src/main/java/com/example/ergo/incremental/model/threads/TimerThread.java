@@ -62,10 +62,6 @@ public class TimerThread extends Activity implements Runnable {
         });
     }
 
-    public static boolean isThreadStopped() {
-        return isThreadStopped;
-    }
-
     public static void setIsThreadStopped(boolean isThreadStopped) {
         TimerThread.isThreadStopped = isThreadStopped;
     }

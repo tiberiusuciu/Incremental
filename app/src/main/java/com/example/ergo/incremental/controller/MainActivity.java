@@ -461,8 +461,4 @@ public class MainActivity extends AppCompatActivity {
     public static User getUser() {
         return user;
     }
-
-    public static void setUser(User user) {
-        MainActivity.user = user;
-    }
 }

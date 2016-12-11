@@ -31,8 +31,4 @@ public class EventFragment extends Fragment {
     public static TextView getEventName() {
         return eventName;
     }
-
-    public static void setEventName(TextView eventName) {
-        EventFragment.eventName = eventName;
-    }
 }

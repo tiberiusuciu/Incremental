@@ -78,10 +78,6 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
         RandomEventThread.newCPS = newCPS;
     }
 
-    public static boolean isThreadStopped() {
-        return isThreadStopped;
-    }
-
     public static void setIsThreadStopped(boolean isThreadStopped) {
         RandomEventThread.isThreadStopped = isThreadStopped;
     }
