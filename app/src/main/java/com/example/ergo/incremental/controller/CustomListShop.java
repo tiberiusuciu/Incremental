@@ -10,25 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
+import com.example.ergo.incremental.model.ProgrammersPerformance;
+import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.Wallet;
+import com.example.ergo.incremental.model.utils.ProgrammersStats;
 
 /**
  * Ici repose ma facon specifique pour gerer ma liste de ma boutique
  */
 
-public class CustomList extends ArrayAdapter<String> {
+public class CustomListShop extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final String[] farmerNames;
-    private final String[] farmerCost;
-    private final String[] farmerPerformance;
     private final Integer[] imageId;
-    public CustomList(Activity context, String[] farmerNames, String[] farmerCost, String[] farmerPerformance, Integer[] imageId) {
+
+    public CustomListShop(Activity context, String[] farmerNames, Integer[] imageId) {
         super(context, R.layout.shop_list_single, farmerNames);
         this.context = context;
-        this.farmerNames = farmerNames;
-        this.farmerCost = farmerCost;
-        this.farmerPerformance = farmerPerformance;
         this.imageId = imageId;
     }
 
@@ -43,16 +41,16 @@ public class CustomList extends ArrayAdapter<String> {
         TextView priceText = (TextView) rowView.findViewById(R.id.price);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
 
-        mainText.setText(farmerNames[position]);
-        priceText.setText("2 " + farmerCost[position]);
-        subText.setText(farmerPerformance[position]);
+        mainText.setText(Team.Programmers.values()[position] + "");
+        subText.setText(ProgrammersPerformance.getPerformanceOfProgrammer(Team.Programmers.values()[position]) + " " + ProgrammersStats.PERFORMANCE_UNIT);
+        priceText.setText("2 " + Wallet.Currency.values()[position]);
         imageView.setImageResource(imageId[position]);
 
-        if(MainActivity.user.findSpecificAmountMonnaie(Wallet.Currency.values()[position], 2)) {
+        // Si l'usager peut acheter un  programmeur, alors on affichera son nom en or
+        if(MainActivity.getUser().findSpecificAmountMonnaie(Wallet.Currency.values()[position], 2)) {
             mainText.setTextColor(getContext().getResources().getColor(R.color.gold));
         }
-        //Todo: to implement
-        //imageView.setImageResource(imageId[position]);
+
         return rowView;
     }
 }

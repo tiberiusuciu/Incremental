@@ -36,7 +36,9 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
             do{
                 Thread.sleep(1000);
                 if(!isThreadStopped) {
-                    if (StatsFragment.timeBar.getProgress() % MONNAIE_A_CHAQUE_X_SECONDES == 0 && StatsFragment.timeBar.getProgress() != 0 && StatsFragment.timeBar.getProgress() != GameValues.TEMPS_PAR_NIVEAU) {
+                    if (StatsFragment.getTimeBar().getProgress() % MONNAIE_A_CHAQUE_X_SECONDES == 0 &&
+                            StatsFragment.getTimeBar().getProgress() != 0 &&
+                            StatsFragment.getTimeBar().getProgress() != GameValues.TEMPS_PAR_NIVEAU) {
                         newCurrency = randomCurrency();
                         if (newCurrency != null) {
                             addCurrencyToUser(newCurrency);
@@ -61,7 +63,7 @@ public class RandomCurrencyThread extends Activity implements Runnable, GameValu
             public void run() {
                 Toast.makeText(context, MainActivity.getAppContext().getString(R.string.receive_notification) + currency.name(), Toast.LENGTH_SHORT).show();
                 // Mettre a jour la liste de fermiers
-                ((BaseAdapter)ShopFragment.listView.getAdapter()).notifyDataSetChanged();
+                ((BaseAdapter)ShopFragment.getShopListView().getAdapter()).notifyDataSetChanged();
             }
         });
     }

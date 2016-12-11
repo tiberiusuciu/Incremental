@@ -9,7 +9,7 @@ import com.example.ergo.incremental.model.core_mechanics.Game;
 import com.example.ergo.incremental.controller.StatsFragment;
 
 /**
- * Created by ergo on 02/12/16.
+ * Thread FarmerThread, ce thread s'occupe d'appliquer le CPS de chaque programmeurs à chaque seconde
  */
 
 public class FarmerThread extends Activity implements Runnable {
@@ -20,15 +20,14 @@ public class FarmerThread extends Activity implements Runnable {
         this.context = context;
         isThreadStopped = false;
     }
-    // TODO This needs to be a singleton
-    // TODO the main loop will be separated from the run method, in order to reuse the code for each level
+
     @Override
     public void run() {
         try {
             do{
                 Thread.sleep(1000);
                 if(!isThreadStopped) {
-                    int codePerSecond = MainActivity.user.getCodesPerSecond();
+                    int codePerSecond = MainActivity.getUser().getCodesPerSecond();
                     updateCode(codePerSecond);
                     setText((int) (codePerSecond * RandomEventThread.newCPS) + "");
                 }
@@ -42,12 +41,12 @@ public class FarmerThread extends Activity implements Runnable {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + (int)(codePerSecond * RandomEventThread.newCPS));
-                if(StatsFragment.codeBar.getProgress() >= StatsFragment.codeBar.getMax()) {
+                StatsFragment.getCodeBar().setProgress(StatsFragment.getCodeBar().getProgress() + (int)(codePerSecond * RandomEventThread.newCPS));
+                if(StatsFragment.getCodeBar().getProgress() >= StatsFragment.getCodeBar().getMax()) {
                     Game.levelUp();
-                    StatsFragment.codeBar.setProgress(0);
-                    StatsFragment.codeBar.setMax(Game.codeToMake);
-                    StatsFragment.codeText.setText(context.getString(R.string.beggining_code));
+                    StatsFragment.getCodeBar().setProgress(0);
+                    StatsFragment.getCodeBar().setMax(Game.codeToMake);
+                    StatsFragment.getCodeText().setText(context.getString(R.string.beggining_code));
                 }
             }
         });
@@ -57,9 +56,9 @@ public class FarmerThread extends Activity implements Runnable {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StatsFragment.codesPerSecond.setText(value);
-                if(StatsFragment.codeBar.getProgress() != 0){
-                    StatsFragment.codeText.setText(context.getString(R.string.remaining_code) + " " + (Game.codeToMake - StatsFragment.codeBar.getProgress()));
+                StatsFragment.getCodesPerSecond().setText(value);
+                if(StatsFragment.getCodeBar().getProgress() != 0){
+                    StatsFragment.getCodeText().setText(context.getString(R.string.remaining_code) + " " + (Game.codeToMake - StatsFragment.getCodeBar().getProgress()));
                 }
             }
         });

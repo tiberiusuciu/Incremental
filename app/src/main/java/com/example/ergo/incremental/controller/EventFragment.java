@@ -12,12 +12,12 @@ import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.threads.RandomEventThread;
 
 /**
- * Created by ergo on 03/12/16.
+ * Ceci est le fragment qui s'occupe à afficher la description de l'événement
  */
 
 public class EventFragment extends Fragment {
 
-    public static TextView eventName;
+    private static TextView eventName;
 
     @Nullable
     @Override
@@ -26,5 +26,13 @@ public class EventFragment extends Fragment {
         eventName = (TextView) v.findViewById(R.id.eventName);
         eventName.setText(RandomEventThread.getEventName());
         return v;
+    }
+
+    public static TextView getEventName() {
+        return eventName;
+    }
+
+    public static void setEventName(TextView eventName) {
+        EventFragment.eventName = eventName;
     }
 }

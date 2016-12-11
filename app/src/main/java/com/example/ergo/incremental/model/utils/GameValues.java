@@ -12,7 +12,9 @@ public interface GameValues {
     final int STARTING_LEVEL = 1;
     final int MAX_NIVEAU = 24;
     final int MONNAIE_A_CHAQUE_X_SECONDES = 5;
-    final double CODE_A_CREER_DE_BASE = 2;
+    final double CODE_A_CREER_DE_BASE = 1.8;
+    final int PRIX_DE_BASE = 2;
+    final int EVENT_DURATION = 60;
     final String[] currencyNames = {
         "Absence",
         "Anime",
@@ -35,8 +37,8 @@ public interface GameValues {
         "Silence",
         "Sommeil"
     };
-    // TODO: Make event time last defined in this class instead of randomEbentThread class
-    // Ceci est ma collection d'événements rassemblé dans un array de String. Je ne fait qu'en chosir un aléatoirement selon un temps
+
+    // Ceci est ma collection d'événements rassemblé dans un array de String. Je ne fait qu'en chosir un aléatoirement
     final String[] eventNames = {
             MainActivity.getAppContext().getString(R.string.fin_session),
             MainActivity.getAppContext().getString(R.string.eclipse_install),
@@ -124,10 +126,11 @@ public interface GameValues {
             0.45,
             0.3,
             2.2,
-            2,
+            3,
             1.5
     };
-    //Ce sont une des seuls valeurs que je n'ai pas convertis en anglais et français, car c'est des noms spécifiques
+    // Ce sont une des seuls valeurs que je n'ai pas convertis en anglais et français, car c'est des noms spécifiques
+    // Ceci sont les descriptions pour chaque niveau, c'est la raison pourquoi il y a exactement 24 niveau dans mon jeu
     final String[] classNames = {
             MainActivity.getAppContext().getString(R.string.maths1),
             MainActivity.getAppContext().getString(R.string.prog1),

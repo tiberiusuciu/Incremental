@@ -12,7 +12,7 @@ import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.core_mechanics.Game;
 
 /**
- * Ceci est le fragment du bouton pour créer du code
+ * Ceci est le fragment du bouton pour faire du code
  */
 
 
@@ -22,17 +22,19 @@ public class ClickerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.clicker_fragment, container, false);
         button = (Button) v.findViewById(R.id.button);
+
         button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    StatsFragment.codeBar.setProgress(StatsFragment.codeBar.getProgress() + 1);
-                    StatsFragment.codeText.setText(getString(R.string.remaining_code) + " " + (Game.codeToMake - StatsFragment.codeBar.getProgress()));
-                    if(StatsFragment.codeBar.getProgress() == Game.codeToMake){
+                    StatsFragment.getCodeBar().setProgress(StatsFragment.getCodeBar().getProgress() + 1);
+                    StatsFragment.getCodeText().setText(getString(R.string.remaining_code) + " " + (Game.codeToMake - StatsFragment.getCodeBar().getProgress()));
+                    if(StatsFragment.getCodeBar().getProgress() >= Game.codeToMake){
                         Game.levelUp();
-                        StatsFragment.codeBar.setProgress(0);
-                        StatsFragment.codeBar.setMax(Game.codeToMake);
-                        StatsFragment.codeText.setText(getString(R.string.beggining_code));
+                        StatsFragment.getCodeBar().setProgress(0);
+                        StatsFragment.getCodeBar().setMax(Game.codeToMake);
+                        StatsFragment.getCodeText().setText(getString(R.string.beggining_code));
                     }
                 }
             }

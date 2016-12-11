@@ -18,7 +18,7 @@ public class CustomListObtainedFarmers extends ArrayAdapter<String> {
     private final String[] farmerNames;
     private final Integer[] imageId;
     public CustomListObtainedFarmers(Activity context, String[] farmerNames, Integer[] imageId) {
-        super(context, R.layout.obtained_farmer_list_single, farmerNames);
+        super(context, R.layout.obtained_programmer_list_single, farmerNames);
         this.context = context;
         this.farmerNames = farmerNames;
         this.imageId = imageId;
@@ -28,7 +28,7 @@ public class CustomListObtainedFarmers extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.obtained_farmer_list_single, null, true);
+        View rowView = inflater.inflate(R.layout.obtained_programmer_list_single, null, true);
 
         TextView mainText = (TextView) rowView.findViewById(R.id.textView);
         TextView priceText = (TextView) rowView.findViewById(R.id.amount);
@@ -36,7 +36,7 @@ public class CustomListObtainedFarmers extends ArrayAdapter<String> {
 
 
         mainText.setText(farmerNames[position]);
-        priceText.setText(MainActivity.user.countAllInstancesOfSpecificFarmer(Team.Programmers.values()[position]) + "");
+        priceText.setText(MainActivity.getUser().countAllInstancesOfSpecificFarmer(Team.Programmers.values()[position]) + "");
         imageView.setImageResource(imageId[position]);
         return rowView;
     }

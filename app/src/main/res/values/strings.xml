@@ -79,7 +79,7 @@
     <string name="game_over">GAME OVER</string>
     <string name="your_score">Your score</string>
     <string name="total_time_played">Total time played:</string>
-    <string name="total_farmers_bought">Total programmers bought:</string>
+    <string name="total_programmers_bought">Total programmers bought:</string>
     <string name="play_again">Play again!</string>
     <string name="red">Red:</string>
     <string name="_0_255">0 – 255</string>

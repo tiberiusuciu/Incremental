@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ergo on 09/12/16.
+ * Cette classe regroupe une collection de currency, qu'on peut ajouter et enlever
  */
 
 public class Wallet {

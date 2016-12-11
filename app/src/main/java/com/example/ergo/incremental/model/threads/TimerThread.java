@@ -10,7 +10,7 @@ import com.example.ergo.incremental.controller.StatsFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
- * Ce Thread gère le temps qui avance
+ * Ce Thread gère le temps qui avance dans un niveau qui va jusqu'à 3 minutes
  */
 
 public class TimerThread extends Activity implements Runnable {
@@ -22,23 +22,21 @@ public class TimerThread extends Activity implements Runnable {
         this.context = context;
         isThreadStopped = false;
     }
-    // TODO This needs to be a singleton
-    // TODO the main loop will be separated from the run method, in order to reuse the code for each level
-    // TODO Make static progress variable here and loop on it in order to keep track of previous game
+
     @Override
     public void run() {
         try {
             do{
                 Thread.sleep(1000);
                 if(!isThreadStopped) {
-                    if(StatsFragment.timeBar.getProgress() == StatsFragment.timeBar.getMax()) {
+                    if(StatsFragment.getTimeBar().getProgress() == StatsFragment.getTimeBar().getMax()) {
                         runDowngrade();
                     }
                     else {
                         displayTime();
                     }
                 }
-            } while(StatsFragment.timeBar.getProgress() <= GameValues.TEMPS_PAR_NIVEAU);
+            } while(StatsFragment.getTimeBar().getProgress() <= GameValues.TEMPS_PAR_NIVEAU);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -57,9 +55,9 @@ public class TimerThread extends Activity implements Runnable {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StatsFragment.timeBar.setProgress(StatsFragment.timeBar.getProgress() + 1);
-                String textForTime = MainActivity.getAppContext().getResources().getString(R.string.time_indicator) + " " + Game.formatTime(GameValues.TEMPS_PAR_NIVEAU - StatsFragment.timeBar.getProgress());
-                StatsFragment.timeText.setText(textForTime);
+                StatsFragment.getTimeBar().setProgress(StatsFragment.getTimeBar().getProgress() + 1);
+                String textForTime = MainActivity.getAppContext().getResources().getString(R.string.time_indicator) + " " + Game.formatTime(GameValues.TEMPS_PAR_NIVEAU - StatsFragment.getTimeBar().getProgress());
+                StatsFragment.getTimeText().setText(textForTime);
             }
         });
     }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ergo on 10/12/16.
+ * Cette classe regroupe une collection de programmeurs, qu'on peut ajouter et enlever
  */
 
 public class Team {
@@ -13,11 +13,11 @@ public class Team {
 
     private static Map<Programmers, Integer> amount = initProgrammersMap();
 
-    private static Farmers farmers = new Farmers();
+    private static ProgrammersPerformance programmersPerformance = new ProgrammersPerformance();
 
     private static Map<Programmers, Integer> initProgrammersMap() {
         HashMap<Programmers, Integer> map = new HashMap<>();
-        for(Programmers programmers : Programmers.values()){
+        for(Programmers programmers : Team.Programmers.values()){
             map.put(programmers, 0);
         }
         return map;
@@ -33,15 +33,15 @@ public class Team {
 
     public int calculateCPSFromTeam() {
         int total = 0;
-        for(Programmers programmer : Programmers.values()){
-            total += amount.get(programmer) * farmers.getPerformanceOfProgrammer(programmer);
+        for(Programmers programmer : Team.Programmers.values()){
+            total += amount.get(programmer) * programmersPerformance.getPerformanceOfProgrammer(programmer);
         }
         return total;
     }
 
     public int getTotalAmountOfAllProgrammers() {
         int total = 0;
-        for(Programmers programmer : Programmers.values()){
+        for(Programmers programmer : Team.Programmers.values()){
             total += getAmountOfProgrammers(programmer);
         }
         return total;

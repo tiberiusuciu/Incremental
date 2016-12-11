@@ -1,20 +1,12 @@
 package com.example.ergo.incremental;
 
-import android.util.Log;
-
-import com.example.ergo.incremental.model.Farmers;
 import com.example.ergo.incremental.model.Team;
 import com.example.ergo.incremental.model.User;
 import com.example.ergo.incremental.model.Wallet;
-import com.example.ergo.incremental.model.utils.CurrencyNames;
-import com.example.ergo.incremental.model.utils.FarmersStats;
-import com.example.ergo.incremental.model.utils.GameValues;
+import com.example.ergo.incremental.model.utils.ProgrammersStats;
 import com.example.ergo.incremental.model.utils.UserStats;
 
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -113,7 +105,7 @@ public class UserTest {
         user.addFarmer(Team.Programmers.ADAM); // index 0 dans CPS
         user.addFarmer(Team.Programmers.KEVIN); // index 10 dans CPS
         user.calculateCodesPerSecond();
-        assertEquals(user.getCodesPerSecond(), FarmersStats.cps[0] + FarmersStats.cps[10]);
+        assertEquals(user.getCodesPerSecond(), ProgrammersStats.cps[0] + ProgrammersStats.cps[10]);
     }
 
     @Test

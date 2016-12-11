@@ -12,10 +12,15 @@ import com.example.ergo.incremental.model.core_mechanics.Game;
 import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
 import com.example.ergo.incremental.model.utils.UserStats;
 
+/*
+    Ceci est l'activité qui s'active lorsque la personne termine sa partie
+    On demande au joueur si il veut rejouer
+ */
+
 public class GameOver extends AppCompatActivity {
 
     TextView ellapsedTimeText;
-    TextView totalFarmersText;
+    TextView totalProgrammersText;
     Button replayButton;
 
     @Override
@@ -25,14 +30,15 @@ public class GameOver extends AppCompatActivity {
         Intent intent = getIntent();
 
         ellapsedTimeText = (TextView) findViewById(R.id.totalTime);
-        totalFarmersText = (TextView) findViewById(R.id.totalFarmers);
+        totalProgrammersText = (TextView) findViewById(R.id.totalProgrammers);
         replayButton = (Button) findViewById(R.id.playAgain);
 
+        //On affiche le temps que l'usager a dépensé sur cette partie ainsi que le nombre de programmeurs qu'il a acheté
         String ellapsedTime = intent.getStringExtra("ellapsedTime");
         String formatedTime = Game.formatTime(Integer.parseInt(ellapsedTime));
 
         ellapsedTimeText.setText(formatedTime);
-        totalFarmersText.setText(intent.getStringExtra("totalFarmers"));
+        totalProgrammersText.setText(intent.getStringExtra("totalProgrammers"));
 
 
     }
@@ -45,10 +51,10 @@ public class GameOver extends AppCompatActivity {
         Game.isGameOver = false;
         Game.currentLevel = 0;
         Game.levelUp();
-        MainActivity.user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
-        MainActivity.user.resetTeam();
-        MainActivity.user.resetWallet();
-        MainActivity.user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
+        MainActivity.getUser().setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
+        MainActivity.getUser().resetTeam();
+        MainActivity.getUser().resetWallet();
+        MainActivity.getUser().setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
 
         startActivity(myNewIntent);
     }

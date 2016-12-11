@@ -34,7 +34,6 @@ import com.example.ergo.incremental.model.threads.RandomCurrencyThread;
 import com.example.ergo.incremental.model.threads.RandomEventThread;
 import com.example.ergo.incremental.model.threads.TimerThread;
 import com.example.ergo.incremental.model.Wallet;
-import com.example.ergo.incremental.model.utils.FarmersStats;
 import com.example.ergo.incremental.model.utils.UserStats;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,12 +41,15 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+/**
+ * MainActivity de mon application, ici on déclenche nos threads, on s'occupe de charger et sauvegarder la partie
+ */
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    public static User user = null;
+    private static User user = null;
     private static Context mContext;
     private static TimerThread timerThread = null;
     private static RandomCurrencyThread currencyThread = null;
@@ -97,20 +99,23 @@ public class MainActivity extends AppCompatActivity {
         });
         mContext = this.getApplicationContext();
         viewPager.setOffscreenPageLimit(3);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
+        // On restaure la partie d'avant si il y a n'a une
         loadPreferences();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        // Une fois que l'application est prête, on déclenche nos threads
         if(user == null) {
             user = new User();
         }
         if(timerThread == null) {
             timerThread = new TimerThread(getApplicationContext());
-            Thread timer = new Thread(timerThread);
             new Thread(timerThread).start();
         }
         if(currencyThread == null) {
@@ -129,28 +134,35 @@ public class MainActivity extends AppCompatActivity {
             ellapsedTimeThread = new EllapsedTimeThread(getApplicationContext());
             new Thread(ellapsedTimeThread).start();
         }
+
         mainActivity = (LinearLayout) findViewById(R.id.activity_main);
+
+        // On applique le fond d'écran spécifié si il existe
         if(backgroundColorValue != null) {
             mainActivity.setBackgroundColor(backgroundColorValue);
         }
     }
 
+    // Méthode de sauvegarde
     private void savePreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
         preferences.edit().putString("currentLevel", Game.currentLevel + "").apply();
         preferences.edit().putString("isGameOver", Game.isGameOver + "").apply();
+        // On sauve l'état de nos threads
         preferences.edit().putString("ellapsedTimeThreadEllapsedTime", EllapsedTimeThread.getEllapsedTime() + "").apply();
         preferences.edit().putString("randomEventThreadEventIsOn", RandomEventThread.eventIsOn + "").apply();
         preferences.edit().putString("randomEventThreadEventTimeRemainder", RandomEventThread.eventTimeRemainder + "").apply();
         preferences.edit().putString("randomEventThreadNewCPS", RandomEventThread.newCPS + "").apply();
         preferences.edit().putString("randomEventThreadEventName", RandomEventThread.getEventName()).apply();
 
-        preferences.edit().putString("timeBarProgress", StatsFragment.timeBar.getProgress() + "").apply();
+        // On sauve l'état de nos progress bars
+        preferences.edit().putString("timeBarProgress", StatsFragment.getTimeBar().getProgress() + "").apply();
 
-        preferences.edit().putString("codeBarMax", StatsFragment.codeBar.getMax() + "").apply();
-        preferences.edit().putString("codeBarProgress", StatsFragment.codeBar.getProgress() + "").apply();
+        preferences.edit().putString("codeBarMax", StatsFragment.getCodeBar().getMax() + "").apply();
+        preferences.edit().putString("codeBarProgress", StatsFragment.getCodeBar().getProgress() + "").apply();
 
+        // On sauvegarde nos objets (user, wallet, team)
         Gson gson = new Gson();
 
         String jsonUser = gson.toJson(user);
@@ -162,16 +174,19 @@ public class MainActivity extends AppCompatActivity {
         preferences.edit().putString("walletObject", jsonWallet).apply();
     }
 
+    // Méthode qui charge la partie d'auparavant
     private void loadPreferences() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Si il y a un fond d'écran spécifique
         if(!preferences.getString("backgroundColorValue", "").equals("")) {
             backgroundColorValue = Integer.parseInt(preferences.getString("backgroundColorValue", ""));
         }
+
+        // Si tout les objets d'auparavant ont été sauvegardé
         if(!preferences.getString("userObject", "").equals("") &&
                 !preferences.getString("teamObject", "").equals("") &&
-                !preferences.getString("walletObject", "").equals("") &&
-                !preferences.getString("currentLevel", "").equals("") &&
-                !preferences.getString("isGameOver", "").equals("")) {
+                !preferences.getString("walletObject", "").equals("")) {
 
             Gson gson = new Gson();
 
@@ -188,14 +203,24 @@ public class MainActivity extends AppCompatActivity {
             user = gson.fromJson(jsonUser, User.class);
             Team.setAmount(team);
             Wallet.setAmount(wallet);
+        }
 
+        // On vérifie que le niveau courant a été bien sauvegardé
+        if(!preferences.getString("currentLevel", "").equals("")) {
             Game.currentLevel = Integer.parseInt(preferences.getString("currentLevel", ""));
+        }
+
+        // On vérifie que l'état de la partie a été bien sauvegardé
+        if(!preferences.getString("isGameOver", "").equals("")) {
             Game.isGameOver = Boolean.parseBoolean(preferences.getString("isGameOver", ""));
         }
+
+        // On vérifie que le thread EllapsedTimeThread a été bien sauvegardé
         if(!preferences.getString("ellapsedTimeThreadEllapsedTime", "").equals("")) {
             EllapsedTimeThread.setEllapsedTime(Integer.parseInt(preferences.getString("ellapsedTimeThreadEllapsedTime", "")));
         }
 
+        // On vérifie que le thread RandomEventThread a été bien sauvegardé
         if(!preferences.getString("randomEventThreadEventIsOn", "").equals("") &&
                 !preferences.getString("randomEventThreadEventTimeRemainder", "").equals("") &&
                 !preferences.getString("randomEventThreadNewCPS", "").equals("") &&
@@ -206,14 +231,16 @@ public class MainActivity extends AppCompatActivity {
             RandomEventThread.setEventName(preferences.getString("randomEventThreadEventName", ""));
         }
 
+        // On vérifie que le progres du progress bar du temps a été bien sauvegardé
         if(!preferences.getString("timeBarProgress", "").equals("")) {
-            StatsFragment.timeProgress = Integer.parseInt(preferences.getString("timeBarProgress", ""));
+            StatsFragment.setTimeProgress(Integer.parseInt(preferences.getString("timeBarProgress", "")));
         }
 
+        // On vérifie que le progres du progress bar du code ainsi que le max de cette bar ont été bien sauvegardés
         if(!preferences.getString("codeBarMax", "").equals("") &&
                 !preferences.getString("codeBarProgress", "").equals("")) {
             Game.codeToMake = Integer.parseInt(preferences.getString("codeBarMax", ""));
-            StatsFragment.codeProgress = Integer.parseInt(preferences.getString("codeBarProgress", ""));
+            StatsFragment.setCodeProgress(Integer.parseInt(preferences.getString("codeBarProgress", "")));
         }
     }
 
@@ -224,6 +251,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+
+        // Si l'utilisateur met l'application en pause, on demande aux threads de rien en arrière plan alors
+
         TimerThread.setIsThreadStopped(true);
         RandomCurrencyThread.setIsThreadStopped(true);
         FarmerThread.setIsThreadStopped(true);
@@ -233,7 +263,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        super.onResume();  // Always call the superclass method first
+        super.onResume();
+
+        // Lorsque l'application revient en premier plan, on indique on threads de reprendre leurs fonctionnements
         TimerThread.setIsThreadStopped(false);
         RandomCurrencyThread.setIsThreadStopped(false);
         FarmerThread.setIsThreadStopped(false);
@@ -246,9 +278,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        // Si l'application se ferme, on sauvegarde le tout
         savePreferences();
     }
 
+    // Méthodes pour le viewPager
     private class CustomAdapter extends FragmentPagerAdapter {
 
         private String fragments[] = {
@@ -267,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new FarmingFragment();
                 case 1:
-                    return new FarmersFragment();
+                    return new ProgrammersFragment();
                 case 2:
                     return new ShopFragment();
                 default:
@@ -285,6 +319,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    // Méthodes pour le menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -292,13 +328,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Switch case pour diriger l'usager selon sa selection dans le menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.changeBackgroundColor:
+                // Changer la couleur du fond d'écran
                 changeColor();
                 return true;
             case R.id.reset:
+                // Demander une confirmation pour tout effacer et recommencer
                 resetDialog();
                 return true;
             default:
@@ -330,6 +369,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reset() {
+        // On réinitialise le tout
         user.setCodesPerTap(UserStats.STARTING_CODES_PER_TAP);
         user.getWallet().reset();
         user.getTeam().reset();
@@ -338,12 +378,14 @@ public class MainActivity extends AppCompatActivity {
         Game.calculateCodeToMake();
         Game.renderUI();
 
-        ((BaseAdapter)ShopFragment.listView.getAdapter()).notifyDataSetChanged();
-        ((BaseAdapter)FarmersFragment.listViewofFarmers.getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter)ShopFragment.getShopListView().getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter) ProgrammersFragment.getListViewofProgrammers().getAdapter()).notifyDataSetChanged();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().clear().apply();
 
+        // on va conserver le fond d'écran, ceci est une décision que j'ai chosit, car je me dit que
+        // le fond d'écran n'a rien a avoir avec la partie vraiment
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
     }
 
@@ -357,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                // On fonctionne avec du RGB de 0 à 255
                 EditText red = (EditText) view.findViewById(R.id.redAmount);
                 EditText green = (EditText) view.findViewById(R.id.greenAmount);
                 EditText blue = (EditText) view.findViewById(R.id.blueAmount);
@@ -372,9 +415,12 @@ public class MainActivity extends AppCompatActivity {
                 if(blueText.equals("")){
                     blueText = "255";
                 }
+
                 int redValue = Integer.parseInt(redText);
                 int greenValue = Integer.parseInt(greenText);
                 int blueValue = Integer.parseInt(blueText);
+
+                // Les conditions suivantes sont pour s'assurer que l'usager ne fait pas le malin
 
                 if(redValue < 0) {
                     redValue = 0;
@@ -391,13 +437,24 @@ public class MainActivity extends AppCompatActivity {
                 } else if (blueValue >= 255) {
                     blueValue = 255;
                 }
+
                 backgroundColorValue = Color.rgb(redValue, greenValue, blueValue);
                 mainActivity.setBackgroundColor(backgroundColorValue);
+
+                // On sauvegarde l'application une fois que la couleur est établie
                 savePreferences();
             }
         });
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        MainActivity.user = user;
     }
 }

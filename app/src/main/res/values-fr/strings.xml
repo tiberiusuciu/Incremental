@@ -64,7 +64,7 @@
     <string name="game_over">PARTI TERMINÉ</string>
     <string name="your_score">Votre score</string>
     <string name="total_time_played">Temps total joué:</string>
-    <string name="total_farmers_bought">Programmeurs achetés au total:</string>
+    <string name="total_programmers_bought">Programmeurs achetés au total:</string>
     <string name="play_again">Rejouer!</string>
     <string name="red">Rouge:</string>
     <string name="green">Vert:</string>

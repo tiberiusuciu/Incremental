@@ -8,7 +8,7 @@ import com.example.ergo.incremental.controller.EventFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
- * Created by ergo on 03/12/16.
+ * thread RandomEventThread, ce thread permet de généré un événement aléatoire à chaque minutes parmis les 42 événements possibles
  */
 
 public class RandomEventThread extends Activity implements Runnable, GameValues {
@@ -56,8 +56,8 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
                 int randomEventIndex = (int)(Math.random()*GameValues.eventNames.length);
                 newCPS = GameValues.eventEffects[randomEventIndex];
                 eventName = GameValues.eventNames[randomEventIndex];
-                EventFragment.eventName.setText(eventName);
-                eventTimeRemainder = 60;
+                EventFragment.getEventName().setText(eventName);
+                eventTimeRemainder = GameValues.EVENT_DURATION;
             }
         });
     }

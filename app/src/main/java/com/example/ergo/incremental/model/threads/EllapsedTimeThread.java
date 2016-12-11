@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 /**
- * Created by ergo on 03/12/16.
+ * Thread EllapsedTimeThread, ceci est le thread qui permet de calculer le grand total du temps dépensé sur cette partie uniquement
  */
 
 public class EllapsedTimeThread extends Activity implements Runnable {

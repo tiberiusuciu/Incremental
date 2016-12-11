@@ -12,27 +12,36 @@ import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.utils.ShopFragmentInterface;
 
 /**
- * Created by ergo on 03/11/16.
+ * Ceci est le fragment qui affiche la collection de programmeurs stocké dans l'usager
+ * C'est un custom list view qui indique combien de chaque programmeur l'usager possède.
  */
 
-public class FarmersFragment extends Fragment {
+public class ProgrammersFragment extends Fragment {
 
-    public static ListView listViewofFarmers;
+    private static ListView listViewofProgrammers;
     protected String[] farmers;
     protected Integer[] images;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.farmers_fragment, container, false);
+        View view = inflater.inflate(R.layout.programmers_fragment, container, false);
 
         farmers = ShopFragmentInterface.farmers;
         images = ShopFragmentInterface.images;
 
         CustomListObtainedFarmers adapter = new CustomListObtainedFarmers(getActivity(), farmers, images);
-        listViewofFarmers = (ListView) view.findViewById(R.id.listviewObtainedFarmers);
-        listViewofFarmers.setAdapter(adapter);
+        listViewofProgrammers = (ListView) view.findViewById(R.id.listviewObtainedFarmers);
+        listViewofProgrammers.setAdapter(adapter);
 
         return view;
+    }
+
+    public static ListView getListViewofProgrammers() {
+        return listViewofProgrammers;
+    }
+
+    public static void setListViewofProgrammers(ListView listViewofProgrammers) {
+        ProgrammersFragment.listViewofProgrammers = listViewofProgrammers;
     }
 }

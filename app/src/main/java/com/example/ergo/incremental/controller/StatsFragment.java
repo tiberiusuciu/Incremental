@@ -15,19 +15,19 @@ import com.example.ergo.incremental.model.threads.RandomEventThread;
 import com.example.ergo.incremental.model.utils.GameValues;
 
 /**
- * Created by ergo on 03/11/16.
+ * Ceci est le fragment qui s'occupe pour l'affichage du temps courant, le code crée, le CPS, le niveau courant, la description du niveau
  */
 
 public class StatsFragment extends Fragment {
-    public static ProgressBar timeBar;
-    public static ProgressBar codeBar;
-    public static int codeProgress;
-    public static int timeProgress;
-    public static TextView timeText;
-    public static TextView codeText;
-    public static TextView codesPerSecond;
-    public static TextView currentLevel;
-    public static TextView levelDescription;
+    private static ProgressBar timeBar;
+    private static ProgressBar codeBar;
+    private static int codeProgress;
+    private static int timeProgress;
+    private static TextView timeText;
+    private static TextView codeText;
+    private static TextView codesPerSecond;
+    private static TextView currentLevel;
+    private static TextView levelDescription;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class StatsFragment extends Fragment {
         codeText = (TextView) v.findViewById(R.id.codeText);
 
         codesPerSecond = (TextView) v.findViewById(R.id.cps);
-        codesPerSecond.setText((int)(MainActivity.user.getCodesPerSecond() * RandomEventThread.getNewCPS()) + "");
+        codesPerSecond.setText((int)(MainActivity.getUser().getCodesPerSecond() * RandomEventThread.getNewCPS()) + "");
         currentLevel = (TextView) v.findViewById(R.id.lvl);
         currentLevel.setText(Game.currentLevel + "");
 
@@ -52,5 +52,77 @@ public class StatsFragment extends Fragment {
         levelDescription.setText(GameValues.classNames[Game.currentLevel - 1]);
 
         return v;
+    }
+
+    public static ProgressBar getTimeBar() {
+        return timeBar;
+    }
+
+    public static void setTimeBar(ProgressBar timeBar) {
+        StatsFragment.timeBar = timeBar;
+    }
+
+    public static ProgressBar getCodeBar() {
+        return codeBar;
+    }
+
+    public static void setCodeBar(ProgressBar codeBar) {
+        StatsFragment.codeBar = codeBar;
+    }
+
+    public static int getCodeProgress() {
+        return codeProgress;
+    }
+
+    public static void setCodeProgress(int codeProgress) {
+        StatsFragment.codeProgress = codeProgress;
+    }
+
+    public static int getTimeProgress() {
+        return timeProgress;
+    }
+
+    public static void setTimeProgress(int timeProgress) {
+        StatsFragment.timeProgress = timeProgress;
+    }
+
+    public static TextView getTimeText() {
+        return timeText;
+    }
+
+    public static void setTimeText(TextView timeText) {
+        StatsFragment.timeText = timeText;
+    }
+
+    public static TextView getCodeText() {
+        return codeText;
+    }
+
+    public static void setCodeText(TextView codeText) {
+        StatsFragment.codeText = codeText;
+    }
+
+    public static TextView getCodesPerSecond() {
+        return codesPerSecond;
+    }
+
+    public static void setCodesPerSecond(TextView codesPerSecond) {
+        StatsFragment.codesPerSecond = codesPerSecond;
+    }
+
+    public static TextView getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public static void setCurrentLevel(TextView currentLevel) {
+        StatsFragment.currentLevel = currentLevel;
+    }
+
+    public static TextView getLevelDescription() {
+        return levelDescription;
+    }
+
+    public static void setLevelDescription(TextView levelDescription) {
+        StatsFragment.levelDescription = levelDescription;
     }
 }
