@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private static FarmerThread farmerThread = null;
     private static RandomEventThread randomEventThread = null;
     private static EllapsedTimeThread ellapsedTimeThread = null;
+    private static int prestigeCount = 0;
     private LinearLayout mainActivity = null;
     private Integer backgroundColorValue = null;
 
@@ -70,8 +71,16 @@ public class MainActivity extends AppCompatActivity {
         String reset = intent.getStringExtra("reset");
         if(reset != null) {
             if(reset.equals("true")){
+                String prestigeDecision = intent.getStringExtra("prestige");
+                if(prestigeDecision != null) {
+                    if(prestigeDecision.equals("true")){
+                        prestige();
+                    }
+                    Log.d("DECISION FAILED", "WE ARE NOT RESTARTING!!!" + prestigeDecision);
+                }
                 reset();
                 getIntent().removeExtra("reset");
+                getIntent().removeExtra("prestige");
             }
         }
 
@@ -107,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
         loadPreferences();
     }
 
+    private void prestige() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        prestigeCount = Integer.parseInt(preferences.getString("prestigeCount", "0"));
+        prestigeCount++;
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -114,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
         if(user == null) {
             user = new User();
         }
+        // Ceci est un feature que j'ai ajouté à la fin de la création de cette application,
+        // Je récompense le joueur selon le nombre de fois qu'il recommence après avoir atteint la fin du jeu
+        user.setCodesPerTap((int)Math.pow(2, prestigeCount));
+        Log.d("This is my prestige", prestigeCount + "");
         if(timerThread == null) {
             timerThread = new TimerThread(getApplicationContext());
             new Thread(timerThread).start();
@@ -136,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mainActivity = (LinearLayout) findViewById(R.id.activity_main);
-
         // On applique le fond d'écran spécifié si il existe
         if(backgroundColorValue != null) {
             mainActivity.setBackgroundColor(backgroundColorValue);
@@ -149,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
         preferences.edit().putString("currentLevel", Game.currentLevel + "").apply();
         preferences.edit().putString("isGameOver", Game.isGameOver + "").apply();
+        preferences.edit().putString("prestigeCount", prestigeCount + "").apply();
         // On sauve l'état de nos threads
         preferences.edit().putString("ellapsedTimeThreadEllapsedTime", EllapsedTimeThread.getEllapsedTime() + "").apply();
         preferences.edit().putString("randomEventThreadEventIsOn", RandomEventThread.eventIsOn + "").apply();
@@ -243,6 +262,9 @@ public class MainActivity extends AppCompatActivity {
             Game.codeToMake = Integer.parseInt(preferences.getString("codeBarMax", ""));
             StatsFragment.setCodeProgress(Integer.parseInt(preferences.getString("codeBarProgress", "")));
         }
+
+        // On essayer d'aller cherche le nombre de fois que l'usage a fait un prestige, si on échoue on retourne 0
+        prestigeCount = Integer.parseInt(preferences.getString("prestigeCount", "0"));
     }
 
     public static Context getAppContext(){
@@ -341,9 +363,29 @@ public class MainActivity extends AppCompatActivity {
                 // Demander une confirmation pour tout effacer et recommencer
                 resetDialog();
                 return true;
+            case R.id.info:
+                // Afficher de l'information sur l'application
+                about();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void about() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.about_info );
+        builder.setCancelable(true);
+
+        builder.setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void resetDialog() {
@@ -388,12 +430,29 @@ public class MainActivity extends AppCompatActivity {
                 !preferences.getString("backgroundColorValue", "").equals("null")) {
             tmpBackgroundColor = Integer.parseInt(preferences.getString("backgroundColorValue", "-1"));
         }
+
         preferences.edit().clear().apply();
 
         // on va conserver le fond d'écran, ceci est une décision que j'ai choisit, car je me dit que
         // le fond d'écran n'a rien a avoir avec la partie vraiment
         if(tmpBackgroundColor != null) {
             preferences.edit().putString("backgroundColorValue", tmpBackgroundColor + "").apply();
+        }
+        Intent intent = getIntent();
+        String prestigeDescision = intent.getStringExtra("prestige");
+        if(prestigeDescision != null) {
+            if (prestigeDescision.equals("true")) {
+                preferences.edit().putString("prestigeCount", prestigeCount + "").apply();
+            }
+        } else {
+            Intent myIntent = new Intent(getAppContext(), GameOver.class);
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
+            int totalProgrammers = MainActivity.getUser().getTeam().getTotalAmountOfAllProgrammers();
+            myIntent.putExtra("ellapsedTime", ellapsedTime + "");
+            myIntent.putExtra("totalProgrammers", totalProgrammers + "");
+            myIntent.putExtra("abandon", "true");
+            MainActivity.getAppContext().startActivity(myIntent);
         }
     }
 

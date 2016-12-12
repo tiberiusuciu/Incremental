@@ -26,7 +26,7 @@ public class ClickerFragment extends Fragment {
 
         button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    StatsFragment.getCodeBar().setProgress(StatsFragment.getCodeBar().getProgress() + 1);
+                    StatsFragment.getCodeBar().setProgress(StatsFragment.getCodeBar().getProgress() + MainActivity.getUser().getCodesPerTap());
                     StatsFragment.getCodeText().setText(getString(R.string.remaining_code) + " " + (Game.codeToMake - StatsFragment.getCodeBar().getProgress()));
                     if(StatsFragment.getCodeBar().getProgress() >= Game.codeToMake){
                         Game.levelUp();
@@ -38,13 +38,5 @@ public class ClickerFragment extends Fragment {
             }
         );
         return v;
-    }
-
-    public static Button getButton() {
-        return button;
-    }
-
-    public static void setButton(Button button) {
-        ClickerFragment.button = button;
     }
 }

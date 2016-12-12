@@ -1,5 +1,6 @@
 package com.example.ergo.incremental.model.core_mechanics;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import com.example.ergo.incremental.R;
@@ -21,7 +22,7 @@ public class Game {
     public static int codeToMake = (int)Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
 
     public static void calculateCodeToMake(){
-        codeToMake = (int)Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel);
+        codeToMake = (int)(Math.pow(GameValues.CODE_A_CREER_DE_BASE, currentLevel));
     }
 
     public static void levelUp() {
