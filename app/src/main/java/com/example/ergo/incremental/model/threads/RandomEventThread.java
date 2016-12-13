@@ -18,6 +18,7 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
     public static int eventTimeRemainder = 0;
     public static double newCPS = 1;
     private static String eventName;
+    private static int eventIndex;
     private static boolean isThreadStopped;
 
     public RandomEventThread(Context context, User user) {
@@ -53,9 +54,9 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                int randomEventIndex = (int)(Math.random()*GameValues.eventNames.length);
-                newCPS = GameValues.eventEffects[randomEventIndex];
-                eventName = GameValues.eventNames[randomEventIndex];
+                eventIndex = (int)(Math.random()*GameValues.eventNames.length);
+                newCPS = GameValues.eventEffects[eventIndex];
+                eventName = GameValues.eventNames[eventIndex];
                 EventFragment.getEventName().setText(eventName);
                 eventTimeRemainder = GameValues.EVENT_DURATION;
             }
@@ -80,5 +81,13 @@ public class RandomEventThread extends Activity implements Runnable, GameValues 
 
     public static void setIsThreadStopped(boolean isThreadStopped) {
         RandomEventThread.isThreadStopped = isThreadStopped;
+    }
+
+    public static int getEventIndex() {
+        return eventIndex;
+    }
+
+    public static void setEventIndex(int eventIndex) {
+        RandomEventThread.eventIndex = eventIndex;
     }
 }

@@ -16,7 +16,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +35,7 @@ import com.example.ergo.incremental.model.threads.RandomCurrencyThread;
 import com.example.ergo.incremental.model.threads.RandomEventThread;
 import com.example.ergo.incremental.model.threads.TimerThread;
 import com.example.ergo.incremental.model.Wallet;
+import com.example.ergo.incremental.model.utils.GameValues;
 import com.example.ergo.incremental.model.utils.UserStats;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                     if(prestigeDecision.equals("true")){
                         prestige();
                     }
-                    Log.d("DECISION FAILED", "WE ARE NOT RESTARTING!!!" + prestigeDecision);
                 }
                 reset();
                 getIntent().removeExtra("reset");
@@ -132,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         // Ceci est un feature que j'ai ajouté à la fin de la création de cette application,
         // Je récompense le joueur selon le nombre de fois qu'il recommence après avoir atteint la fin du jeu
         user.setCodesPerTap((int)Math.pow(2, prestigeCount));
-        Log.d("This is my prestige", prestigeCount + "");
         if(timerThread == null) {
             timerThread = new TimerThread(getApplicationContext());
             new Thread(timerThread).start();
@@ -164,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
     // Méthode de sauvegarde
     private void savePreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
+        if(backgroundColorValue != null) {
+            preferences.edit().putString("backgroundColorValue", backgroundColorValue + "").apply();
+        }
         preferences.edit().putString("currentLevel", Game.currentLevel + "").apply();
         preferences.edit().putString("isGameOver", Game.isGameOver + "").apply();
         preferences.edit().putString("prestigeCount", prestigeCount + "").apply();
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         preferences.edit().putString("randomEventThreadEventIsOn", RandomEventThread.eventIsOn + "").apply();
         preferences.edit().putString("randomEventThreadEventTimeRemainder", RandomEventThread.eventTimeRemainder + "").apply();
         preferences.edit().putString("randomEventThreadNewCPS", RandomEventThread.newCPS + "").apply();
-        preferences.edit().putString("randomEventThreadEventName", RandomEventThread.getEventName()).apply();
+        preferences.edit().putString("randomEventThreadEventIndex", RandomEventThread.getEventIndex() + "").apply();
 
         // On sauve l'état de nos progress bars
         preferences.edit().putString("timeBarProgress", StatsFragment.getTimeBar().getProgress() + "").apply();
@@ -244,11 +244,11 @@ public class MainActivity extends AppCompatActivity {
         if(!preferences.getString("randomEventThreadEventIsOn", "").equals("") &&
                 !preferences.getString("randomEventThreadEventTimeRemainder", "").equals("") &&
                 !preferences.getString("randomEventThreadNewCPS", "").equals("") &&
-                !preferences.getString("randomEventThreadEventName", "").equals("")) {
+                !preferences.getString("randomEventThreadEventIndex", "").equals("")) {
             RandomEventThread.eventIsOn = Boolean.parseBoolean(preferences.getString("randomEventThreadEventIsOn", ""));
             RandomEventThread.eventTimeRemainder = Integer.parseInt(preferences.getString("randomEventThreadEventTimeRemainder", ""));
             RandomEventThread.setNewCPS(Double.parseDouble(preferences.getString("randomEventThreadNewCPS", "")));
-            RandomEventThread.setEventName(preferences.getString("randomEventThreadEventName", ""));
+            RandomEventThread.setEventName(GameValues.eventNames[Integer.parseInt(preferences.getString("randomEventThreadEventIndex", ""))]);
         }
 
         // On vérifie que le progres du progress bar du temps a été bien sauvegardé
@@ -396,7 +396,15 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                reset();
+                Intent myIntent = new Intent(getAppContext(), GameOver.class);
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
+                int totalProgrammers = user.getTeam().getTotalAmountOfAllProgrammers();
+                myIntent.putExtra("ellapsedTime", ellapsedTime + "");
+                myIntent.putExtra("totalProgrammers", totalProgrammers + "");
+                myIntent.putExtra("abandon", "true");
+                MainActivity.getAppContext().startActivity(myIntent);
+                finish();
             }
         });
 
@@ -417,6 +425,7 @@ public class MainActivity extends AppCompatActivity {
         user.getWallet().reset();
         user.getTeam().reset();
         user.setCodesPerSecond(UserStats.STARTING_CODES_PER_SECOND);
+        EllapsedTimeThread.setEllapsedTime(0);
         Game.currentLevel = 1;
         Game.calculateCodeToMake();
         Game.renderUI();
@@ -425,34 +434,15 @@ public class MainActivity extends AppCompatActivity {
         ((BaseAdapter) ProgrammersFragment.getListViewofProgrammers().getAdapter()).notifyDataSetChanged();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Integer tmpBackgroundColor = null;
-        if(!preferences.getString("backgroundColorValue", "").equals("") &&
-                !preferences.getString("backgroundColorValue", "").equals("null")) {
-            tmpBackgroundColor = Integer.parseInt(preferences.getString("backgroundColorValue", "-1"));
-        }
 
         preferences.edit().clear().apply();
 
-        // on va conserver le fond d'écran, ceci est une décision que j'ai choisit, car je me dit que
-        // le fond d'écran n'a rien a avoir avec la partie vraiment
-        if(tmpBackgroundColor != null) {
-            preferences.edit().putString("backgroundColorValue", tmpBackgroundColor + "").apply();
-        }
         Intent intent = getIntent();
         String prestigeDescision = intent.getStringExtra("prestige");
         if(prestigeDescision != null) {
             if (prestigeDescision.equals("true")) {
                 preferences.edit().putString("prestigeCount", prestigeCount + "").apply();
             }
-        } else {
-            Intent myIntent = new Intent(getAppContext(), GameOver.class);
-            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            int ellapsedTime = EllapsedTimeThread.getEllapsedTime();
-            int totalProgrammers = MainActivity.getUser().getTeam().getTotalAmountOfAllProgrammers();
-            myIntent.putExtra("ellapsedTime", ellapsedTime + "");
-            myIntent.putExtra("totalProgrammers", totalProgrammers + "");
-            myIntent.putExtra("abandon", "true");
-            MainActivity.getAppContext().startActivity(myIntent);
         }
     }
 
