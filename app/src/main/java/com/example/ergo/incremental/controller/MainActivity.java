@@ -437,6 +437,9 @@ public class MainActivity extends AppCompatActivity {
 
         preferences.edit().clear().apply();
 
+        TimerThread.setResetTimer(true);
+        FarmerThread.setResetFarmer(true);
+
         Intent intent = getIntent();
         String prestigeDescision = intent.getStringExtra("prestige");
         if(prestigeDescision != null) {

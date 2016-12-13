@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.controller.MainActivity;
+import com.example.ergo.incremental.controller.ShopFragment;
 import com.example.ergo.incremental.model.core_mechanics.Game;
 import com.example.ergo.incremental.controller.StatsFragment;
 import com.example.ergo.incremental.model.utils.GameValues;
@@ -17,6 +18,7 @@ public class TimerThread extends Activity implements Runnable {
 
     protected Context context;
     private static boolean isThreadStopped;
+    private static boolean resetTimer = false;
 
     public TimerThread(Context context) {
         this.context = context;
@@ -29,11 +31,17 @@ public class TimerThread extends Activity implements Runnable {
             do{
                 Thread.sleep(1000);
                 if(!isThreadStopped) {
-                    if(StatsFragment.getTimeBar().getProgress() == StatsFragment.getTimeBar().getMax()) {
-                        runDowngrade();
+                    if(resetTimer){
+                        StatsFragment.getTimeBar().setProgress(0);
+                        resetTimer = false;
                     }
                     else {
-                        displayTime();
+                        if(StatsFragment.getTimeBar().getProgress() == StatsFragment.getTimeBar().getMax()) {
+                            runDowngrade();
+                        }
+                        else {
+                            displayTime();
+                        }
                     }
                 }
             } while(StatsFragment.getTimeBar().getProgress() <= GameValues.TEMPS_PAR_NIVEAU);
@@ -64,5 +72,13 @@ public class TimerThread extends Activity implements Runnable {
 
     public static void setIsThreadStopped(boolean isThreadStopped) {
         TimerThread.isThreadStopped = isThreadStopped;
+    }
+
+    public static boolean isResetTimer() {
+        return resetTimer;
+    }
+
+    public static void setResetTimer(boolean resetTimer) {
+        TimerThread.resetTimer = resetTimer;
     }
 }

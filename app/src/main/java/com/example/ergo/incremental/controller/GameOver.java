@@ -3,15 +3,12 @@ package com.example.ergo.incremental.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ergo.incremental.R;
 import com.example.ergo.incremental.model.core_mechanics.Game;
-import com.example.ergo.incremental.model.threads.EllapsedTimeThread;
-import com.example.ergo.incremental.model.utils.UserStats;
 
 /*
     Ceci est l'activité qui s'active lorsque la personne termine sa partie

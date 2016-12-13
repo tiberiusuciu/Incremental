@@ -15,6 +15,7 @@ import com.example.ergo.incremental.controller.StatsFragment;
 public class FarmerThread extends Activity implements Runnable {
     protected Context context;
     private static boolean isThreadStopped;
+    private static boolean resetFarmer;
 
     public FarmerThread(Context context) {
         this.context = context;
@@ -27,9 +28,15 @@ public class FarmerThread extends Activity implements Runnable {
             do{
                 Thread.sleep(1000);
                 if(!isThreadStopped) {
-                    int codePerSecond = MainActivity.getUser().getCodesPerSecond();
-                    updateCode(codePerSecond);
-                    setText((int) (codePerSecond * RandomEventThread.newCPS) + "");
+                    if(resetFarmer) {
+                        StatsFragment.getCodeBar().setProgress(0);
+                        resetFarmer = false;
+                    }
+                    else {
+                        int codePerSecond = MainActivity.getUser().getCodesPerSecond();
+                        updateCode(codePerSecond);
+                        setText((int) (codePerSecond * RandomEventThread.newCPS) + "");
+                    }
                 }
             } while(true);
         } catch (InterruptedException e) {
@@ -66,5 +73,13 @@ public class FarmerThread extends Activity implements Runnable {
 
     public static void setIsThreadStopped(boolean isThreadStopped) {
         FarmerThread.isThreadStopped = isThreadStopped;
+    }
+
+    public static boolean isResetFarmer() {
+        return resetFarmer;
+    }
+
+    public static void setResetFarmer(boolean resetFarmer) {
+        FarmerThread.resetFarmer = resetFarmer;
     }
 }

@@ -30,7 +30,8 @@
             android:id="@+id/timeText"
             android:textAlignment="center"
             android:textStyle="normal|bold"
-            android:textColor="@color/clickerBackground" />
+            android:textColor="@color/clickerBackground"
+            android:text="Starting time..." />
 
         <ProgressBar
             style="@android:style/Widget.ProgressBar.Horizontal"
